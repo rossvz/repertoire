@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import Firebase from '../Firebase'
 
+const INITIAL_STATE = {title: '', artist: '', album: '', votes: 0}
 class NewSongForm extends Component {
   constructor () {
     super()
-    this.state = {title: '', artist: '', album: ''}
+    this.state = INITIAL_STATE
   }
 
   saveSong (e) {
     e.preventDefault()
-    const {title, artist, album} = this.state
-    Firebase.database().ref('songs').push({title, artist, album})
-    this.setState({title: '', artist: '', album: ''})
+    const {title, artist, album, votes} = this.state
+    Firebase.database().ref('songs').push({title, artist, album, votes})
+    this.setState(INITIAL_STATE)
   }
 
   onTitleChange (e) {
@@ -28,7 +29,7 @@ class NewSongForm extends Component {
 
   render () {
     return (
-      <form onSubmit={this.saveSong.bind(this)}>
+      <form onSubmit={this.saveSong.bind(this)} className='new-song-form'>
         <input type='text' placeholder={'Title'} onChange={this.onTitleChange.bind(this)} value={this.state.title} />
         <input type='text' placeholder={'Artist'} onChange={this.onArtistChange.bind(this)} value={this.state.artist} />
         <input type='text' placeholder={'Album'} onChange={this.onAlbumChange.bind(this)} value={this.state.album} />

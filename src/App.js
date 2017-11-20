@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import 'typeface-roboto'
 import './App.css'
 import SongList from './components/SongList'
 
@@ -10,7 +11,7 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div className='App'>
         <SongList />
       </div>
     )

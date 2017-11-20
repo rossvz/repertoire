@@ -1,28 +1,53 @@
 .App {
-  text-align: center;
+    height: 100vh;
+    background-size: cover;
+    background: linear-gradient(135deg, #81c, #18c) fixed;
+    overflow: scroll;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.SongList {
+    max-width: 500px;
+    margin: 0 auto !important;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.Song {
+    width: 90%;
+    color: white;
+    border: 2px solid white;
+    background: #0000005e;
+    margin: 2% 20%;
+    border-radius: 5px;
+    padding: 0 3%;
 }
 
-.App-title {
-  font-size: 1.5em;
+.Song_columns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.App-intro {
-  font-size: large;
+.Song_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.arrow-up, .arrow-down {
+    width: 50px;
+}
+
+.arrow-down {
+    transform: rotate(180deg);
+}
+
+.new-song-form input {
+    font-size: 1.2em;
+    text-align: center;
 }

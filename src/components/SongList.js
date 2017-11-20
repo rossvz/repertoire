@@ -33,9 +33,9 @@ class SongList extends Component {
 
   render () {
     return (
-      <div>
-        {this.renderSongs()}
+      <div className='SongList'>
         {this.displayNewSong()}
+        {this.renderSongs()}
       </div>
     )
   }
