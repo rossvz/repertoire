@@ -1,51 +1,37 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
-import Firebase from '../Firebase'
+import {
+  mapObjIndexed,
+  prop,
+  reverse,
+  sortBy,
+} from 'ramda'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firebaseConnect } from 'react-redux-firebase'
 import NewSongForm from './NewSongForm'
 import Song from './Song'
 
 class SongList extends Component {
-  constructor () {
-    super()
-    this.state = {songs: [], editing: false}
+  state = { editing: false }
+
+  createSong = () => {
+    this.setState({ editing: true })
   }
 
-  componentDidMount () {
-    let songsRef = Firebase.database().ref('songs').orderByChild('votes')
-    songsRef.on('child_added', snapshot => {
-      let song = snapshot.val()
-      song.id = snapshot.key
-      this.setState({songs: [ song ].concat(this.state.songs)})
-    })
-  }
-
-  createSong () {
-    this.setState({...this.state, editing: true})
-  }
-
-  displayNewSong () {
-    if (!this.state.editing) return <button onClick={this.createSong.bind(this)}>New Song</button>
+  displayNewSong = () => {
+    if (!this.state.editing) return <button onClick={this.createSong}>New Song</button>
     return <NewSongForm />
   }
 
-  changeVote (song, value) {
-    song.votes = song.votes || 0
-    song.votes += value
-    Firebase.database().ref().child('songs/' + song.id).update({votes: song.votes}).then(results => {
-      console.log(song, value, results)
-      let songs = this.state.songs
-      let index = this.state.songs.findIndex(s => s.id === song.id)
-      songs.splice(index, 1, song)
-      songs = _.orderBy(songs, [ 'votes' ], [ 'desc' ])
-      this.setState({...this.state, songs})
-    }).catch(err => {
-      console.error(err)
-    })
+  changeVote = song => value => {
+    const votes = song.votes || 0
+    const newVotes = votes + value;
+    this.props.firebase.update(`/songs/${song.id}`, { votes: newVotes })
   }
 
-  renderSongs () {
-    return this.state.songs.map(song => <Song changeVote={(value) => { this.changeVote(song, value) }} key={song.id} song={song} />)
-  }
+  renderSongs = () => this.props.songs.map(song =>
+    <Song changeVote={this.changeVote(song)} key={song.id} song={song} />
+  )
 
   render () {
     return (
@@ -60,4 +46,20 @@ class SongList extends Component {
 SongList.propTypes = {}
 SongList.defaultProps = {}
 
-export default SongList
+const sortDescByVotes = compose(
+  reverse,
+  sortBy(prop('votes')),
+  Object.values,
+  mapObjIndexed((song, id) => ({ ...song, id }))
+)
+
+export default compose(
+  firebaseConnect([
+    'songs'
+  ]),
+  connect(
+    ({ firebase }) => ({
+      songs: sortDescByVotes(firebase.data.songs),
+    })
+  )
+)(SongList)
