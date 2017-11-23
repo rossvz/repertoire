@@ -5,6 +5,7 @@
   "dependencies": {
     "firebase": "^4.6.2",
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",

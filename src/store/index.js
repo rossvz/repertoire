@@ -7,7 +7,7 @@ import reducers from './reducers'
 
 const createStoreWithMiddlewares = compose(
   reactReduxFirebase(firebase),
-  applyMiddleware(logger),
+  applyMiddleware(process.env.NODE_ENV === 'development' ? logger : x => x),
 )(createStore)
 
 export default createStoreWithMiddlewares(reducers)
