@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Firebase from '../Firebase'
+import { withFirebase } from 'react-redux-firebase'
 
 const INITIAL_STATE = {title: '', artist: '', album: '', votes: 0}
 class NewSongForm extends Component {
@@ -11,7 +11,7 @@ class NewSongForm extends Component {
   saveSong (e) {
     e.preventDefault()
     const {title, artist, album, votes} = this.state
-    Firebase.database().ref('songs').push({title, artist, album, votes})
+    this.props.firebase.push('/songs', {title, artist, album, votes})
     this.setState(INITIAL_STATE)
   }
 
@@ -42,4 +42,4 @@ class NewSongForm extends Component {
 NewSongForm.propTypes = {}
 NewSongForm.defaultProps = {}
 
-export default NewSongForm
+export default withFirebase(NewSongForm)
