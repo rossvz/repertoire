@@ -1,7 +1,7 @@
 import React from 'react'
-import ArrowUp from '../img/arrow-up.svg'
+import Arrow from '../img/arrow-up.svg'
 
-const Song = ({song}) => {
+const Song = ({song, changeVote}) => {
   return (
     <div className='Song'>
       <div className='Song_columns'>
@@ -9,10 +9,11 @@ const Song = ({song}) => {
           <h2>{song.title}</h2>
           <h4>{song.artist}</h4>
           <p>{song.album}</p>
+          <small>{song.votes} votes</small>
         </div>
         <div className='Song_actions'>
-          <img src={ArrowUp} className='arrow-up' />
-          <img src={ArrowUp} className='arrow-down' />
+          <img alt={'vote-up'} src={Arrow} className='arrow-up' onClick={() => changeVote(1)} />
+          <img alt={'vote-down'} src={Arrow} className='arrow-down' onClick={() => changeVote(-1)} />
         </div>
       </div>
     </div>

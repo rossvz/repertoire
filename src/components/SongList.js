@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import Firebase from '../Firebase'
 import NewSongForm from './NewSongForm'
@@ -10,7 +11,7 @@ class SongList extends Component {
   }
 
   componentDidMount () {
-    let songsRef = Firebase.database().ref('songs')
+    let songsRef = Firebase.database().ref('songs').orderByChild('votes')
     songsRef.on('child_added', snapshot => {
       let song = snapshot.val()
       song.id = snapshot.key
@@ -27,8 +28,23 @@ class SongList extends Component {
     return <NewSongForm />
   }
 
+  changeVote (song, value) {
+    song.votes = song.votes || 0
+    song.votes += value
+    Firebase.database().ref().child('songs/' + song.id).update({votes: song.votes}).then(results => {
+      console.log(song, value, results)
+      let songs = this.state.songs
+      let index = this.state.songs.findIndex(s => s.id === song.id)
+      songs.splice(index, 1, song)
+      songs = _.orderBy(songs, [ 'votes' ], [ 'desc' ])
+      this.setState({...this.state, songs})
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
   renderSongs () {
-    return this.state.songs.map(song => <Song key={song.id} song={song} />)
+    return this.state.songs.map(song => <Song changeVote={(value) => { this.changeVote(song, value) }} key={song.id} song={song} />)
   }
 
   render () {
