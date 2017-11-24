@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
 import { changeVote } from 'store/songs/actions'
 import { toggleIsEditing } from 'store/newSong/actions'
-import SongList from './SongList';
+import SongList from './SongList'
 
 const sortDescByVotes = compose(
   reverse,

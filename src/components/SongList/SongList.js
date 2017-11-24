@@ -38,4 +38,4 @@ SongList.propTypes = {
   toggleIsEditing: PropTypes.func.isRequired,
 }
 
-export default SongList;
+export default SongList
