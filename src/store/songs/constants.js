@@ -1,0 +1,1 @@
+export const CHANGE_VOTE_FAIL = 'CHANGE_VOTE_FAIL'

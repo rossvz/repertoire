@@ -1,0 +1,1 @@
+export const TOGGLE_IS_EDITING = 'TOGGLE_IS_EDITING'

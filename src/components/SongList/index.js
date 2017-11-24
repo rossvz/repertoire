@@ -7,7 +7,9 @@ import {
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
-import SongList from './SongList';
+import { changeVote } from 'store/songs/actions'
+import { toggleIsEditing } from 'store/newSong/actions'
+import SongList from './SongList'
 
 const sortDescByVotes = compose(
   reverse,
@@ -21,19 +23,13 @@ export default compose(
     'songs'
   ]),
   connect(
-    ({ firebase }) => ({
+    ({ firebase, newSong }) => ({
+      isEditing: newSong.isEditing,
       songs: sortDescByVotes(firebase.data.songs),
     }),
-    {},
-    (stateProps, dispatchProps, ownProps) => ({
-      ...stateProps,
-      ...dispatchProps,
-      ...ownProps,
-      changeVote: song => value => {
-        const votes = song.votes || 0
-        const newVotes = votes + value
-        ownProps.firebase.update(`/songs/${song.id}`, { votes: newVotes })
-      },
-    })
+    {
+      changeVote,
+      toggleIsEditing,
+    }
   )
 )(SongList)
