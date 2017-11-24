@@ -1,0 +1,16 @@
+import { CHANGE_VOTE_FAIL } from './constants'
+
+export const changeVote = song => (dispatch, getState, getFirebase) =>
+  async value => {
+    const firebase = getFirebase()
+    const votes = song.votes || 0
+    const newVotes = votes + value
+    try {
+      firebase.update(`/songs/${song.id}`, { votes: newVotes })
+    } catch (error) {
+      dispatch({
+        type: CHANGE_VOTE_FAIL,
+        error,
+      })
+    }
+  }

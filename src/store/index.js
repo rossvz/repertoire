@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore, compose } from 'redux'
-import { reactReduxFirebase } from 'react-redux-firebase'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import firebase from 'store/Firebase'
 import reducers from './reducers'
@@ -7,7 +8,10 @@ import reducers from './reducers'
 
 const createStoreWithMiddlewares = compose(
   reactReduxFirebase(firebase),
-  applyMiddleware(process.env.NODE_ENV === 'development' ? logger : x => x),
+  applyMiddleware(
+    thunk.withExtraArgument(getFirebase),
+    process.env.NODE_ENV === 'development' ? logger : x => x
+  ),
 )(createStore)
 
 export default createStoreWithMiddlewares(reducers)
