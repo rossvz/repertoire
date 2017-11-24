@@ -6,9 +6,8 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
     const votes = song.votes || 0
     const newVotes = votes + value
     try {
-      await firebase.update(`/songs/${song.id}`, { votes: newVotes })
-      debugger
       writeVoteToStorage(song.id)
+      await firebase.update(`/songs/${song.id}`, { votes: newVotes })
     } catch (error) {
       dispatch({
         type: CHANGE_VOTE_FAIL,
