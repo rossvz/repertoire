@@ -1,3 +1,4 @@
+import { writeVoteToStorage } from '../../util/votes'
 import { CHANGE_VOTE_FAIL } from './constants'
 
 export const changeVote = song => (dispatch, getState, getFirebase) =>
@@ -16,8 +17,4 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
     }
   }
 
-const readVotesFromStorage = () => localStorage.getItem('persistedVotes') ? JSON.parse(localStorage.getItem('persistedVotes')) : []
-const writeVoteToStorage = songId => {
-  const persistedVotes = JSON.stringify([ ...readVotesFromStorage(), songId ])
-  localStorage.setItem('persistedVotes', persistedVotes)
-}
+
