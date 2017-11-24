@@ -7,6 +7,8 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
     const newVotes = votes + value
     try {
       await firebase.update(`/songs/${song.id}`, { votes: newVotes })
+      debugger
+      writeVoteToStorage(song.id)
     } catch (error) {
       dispatch({
         type: CHANGE_VOTE_FAIL,
@@ -14,3 +16,9 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
       })
     }
   }
+
+const readVotesFromStorage = () => localStorage.getItem('persistedVotes') ? JSON.parse(localStorage.getItem('persistedVotes')) : []
+const writeVoteToStorage = songId => {
+  const persistedVotes = JSON.stringify([ ...readVotesFromStorage(), songId ])
+  localStorage.setItem('persistedVotes', persistedVotes)
+}
