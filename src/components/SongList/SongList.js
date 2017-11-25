@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import NewSongForm from 'components/NewSongForm'
-import Song from 'components/Song'
+import Song from 'components/Song/Song'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const SongList = ({
   changeVote,
