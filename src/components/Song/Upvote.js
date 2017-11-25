@@ -12,9 +12,15 @@ const Upvote = ({changeVote, songId}) => {
   if (isUpvoted(songId)) return <div>VOTED!</div>
   return (
     <div>
-      <img alt={'vote-up'} src={Arrow} className="arrow-up" onClick={() => changeVote(1)} />
+      <img alt={'vote-up'} src={Arrow} onClick={() => changeVote(1)} style={styles.arrowStyles} />
     </div>
   )
+}
+
+const styles = {
+  arrowStyles: {
+    width: '50px',
+  }
 }
 
 export default Upvote

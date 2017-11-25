@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const SongList = ({
-  changeVote,
-  isEditing,
-  songs,
-  toggleIsEditing,
-}) => (
-  <div className='SongList'>
+                    changeVote,
+                    isEditing,
+                    songs,
+                    toggleIsEditing,
+                  }) => (
+  <div style={styles.songListStyles}>
     {
       isEditing
         ? <NewSongForm />
@@ -36,6 +36,18 @@ SongList.propTypes = {
     })
   ).isRequired,
   toggleIsEditing: PropTypes.func.isRequired,
+}
+
+const styles = {
+  songListStyles: {
+    maxWidth: '500px',
+    margin: '0 auto !important',
+    display: 'flex',
+    flexFlow: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '5%'
+  }
 }
 
 export default SongList
