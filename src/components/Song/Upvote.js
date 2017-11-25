@@ -1,7 +1,7 @@
 import { contains } from 'ramda'
 import React from 'react'
 import Arrow from '../../img/arrow-up.svg'
-import { readVotesFromStorage } from '../../util/votes'
+import { readVotesFromStorage } from 'util/votes'
 
 const isUpvoted = songId => {
   let persistedVotes = readVotesFromStorage()
