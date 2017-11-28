@@ -1,10 +1,11 @@
 import { contains } from 'ramda'
 
+export const isUpvoted = songId => contains(songId, readVotesFromStorage())
+
 export const readVotesFromStorage = () => localStorage.getItem('persistedVotes') ? JSON.parse(localStorage.getItem('persistedVotes')) : []
 
 export const toggleVoteInStorage = songId => {
-  const isPreviousVote = contains(songId, readVotesFromStorage())
-  debugger
+  const isPreviousVote = isUpvoted(songId)
   if (isPreviousVote) removeVoteFromStorage(songId)
   else writeVoteToStorage(songId)
 }
@@ -16,6 +17,5 @@ const writeVoteToStorage = songId => {
 
 const removeVoteFromStorage = songId => {
   const persistedVotes = readVotesFromStorage().filter(persistedSongId => persistedSongId !== songId)
-  debugger
   localStorage.setItem('persistedVotes', JSON.stringify(persistedVotes))
 }

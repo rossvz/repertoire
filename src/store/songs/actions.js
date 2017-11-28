@@ -10,6 +10,7 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
       toggleVoteInStorage(song.id)
       await firebase.update(`/songs/${song.id}`, { votes: newVotes })
     } catch (error) {
+      toggleVoteInStorage(song.id)
       dispatch({
         type: CHANGE_VOTE_FAIL,
         error,
