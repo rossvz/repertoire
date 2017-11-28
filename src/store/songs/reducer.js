@@ -2,6 +2,9 @@ import { CHANGE_VOTE_FAIL } from './constants'
 
 const initialState = {
   error: '',
+  filters: {
+    search: '',
+  },
 }
 
 export default (
