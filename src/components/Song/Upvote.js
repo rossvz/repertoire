@@ -1,26 +1,23 @@
-import { contains } from 'ramda'
 import React from 'react'
-import Arrow from '../../img/arrow-up.svg'
-import { readVotesFromStorage } from 'util/votes'
-
-const isUpvoted = songId => {
-  let persistedVotes = readVotesFromStorage()
-  return contains(songId, persistedVotes)
-}
+import { isUpvoted } from 'util/votes'
 
 const Upvote = ({changeVote, songId}) => {
-  if (isUpvoted(songId)) return <div>VOTED!</div>
+  const styles = {
+    arrowStyles: {
+      width: '50px',
+      fill: isUpvoted(songId) ? 'orangered' : ''
+    }
+  }
   return (
     <div>
-      <img alt={'vote-up'} src={Arrow} onClick={() => changeVote(1)} style={styles.arrowStyles} />
+      <svg onClick={() => changeVote(isUpvoted(songId) ? -1 : 1)}
+           style={styles.arrowStyles}
+           xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 512 640">
+        <path d="M128 320l128-128 128 128" />
+      </svg>
     </div>
   )
-}
-
-const styles = {
-  arrowStyles: {
-    width: '50px',
-  }
 }
 
 export default Upvote
