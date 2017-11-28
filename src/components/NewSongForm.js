@@ -29,13 +29,20 @@ class NewSongForm extends Component {
 
   render () {
     return (
-      <form onSubmit={this.saveSong.bind(this)} className='new-song-form'>
+      <form onSubmit={this.saveSong.bind(this)} style={styles.newSongFormStyles}>
         <input type='text' placeholder={'Title'} onChange={this.onTitleChange.bind(this)} value={this.state.title} />
         <input type='text' placeholder={'Artist'} onChange={this.onArtistChange.bind(this)} value={this.state.artist} />
         <input type='text' placeholder={'Album'} onChange={this.onAlbumChange.bind(this)} value={this.state.album} />
         <button type='submit'>Save</button>
       </form>
     )
+  }
+}
+
+const styles = {
+  newSongFormStyles: {
+    fontSize: '1.2em',
+    textAlign: 'center'
   }
 }
 
