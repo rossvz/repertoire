@@ -10,7 +10,9 @@ const createStoreWithMiddlewares = compose(
   reactReduxFirebase(firebase),
   applyMiddleware(
     thunk.withExtraArgument(getFirebase),
-    process.env.NODE_ENV === 'development' ? logger : x => x
+    process.env.NODE_ENV === 'development'
+      ? logger
+      : middlewareAPI => next => action => next(action)
   ),
 )(createStore)
 
