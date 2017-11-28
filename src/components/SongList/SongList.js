@@ -40,7 +40,6 @@ SongList.propTypes = {
 
 const styles = {
   songListStyles: {
-    maxWidth: '500px',
     margin: '0 auto !important',
     display: 'flex',
     flexFlow: 'column',
