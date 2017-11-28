@@ -42,7 +42,6 @@ class NewSongForm extends Component {
 const styles = {
   newSongFormStyles: {
     fontSize: '1.2em',
-    textAlign: 'center'
   }
 }
 
