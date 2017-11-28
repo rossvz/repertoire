@@ -1,5 +1,5 @@
-import { toggleVoteInStorage } from '../../util/votes'
-import { CHANGE_VOTE_FAIL } from './constants'
+import { toggleVoteInStorage } from 'util/votes'
+import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER } from './constants'
 
 export const changeVote = song => (dispatch, getState, getFirebase) =>
   async value => {
@@ -18,4 +18,8 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
     }
   }
 
-
+export const changeSongsFilter = field => value => ({
+  type: CHANGE_SONGS_FILTER,
+  field,
+  value,
+})
