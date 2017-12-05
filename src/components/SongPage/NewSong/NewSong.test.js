@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import NewSong from './NewSong'
-import NewSongForm from './NewSongForm'
+import NewSongForm from './NewSongForm/index'
 
 it('renders a <button> when isEditing is false', () => {
   const wrapper = shallow(<NewSong isEditing={ false } toggleIsEditing={ () => {} } />)

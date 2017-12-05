@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NewSongForm from './NewSongForm'
+import NewSongForm from './NewSongForm/index'
 
 const styles = {
   container: {
