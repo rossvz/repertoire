@@ -5,12 +5,14 @@ import 'typeface-roboto'
 import './App.css'
 import Header from 'components/Header'
 import NewSong from 'components/NewSong'
-import SongList from './components/SongList'
+import Search from 'components/Search'
+import SongList from 'components/SongList'
 
 const App = () =>
   <ReduxProvider store={ store }>
     <div className='App'>
       <Header />
+      <Search />
       <NewSong />
       <SongList />
     </div>
