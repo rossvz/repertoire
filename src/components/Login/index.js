@@ -6,6 +6,7 @@ import { firebaseConnect } from 'react-redux-firebase'
 const wrappedLogin = firebaseConnect([
   'auth'
 ])(Login)
+
 export default connect(
   ({firebase, auth}) => ({
     auth: firebase.auth,

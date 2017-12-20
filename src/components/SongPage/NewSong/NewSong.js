@@ -9,14 +9,16 @@ const styles = {
   },
 }
 
-const NewSong = ({ isEditing, toggleIsEditing }) =>
-  <div style={ styles.container }>
-    {
-      isEditing
-        ? <NewSongForm />
-        : <button onClick={toggleIsEditing}>New Song</button>
-    }
-  </div>
+const NewSong = ({isEditing, toggleIsEditing, firebase}) =>
+  firebase.auth().currentUser
+    ? <div style={styles.container}>
+      {
+        isEditing
+          ? <NewSongForm />
+          : <button onClick={toggleIsEditing}>Add Song</button>
+      }
+    </div>
+    : <div></div>
 
 NewSong.propTypes = {
   isEditing: PropTypes.bool.isRequired,
