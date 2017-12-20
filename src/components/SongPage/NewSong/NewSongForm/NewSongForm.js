@@ -28,14 +28,22 @@ class NewSongForm extends Component {
     this.setState({...this.state, album: e.target.value})
   }
 
+  cancelSong (e) {
+    this.props.toggleIsEditing()
+    this.setState(INITIAL_STATE)
+  }
+
   render () {
     return (
-      <form onSubmit={this.saveSong.bind(this)} style={styles.formStyles}>
-        <input style={styles.inputStyles} type="text" placeholder={'Title'} onChange={this.onTitleChange.bind(this)} value={this.state.title} />
-        <input style={styles.inputStyles} type="text" placeholder={'Artist'} onChange={this.onArtistChange.bind(this)} value={this.state.artist} />
-        <input style={styles.inputStyles} type="text" placeholder={'Album'} onChange={this.onAlbumChange.bind(this)} value={this.state.album} />
-        <button style={styles.addSongStyles} type="submit">Save</button>
-      </form>
+      <div>
+        <form onSubmit={this.saveSong.bind(this)} style={styles.formStyles}>
+          <input style={styles.inputStyles} type="text" placeholder={'Title'} onChange={this.onTitleChange.bind(this)} value={this.state.title} />
+          <input style={styles.inputStyles} type="text" placeholder={'Artist'} onChange={this.onArtistChange.bind(this)} value={this.state.artist} />
+          <input style={styles.inputStyles} type="text" placeholder={'Album'} onChange={this.onAlbumChange.bind(this)} value={this.state.album} />
+          <button style={styles.addSongStyles} type="submit">Save</button>
+        </form>
+        <button onClick={this.cancelSong.bind(this)}>Cancel</button>
+      </div>
     )
   }
 }
