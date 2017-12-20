@@ -8,14 +8,19 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import SongPage from './components/SongPage'
 import Login from './components/Login'
 
+const LoginButton = ({firebase}) => {
+  if (firebase.auth().currentUser) return <div>Hey Randy!</div>
+  else return <ul>
+    <li><Link to="/login">Login</Link></li>
+  </ul>
+}
+
+
 const App = () =>
   <ReduxProvider store={ store }>
     <Router>
       <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/login">Login</Link></li>
-        </ul>
+        <LoginButton firebase={store.firebase} />
         <hr />
         <Route exact path="/" component={SongPage} />
         <Route path="/login" component={Login} />

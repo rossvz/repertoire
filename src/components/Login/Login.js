@@ -1,6 +1,24 @@
 import React from 'react'
 import { Redirect } from 'react-router'
 
+const loginStyles = {
+  formStyles: {
+    display: 'flex',
+    flexFlow: 'column',
+    alignItems: 'center',
+    padding: '5%'
+  },
+  inputStyles: {
+    lineHeight: '1.8em',
+    fontSize: '1.5em',
+    textAlign: 'center',
+    border: 'none',
+    backgroundColor: '#f8f8f8',
+    margin: '1%',
+    width: '35vw'
+  }
+}
+
 const Login = (props) => {
   const onSubmit = e => {
     e.preventDefault()
@@ -21,9 +39,16 @@ const Login = (props) => {
 
   const loginForm = () => {
     return (
-      <form onSubmit={e => onSubmit(e)}>
-        <input type="email" value={props.authentication.email} onChange={e => props.emailChanged(e.target.value)} />
-        <input type="password" value={props.authentication.password} onChange={e => props.passwordChanged(e.target.value)} />
+      <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autocomplete="off">
+        <input style={loginStyles.inputStyles}
+               type="email"
+               value={props.authentication.email}
+               onChange={e => props.emailChanged(e.target.value)}
+               placeholder="user@gmail.com" />
+        <input style={loginStyles.inputStyles}
+               type="password" value={props.authentication.password}
+               onChange={e => props.passwordChanged(e.target.value)}
+               placeholder="********" />
         <button type="submit">Login</button>
       </form>
     )
