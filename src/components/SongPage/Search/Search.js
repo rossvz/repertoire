@@ -2,7 +2,10 @@ import React from 'react'
 
 const styles = {
   search: {
-    margin: 20,
+    width: '100%',
+    textAlign: 'center',
+    fontSize: '1.4em',
+    lineHeight: '1.7em'
   }
 }
 
