@@ -23,7 +23,10 @@ const Song = ({song, changeVote}) => {
 const styles = {
   songStyles: {
     width: '100%',
-    margin: '2% 20%'
+    margin: '2% 20%',
+    boxShadow: '#d8d8d8 3px 5px 10px',
+    backgroundSize: 'cover',
+    // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
   },
   columnStyles: {
     display: 'flex',
@@ -41,10 +44,8 @@ const styles = {
     opacity: 0.5
   },
   songInfoStyles: {
-    border: '1px solid #d8d8d8',
     padding: '0 5%',
-    flex: 3,
-    boxShadow: '#d8d8d8 3px 5px 10px'
+    flex: 3
   }
 }
 

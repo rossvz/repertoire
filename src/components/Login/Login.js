@@ -15,7 +15,7 @@ const loginStyles = {
     border: 'none',
     backgroundColor: '#f8f8f8',
     margin: '1%',
-    width: '35vw'
+    width: '90vw'
   }
 }
 

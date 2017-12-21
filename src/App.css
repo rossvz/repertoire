@@ -1,7 +1,6 @@
 .App {
-    height: 100vh;
-    /*background-size: cover;*/
-    /*background: linear-gradient(135deg, #81c, #18c) fixed;*/
-    overflow: scroll;
+    /*height: 100vh;*/
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     font-family: Roboto, SansSerif;
 }

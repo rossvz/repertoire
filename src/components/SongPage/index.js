@@ -4,9 +4,12 @@ import Search from './Search'
 import NewSong from './NewSong'
 import SongList from './SongList'
 
+const styles = {
+  songPage: {}
+}
 const SongPage = (props) => {
   return (
-    <div className="App">
+    <div style={styles.songPage}>
       <Header />
       <Search />
       <NewSong />

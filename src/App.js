@@ -17,9 +17,9 @@ const LoginButton = ({firebase}) => {
 
 
 const App = () =>
-  <ReduxProvider store={ store }>
+  <ReduxProvider store={store}>
     <Router>
-      <div>
+      <div className="App">
         <Route exact path="/" component={SongPage} />
         <Route path="/login" component={Login} />
         <LoginButton firebase={store.firebase} />
