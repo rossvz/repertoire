@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, user-scalable=no, maximum-scale=1.0">
     <meta name="theme-color" content="#000000">
     <!--
       manifest.json provides metadata used when your web app is added to the
@@ -26,6 +26,15 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <script>
+      document.addEventListener('touchmove', function (event) {
+        event = event.originalEvent || event
+        if (event.scale !== 1) {
+          event.preventDefault()
+        }
+      }, false)
+
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
