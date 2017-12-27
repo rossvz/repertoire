@@ -1,19 +1,22 @@
 import React from 'react'
 import Upvote from './Upvote'
+import AlbumArtwork from './AlbumArtwork'
 
 const Song = ({song, changeVote}) => {
   return (
     <div style={styles.songStyles}>
       <div style={styles.columnStyles}>
-        <div style={styles.actionStyles}>
-          <Upvote changeVote={changeVote} songId={song.id} />
-          <p>{song.votes}</p>
-        </div>
+        <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div style={styles.songInfoStyles}>
           <h2>{song.title}</h2>
           <h4>{song.artist}</h4>
           <p>{song.album}</p>
         </div>
+        <div style={styles.actionStyles}>
+          <Upvote changeVote={changeVote} songId={song.id} />
+          <p>{song.votes}</p>
+        </div>
+
 
       </div>
     </div>

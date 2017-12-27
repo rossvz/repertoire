@@ -79,11 +79,12 @@ class NewSongForm extends Component {
 
   renderNextResult () {
     if (this.state.resultIndex + 1 < this.state.results.length) return <button onClick={this.nextResult.bind(this)}>NEXT</button>
+    else return <button disabled={true} style={styles.disabled}>NEXT</button>
   }
 
   renderPreviousResult () {
     if (this.state.resultIndex > 0) return <button onClick={this.previousResult.bind(this)}>PREV</button>
-    else return <div></div>
+    else return <button disabled={true} style={styles.disabled}>PREV</button>
   }
 
   render () {
@@ -91,15 +92,20 @@ class NewSongForm extends Component {
       <div>
         <form onSubmit={this.searchSong.bind(this)} style={styles.formStyles}>
           <input style={styles.inputStyles} type="text" placeholder={'Title'} onChange={this.onTitleChange.bind(this)} value={this.state.title} />
-          <input style={styles.inputStyles} type="text" placeholder={'Artist'} onChange={this.onArtistChange.bind(this)} value={this.state.artist} />
-          <input style={styles.inputStyles} readOnly={true} type="text" placeholder={'Album'} value={this.state.album} />
+          <input style={styles.inputStyles} type="text" placeholder={'Artist (optional)'} onChange={this.onArtistChange.bind(this)}
+                 value={this.state.artist} />
+          <div style={styles.inputStyles}>{this.state.album}</div>
           <button style={styles.addSongStyles} type="submit">Search</button>
         </form>
-        {this.renderPreviousResult()}
-        <img height="300px" width="300px" src={this.state.albumArtwork} alt="" />
-        {this.renderNextResult()}
-        <button onClick={this.cancelSong.bind(this)}>Cancel</button>
-        <button onClick={this.saveSong.bind(this)}>Save</button>
+        <div style={styles.results}>
+          {this.renderPreviousResult()}
+          <img height="300px" width="300px" src={this.state.albumArtwork} alt="" />
+          {this.renderNextResult()}
+        </div>
+        <div>
+          <button style={styles.cancelButton} onClick={this.cancelSong.bind(this)}>Cancel</button>
+          <button style={styles.saveSongButton} onClick={this.saveSong.bind(this)}>Save</button>
+        </div>
       </div>
     )
   }
@@ -127,6 +133,28 @@ const styles = {
     borderRadius: '5px',
     background: '#f8f8f8',
     color: '#333'
+  },
+  results: {
+    display: 'flex',
+    justifyContent: 'space-evenly'
+
+  },
+  disabled: {
+    opacity: 0.5
+  },
+  cancelButton: {
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: '1.4em',
+    border: 'none',
+    borderRadius: '5px'
+  },
+  saveSongButton: {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: '1.4em',
+    border: 'none',
+    borderRadius: '5px'
   }
 }
 
