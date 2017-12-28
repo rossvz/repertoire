@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withFirebase } from 'react-redux-firebase'
 import { searchSpotify } from 'util/Spotify'
 
-const INITIAL_STATE = {title: '', artist: '', album: '', votes: 0, results: [], resultIndex: 0}
+const INITIAL_STATE = {title: '', artist: '', album: '', votes: 0, results: [], resultIndex: 0, visible: true}
 
 class NewSongForm extends Component {
   constructor (props) {
@@ -26,8 +26,8 @@ class NewSongForm extends Component {
   }
 
   saveSong () {
-    const {title, artist, album, votes, albumArtwork} = this.state
-    this.props.firebase.push('/songs', {title, artist, album, votes, albumArtwork})
+    const {title, artist, album, votes, albumArtwork, visible} = this.state
+    this.props.firebase.push('/songs', {title, artist, album, votes, albumArtwork, visible})
     this.props.toggleIsEditing()
     this.setState(INITIAL_STATE)
   }

@@ -10,9 +10,9 @@ import Login from './components/Login'
 
 const LoginButton = ({firebase}) => {
   if (firebase.auth().currentUser) return <div></div>
-  else return <ul>
-    <li><Link to="/login">Login</Link></li>
-  </ul>
+  else return <Link to="/login">
+    <button>Login</button>
+  </Link>
 }
 
 

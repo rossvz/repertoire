@@ -1,5 +1,5 @@
 import { toggleVoteInStorage } from 'util/votes'
-import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER } from './constants'
+import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER, CHANGE_VISIBLE_FAIL } from './constants'
 
 export const changeVote = song => (dispatch, getState, getFirebase) =>
   async value => {
@@ -8,7 +8,7 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
     const newVotes = votes + value
     try {
       toggleVoteInStorage(song.id)
-      await firebase.update(`/songs/${song.id}`, { votes: newVotes })
+      await firebase.update(`/songs/${song.id}`, {votes: newVotes})
     } catch (error) {
       toggleVoteInStorage(song.id)
       dispatch({
@@ -23,3 +23,16 @@ export const changeSongsFilter = field => value => ({
   field,
   value,
 })
+
+export const changeVisible = song => (dispatch, getState, getFirebase) =>
+  async visible => {
+    const firebase = getFirebase()
+    try {
+      await firebase.update(`/songs/${song.id}`, {visible})
+    } catch (error) {
+      dispatch({
+        type: CHANGE_VISIBLE_FAIL,
+        error,
+      })
+    }
+  }
