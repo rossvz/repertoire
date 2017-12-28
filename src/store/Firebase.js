@@ -6,7 +6,8 @@ const config = {
   databaseURL: 'https://rg-music.firebaseio.com',
   projectId: 'rg-music',
   storageBucket: 'rg-music.appspot.com',
-  messagingSenderId: '390024634944'
+  messagingSenderId: '390024634944',
+  perserveOnLogout: [ 'songs' ]
 }
 const Firebase = firebase.initializeApp(config)
 

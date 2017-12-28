@@ -4,17 +4,10 @@ import store from 'store'
 import 'typeface-roboto'
 import './App.css'
 
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import SongPage from './components/SongPage'
 import Login from './components/Login'
-
-const LoginButton = ({firebase}) => {
-  if (firebase.auth().currentUser) return <div></div>
-  else return <Link to="/login">
-    <button>Login</button>
-  </Link>
-}
-
+import LoginButton from './components/Login/LoginButton'
 
 const App = () =>
   <ReduxProvider store={store}>
