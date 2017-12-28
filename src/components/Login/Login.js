@@ -39,7 +39,7 @@ const Login = (props) => {
 
   const loginForm = () => {
     return (
-      <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autocomplete="off">
+      <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autoComplete={'off'}>
         <input style={loginStyles.inputStyles}
                type="email"
                value={props.authentication.email}

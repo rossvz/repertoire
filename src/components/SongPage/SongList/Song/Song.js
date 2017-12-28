@@ -1,10 +1,12 @@
 import React from 'react'
 import Upvote from './Upvote'
 import AlbumArtwork from './AlbumArtwork'
+import Visibility from './Visibility'
 
-const Song = ({song, changeVote}) => {
+const Song = ({song, changeVote, changeVisible, firebase}) => {
+  if (!firebase.auth().currentUser && !song.visible) return <div></div>
   return (
-    <div style={styles.songStyles}>
+    <div style={setStyles(song)}>
       <div style={styles.columnStyles}>
         <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div style={styles.songInfoStyles}>
@@ -15,6 +17,7 @@ const Song = ({song, changeVote}) => {
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} songId={song.id} />
           <p>{song.votes}</p>
+          <Visibility visible={song.visible} changeVisible={changeVisible} />
         </div>
 
 
@@ -23,8 +26,22 @@ const Song = ({song, changeVote}) => {
   )
 }
 
+const setStyles = song => {
+  console.log('song style', song)
+  if (song.visible) return styles.songStyles
+  else return styles.invisibleSongStyles
+}
+
 const styles = {
   songStyles: {
+    width: '100%',
+    margin: '2% 20%',
+    boxShadow: '#d8d8d8 3px 5px 10px',
+    backgroundSize: 'cover',
+    // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
+  },
+  invisibleSongStyles: {
+    opacity: 0.4,
     width: '100%',
     margin: '2% 20%',
     boxShadow: '#d8d8d8 3px 5px 10px',

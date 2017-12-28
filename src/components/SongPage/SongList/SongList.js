@@ -1,12 +1,12 @@
-import Song from 'components/SongPage/SongList/Song/Song'
+import Song from 'components/SongPage/SongList/Song'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const SongList = ({changeVote, songs}) => (
+const SongList = ({changeVote, songs, changeVisible}) => (
   <div style={styles.songListStyles}>
     {
       songs.map(
-        song => <Song key={song.id} changeVote={changeVote(song)} song={song} />
+        song => <Song key={song.id} changeVote={changeVote(song)} song={song} changeVisible={changeVisible(song)} />
       )
     }
   </div>
