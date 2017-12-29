@@ -8,7 +8,7 @@ const logout = (firebase) => {
 const LoginButton = ({firebase}) => {
   if (firebase.auth().currentUser) return <div style={styles.buttonStyles} onClick={() => logout(firebase)}>Logout</div>
   else return <Link style={{textDecoration: 'none'}} to="/login">
-    <div style={styles.buttonStyles}>Login</div>
+    <div style={styles.buttonStyles}>Admin Login</div>
   </Link>
 }
 
