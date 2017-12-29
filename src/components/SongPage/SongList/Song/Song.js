@@ -42,7 +42,7 @@ const styles = {
     // boxShadow: '#d8d8d8 3px 5px 10px',
     backgroundSize: 'cover',
     paddingBottom: '3%',
-    borderBottom: '3px solid #544E58'
+    borderBottom: '2px solid #544E58'
     // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
   },
   invisibleSongStyles: {

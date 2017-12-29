@@ -23,7 +23,7 @@ const loginStyles = {
     padding: '3%',
     border: '2px solid white',
     backgroundColor: 'transparent',
-    borderRadius: '5px'
+    borderRadius: '100em'
   }
 }
 

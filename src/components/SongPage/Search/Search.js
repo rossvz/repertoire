@@ -2,16 +2,20 @@ import React from 'react'
 
 const styles = {
   searchContainer: {
-    marginTop: '2%',
+    margin: '3% 0',
     display: 'flex',
     flexFlow: 'column',
     justifyContent: 'center',
     alignItems: 'center'
   },
   searchInput: {
+    width: '98vw',
     textAlign: 'center',
-    fontSize: '1em',
-    lineHeight: '1.2em'
+    fontSize: '1.8em',
+    backgroundColor: '#19181c',
+    color: 'white',
+    border: 'none',
+    padding: '2%'
   }
 }
 

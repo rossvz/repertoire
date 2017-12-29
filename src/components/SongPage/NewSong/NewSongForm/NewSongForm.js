@@ -129,8 +129,9 @@ const styles = {
   },
   addSongStyles: {
     fontSize: '1.5em',
-    padding: '1%',
-    borderRadius: '5px',
+    borderRadius: '100em',
+    padding: '2%',
+
     background: '#f8f8f8',
     color: '#333'
   },
@@ -147,14 +148,17 @@ const styles = {
     color: 'black',
     fontSize: '1.4em',
     border: 'none',
-    borderRadius: '5px'
+    padding: '2%',
+
+    borderRadius: '100em'
   },
   saveSongButton: {
     backgroundColor: 'black',
     color: 'white',
     fontSize: '1.4em',
     border: 'none',
-    borderRadius: '5px'
+    padding: '2%',
+    borderRadius: '100em'
   }
 }
 

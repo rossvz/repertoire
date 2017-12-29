@@ -9,8 +9,8 @@ const styles = {
   },
   addSongStyles: {
     fontSize: '1.5em',
-    padding: '1%',
-    borderRadius: '5px',
+    padding: '2%',
+    borderRadius: '100em',
     background: '#f8f8f8',
     color: '#333'
   }
