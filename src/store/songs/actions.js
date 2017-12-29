@@ -1,13 +1,15 @@
-import { toggleVoteInStorage } from 'util/votes'
+import { toggleVoteInStorage, removeVoteFromStorage } from 'util/votes'
 import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER, CHANGE_VISIBLE_FAIL } from './constants'
 
 export const changeVote = song => (dispatch, getState, getFirebase) =>
   async value => {
     const firebase = getFirebase()
     const votes = song.votes || 0
-    const newVotes = votes + value
+    let newVotes = votes + value
+    if (value === 'reset') newVotes = 0
     try {
-      toggleVoteInStorage(song.id)
+      if (value === 'reset') removeVoteFromStorage(song.id)
+      else toggleVoteInStorage(song.id)
       await firebase.update(`/songs/${song.id}`, {votes: newVotes})
     } catch (error) {
       toggleVoteInStorage(song.id)

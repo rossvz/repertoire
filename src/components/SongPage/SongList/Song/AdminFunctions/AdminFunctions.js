@@ -6,7 +6,7 @@ const AdminFunctions = ({song, changeVote, changeVisible}) => {
   return (
     <div style={styles.adminFunctionsContainer}>
       <Visibility visible={song.visible} changeVisible={changeVisible} />
-      <ResetVotes resetVotes={() => changeVote(-song.votes)} />
+      <ResetVotes resetVotes={() => changeVote('reset')} />
     </div>
   )
 }

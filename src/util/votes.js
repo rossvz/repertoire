@@ -15,7 +15,7 @@ const writeVoteToStorage = songId => {
   localStorage.setItem('persistedVotes', JSON.stringify(persistedVotes))
 }
 
-const removeVoteFromStorage = songId => {
+export const removeVoteFromStorage = songId => {
   const persistedVotes = readVotesFromStorage().filter(persistedSongId => persistedSongId !== songId)
   localStorage.setItem('persistedVotes', JSON.stringify(persistedVotes))
 }
