@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import NewSongForm from './NewSongForm/index'
+import FontAwesome from 'react-fontawesome'
 
 const styles = {
   container: {
@@ -13,7 +14,10 @@ const styles = {
     borderRadius: '100em',
     background: '#f8f8f8',
     color: '#333'
-  }
+  },
+  icon: {
+    marginRight: '10px'
+  },
 }
 
 const NewSong = ({isEditing, toggleIsEditing, firebase}) =>
@@ -22,7 +26,7 @@ const NewSong = ({isEditing, toggleIsEditing, firebase}) =>
       {
         isEditing
           ? <NewSongForm toggleIsEditing={toggleIsEditing} />
-          : <button style={styles.addSongStyles} onClick={toggleIsEditing}>ADD SONG</button>
+          : <button style={styles.addSongStyles} onClick={toggleIsEditing}><FontAwesome style={styles.icon} name={'plus-circle'} />ADD SONG</button>
       }
     </div>
     : <div></div>

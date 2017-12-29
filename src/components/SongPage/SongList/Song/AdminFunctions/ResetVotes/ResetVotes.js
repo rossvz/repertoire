@@ -1,6 +1,10 @@
 import React from 'react'
+import FontAwesome from 'react-fontawesome'
 
 const styles = {
+  icon: {
+    marginRight: '10px'
+  },
   resetButton: {
     cursor: 'pointer',
     marginBottom: '10px'
@@ -12,7 +16,10 @@ const ResetVotes = ({resetVotes}) =>
     style={styles.resetButton}
     onClick={resetVotes}
   >
-    RESET
+    <div>
+      <FontAwesome name={'undo'} style={styles.icon} />
+      <span>RESET</span>
+    </div>
   </div>
 
 export default ResetVotes

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
+import FontAwesome from 'react-fontawesome'
 
 const loginStyles = {
   formStyles: {
+    marginTop: '40%',
     display: 'flex',
     flexFlow: 'column',
     alignItems: 'center',
@@ -15,7 +18,8 @@ const loginStyles = {
     border: 'none',
     backgroundColor: '#f8f8f8',
     margin: '1%',
-    width: '90vw'
+    width: '90vw',
+    borderRadius: '100em'
   },
   submit: {
     fontSize: '1.4em',
@@ -24,6 +28,18 @@ const loginStyles = {
     border: '2px solid white',
     backgroundColor: 'transparent',
     borderRadius: '100em'
+  },
+  backButtonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    color: 'white',
+    textDecoration: 'none',
+  },
+  backButton: {
+    fontSize: '1.3em',
+    fontWeight: 'bold',
+    color: 'white',
+    margin: '3%'
   }
 }
 
@@ -47,18 +63,24 @@ const Login = (props) => {
 
   const loginForm = () => {
     return (
-      <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autoComplete={'off'}>
-        <input style={loginStyles.inputStyles}
-               type="email"
-               value={props.authentication.email}
-               onChange={e => props.emailChanged(e.target.value)}
-               placeholder="user@gmail.com" />
-        <input style={loginStyles.inputStyles}
-               type="password" value={props.authentication.password}
-               onChange={e => props.passwordChanged(e.target.value)}
-               placeholder="********" />
-        <button style={loginStyles.submit} type="submit">Submit</button>
-      </form>
+      <div>
+        <Link to={'/'} style={loginStyles.backButtonContainer}>
+          <FontAwesome name="arrow-left" size="2x" />
+          <div style={loginStyles.backButton}>Back</div>
+        </Link>
+        <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autoComplete={'off'}>
+          <input style={loginStyles.inputStyles}
+                 type="email"
+                 value={props.authentication.email}
+                 onChange={e => props.emailChanged(e.target.value)}
+                 placeholder="user@gmail.com" />
+          <input style={loginStyles.inputStyles}
+                 type="password" value={props.authentication.password}
+                 onChange={e => props.passwordChanged(e.target.value)}
+                 placeholder="********" />
+          <button style={loginStyles.submit} type="submit">Submit</button>
+        </form>
+      </div>
     )
   }
 

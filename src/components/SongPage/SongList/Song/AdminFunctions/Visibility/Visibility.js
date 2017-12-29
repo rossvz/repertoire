@@ -1,14 +1,19 @@
 import React from 'react'
+import FontAwesome from 'react-fontawesome'
 
 const Visibility = ({visible = true, changeVisible}) =>
   <div
     style={styles.visibilityButton}
     onClick={() => changeVisible(!visible)}
   >
-    {visible ? 'HIDE' : 'SHOW'}
+    <FontAwesome name={visible ? 'eye-slash' : 'eye'} style={styles.icon} />
+    <span>{visible ? 'HIDE' : 'SHOW'}</span>
   </div>
 
 const styles = {
+  icon: {
+    marginRight: '10px'
+  },
   visibilityButton: {
     cursor: 'pointer',
     marginBottom: '10px'
