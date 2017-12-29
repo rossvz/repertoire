@@ -1,14 +1,4 @@
-import { firebaseConnect } from 'react-redux-firebase'
-import { connect } from 'react-redux'
+import showIfAuthenticated from 'util/showIfAuthenticated'
 import Visibility from './Visibility'
 
-const wrappedVisibility = firebaseConnect([
-  'auth'
-])(Visibility)
-
-export default connect(
-  ({firebase}) => ({
-    firebase
-  }),
-  {}
-)(wrappedVisibility)
+export default showIfAuthenticated(Visibility)
