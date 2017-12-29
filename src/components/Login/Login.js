@@ -5,7 +5,7 @@ import FontAwesome from 'react-fontawesome'
 
 const loginStyles = {
   formStyles: {
-    marginTop: '40%',
+    marginTop: '20%',
     display: 'flex',
     flexFlow: 'column',
     alignItems: 'center',
