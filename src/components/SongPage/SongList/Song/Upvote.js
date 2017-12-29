@@ -4,6 +4,7 @@ import { isUpvoted } from 'util/votes'
 const Upvote = ({changeVote, songId}) => {
   const styles = {
     arrowStyles: {
+      cursor: 'pointer',
       width: '50px',
       fill: isUpvoted(songId) ? '#2ecc71' : ''
     }

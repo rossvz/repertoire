@@ -1,6 +1,7 @@
 import React from 'react'
 import Upvote from './Upvote'
 import AlbumArtwork from './AlbumArtwork'
+import ResetVotes from './ResetVotes'
 import Visibility from './Visibility'
 
 const Song = ({song, changeVote, changeVisible, firebase}) => {
@@ -17,17 +18,19 @@ const Song = ({song, changeVote, changeVisible, firebase}) => {
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} songId={song.id} />
           <p>{song.votes}</p>
-          <Visibility visible={song.visible} changeVisible={changeVisible} />
+          <div style={ styles.row }>
+            <Visibility visible={song.visible} changeVisible={changeVisible} />
+          </div>
+          <div style={ styles.row }>
+            <ResetVotes resetVotes={ () => changeVote(-song.votes) } />
+          </div>
         </div>
-
-
       </div>
     </div>
   )
 }
 
 const setStyles = song => {
-  console.log('song style', song)
   if (song.visible) return styles.songStyles
   else return styles.invisibleSongStyles
 }
@@ -66,7 +69,10 @@ const styles = {
   songInfoStyles: {
     padding: '0 5%',
     flex: 3
-  }
+  },
+  row: {
+    marginBottom: 10,
+  },
 }
 
 export default Song
