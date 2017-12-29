@@ -12,7 +12,7 @@ const ResetVotes = ({resetVotes}) =>
     style={styles.resetButton}
     onClick={resetVotes}
   >
-    Reset
+    RESET
   </div>
 
 export default ResetVotes

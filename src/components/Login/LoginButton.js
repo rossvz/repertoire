@@ -19,7 +19,7 @@ const styles = {
     justifyContent: 'center',
     padding: '5%',
     fontSize: '1.4em',
-    color: 'white'
+    color: '#FC1F49'
   }
 }
 

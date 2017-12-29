@@ -1,8 +1,7 @@
 import React from 'react'
 import Upvote from './Upvote'
 import AlbumArtwork from './AlbumArtwork'
-import ResetVotes from './ResetVotes'
-import Visibility from './Visibility'
+import AdminFunctions from './AdminFunctions/AdminFunctions'
 
 const Song = ({song, changeVote, changeVisible, firebase}) => {
   if (!firebase.auth().currentUser && !song.visible) return <div></div>
@@ -14,16 +13,11 @@ const Song = ({song, changeVote, changeVisible, firebase}) => {
           <div style={styles.title}>{song.title}</div>
           <div style={styles.artist}>{song.artist}</div>
           <div>{song.album}</div>
+          <AdminFunctions song={song} changeVote={changeVote} changeVisible={changeVisible} />
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} songId={song.id} />
           <p>{song.votes}</p>
-          <div>
-            <Visibility visible={song.visible} changeVisible={changeVisible} />
-          </div>
-          <div>
-            <ResetVotes resetVotes={() => changeVote(-song.votes)} />
-          </div>
         </div>
       </div>
     </div>
@@ -68,13 +62,13 @@ const styles = {
     flex: 1,
     opacity: 0.5,
     color: '#fff'
-
   },
   songInfoStyles: {
     padding: '0 5%',
     flex: 3,
     color: '#fff'
   },
+
   title: {
     fontWeight: 'bold',
     fontSize: '1.3em',

@@ -5,7 +5,7 @@ const Visibility = ({visible = true, changeVisible}) =>
     style={styles.visibilityButton}
     onClick={() => changeVisible(!visible)}
   >
-    {visible ? 'Hide' : 'Show'}
+    {visible ? 'HIDE' : 'SHOW'}
   </div>
 
 const styles = {
