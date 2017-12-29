@@ -95,16 +95,16 @@ class NewSongForm extends Component {
           <input style={styles.inputStyles} type="text" placeholder={'Artist (optional)'} onChange={this.onArtistChange.bind(this)}
                  value={this.state.artist} />
           <div style={styles.inputStyles}>{this.state.album}</div>
-          <button style={styles.addSongStyles} type="submit">Search</button>
+          <button style={styles.addSongStyles} type="submit">SEARCH</button>
         </form>
         <div style={styles.results}>
           {this.renderPreviousResult()}
           <img height="300px" width="300px" src={this.state.albumArtwork} alt="" />
           {this.renderNextResult()}
         </div>
-        <div>
-          <button style={styles.cancelButton} onClick={this.cancelSong.bind(this)}>Cancel</button>
-          <button style={styles.saveSongButton} onClick={this.saveSong.bind(this)}>Save</button>
+        <div style={styles.buttonContainer}>
+          <button style={styles.cancelButton} onClick={this.cancelSong.bind(this)}>CANCEL</button>
+          <button style={styles.saveSongButton} onClick={this.saveSong.bind(this)}>SAVE</button>
         </div>
       </div>
     )
@@ -128,7 +128,7 @@ const styles = {
     width: '90vw'
   },
   addSongStyles: {
-    fontSize: '1.5em',
+    fontSize: '1em',
     borderRadius: '100em',
     padding: '2%',
 
@@ -143,22 +143,29 @@ const styles = {
   disabled: {
     opacity: 0.5
   },
+  buttonContainer: {
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
   cancelButton: {
-    backgroundColor: 'white',
-    color: 'black',
-    fontSize: '1.4em',
+    backgroundColor: '#19181c',
+    color: 'white',
+    fontSize: '1em',
     border: 'none',
     padding: '2%',
-
-    borderRadius: '100em'
+    borderRadius: '100em',
+    flex: '1'
   },
   saveSongButton: {
-    backgroundColor: 'black',
-    color: 'white',
-    fontSize: '1.4em',
+    backgroundColor: 'white',
+    color: 'black',
+    fontSize: '1em',
     border: 'none',
     padding: '2%',
-    borderRadius: '100em'
+    borderRadius: '100em',
+    flex: '1'
   }
 }
 

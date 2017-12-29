@@ -8,7 +8,7 @@ const styles = {
     textAlign: 'center',
   },
   addSongStyles: {
-    fontSize: '1.5em',
+    fontSize: '1em',
     padding: '2%',
     borderRadius: '100em',
     background: '#f8f8f8',
@@ -22,7 +22,7 @@ const NewSong = ({isEditing, toggleIsEditing, firebase}) =>
       {
         isEditing
           ? <NewSongForm toggleIsEditing={toggleIsEditing} />
-          : <button style={styles.addSongStyles} onClick={toggleIsEditing}>Add Song</button>
+          : <button style={styles.addSongStyles} onClick={toggleIsEditing}>ADD SONG</button>
       }
     </div>
     : <div></div>
