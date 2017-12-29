@@ -10,8 +10,8 @@ const styles = {
   },
   searchInput: {
     textAlign: 'center',
-    fontSize: '1.4em',
-    lineHeight: '1.7em'
+    fontSize: '1em',
+    lineHeight: '1.2em'
   }
 }
 

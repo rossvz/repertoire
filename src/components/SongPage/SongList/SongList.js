@@ -32,8 +32,10 @@ const styles = {
     flexFlow: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '5%'
+    padding: '5%',
   }
 }
+
+//1E1D22
 
 export default SongList

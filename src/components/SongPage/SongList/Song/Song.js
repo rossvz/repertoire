@@ -10,9 +10,9 @@ const Song = ({song, changeVote, changeVisible, firebase}) => {
       <div style={styles.columnStyles}>
         <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div style={styles.songInfoStyles}>
-          <h2>{song.title}</h2>
-          <h4>{song.artist}</h4>
-          <p>{song.album}</p>
+          <div style={styles.title}>{song.title}</div>
+          <div style={styles.artist}>{song.artist}</div>
+          <div>{song.album}</div>
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} songId={song.id} />
@@ -36,15 +36,17 @@ const styles = {
   songStyles: {
     width: '100%',
     margin: '2% 20%',
-    boxShadow: '#d8d8d8 3px 5px 10px',
+    // boxShadow: '#d8d8d8 3px 5px 10px',
     backgroundSize: 'cover',
+    paddingBottom: '3%',
+    borderBottom: '3px solid #544E58'
     // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
   },
   invisibleSongStyles: {
     opacity: 0.4,
     width: '100%',
     margin: '2% 20%',
-    boxShadow: '#d8d8d8 3px 5px 10px',
+    // boxShadow: '#d8d8d8 3px 5px 10px',
     backgroundSize: 'cover',
     // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
   },
@@ -61,11 +63,29 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    opacity: 0.5
+    opacity: 0.5,
+    color: '#fff'
+
   },
   songInfoStyles: {
     padding: '0 5%',
-    flex: 3
+    flex: 3,
+    color: '#fff'
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: '1.3em',
+    letterSpacing: '0.1em'
+    // textTransform: 'uppercase'
+  },
+  artist: {
+    color: '#B4CBEA',
+    fontSize: '1em',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    padding: '5% 0'
+
   }
 }
 

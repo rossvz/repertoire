@@ -8,7 +8,9 @@ const HelperText = (props) => {
 
 const styles = {
   text: {
-    padding: '5%'
+    color: 'white',
+    padding: '5%',
+    fontSize: '1.2em'
   }
 }
 

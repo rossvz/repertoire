@@ -16,6 +16,14 @@ const loginStyles = {
     backgroundColor: '#f8f8f8',
     margin: '1%',
     width: '90vw'
+  },
+  submit: {
+    fontSize: '1.4em',
+    color: 'white',
+    padding: '3%',
+    border: '2px solid white',
+    backgroundColor: 'transparent',
+    borderRadius: '5px'
   }
 }
 
@@ -49,7 +57,7 @@ const Login = (props) => {
                type="password" value={props.authentication.password}
                onChange={e => props.passwordChanged(e.target.value)}
                placeholder="********" />
-        <button type="submit">Login</button>
+        <button style={loginStyles.submit} type="submit">Submit</button>
       </form>
     )
   }

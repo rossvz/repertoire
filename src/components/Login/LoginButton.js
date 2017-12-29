@@ -13,7 +13,14 @@ const LoginButton = ({firebase}) => {
 }
 
 const styles = {
-  buttonStyles: {display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '5%', fontSize: '1.4em'}
+  buttonStyles: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '5%',
+    fontSize: '1.4em',
+    color: 'white'
+  }
 }
 
 export default LoginButton
