@@ -1,19 +1,18 @@
 import React from 'react'
 
-const Visibility = ({visible = true, changeVisible, firebase}) => {
-  if (firebase.auth().currentUser) {
-    if (!visible) return <div style={styles.isHidden} onClick={() => {changeVisible(true)}}>Show</div>
-    return <div onClick={() => {changeVisible(false)}}>Hide</div>
-  }
-  return <div></div>
-
-}
+const Visibility = ({visible = true, changeVisible}) =>
+  <div
+    style={styles.visibilityButton}
+    onClick={() => changeVisible(!visible)}
+  >
+    {visible ? 'Hide' : 'Show'}
+  </div>
 
 const styles = {
-  isVisible: {},
-  isHidden: {
-    pointerEvents: 'auto',
-  }
+  visibilityButton: {
+    cursor: 'pointer',
+    marginBottom: '10px'
+  },
 }
 
 export default Visibility
