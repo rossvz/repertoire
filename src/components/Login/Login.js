@@ -44,6 +44,7 @@ const loginStyles = {
 }
 
 const Login = (props) => {
+  window.scrollTo(0, 0)
   const onSubmit = e => {
     e.preventDefault()
     const credentials = {

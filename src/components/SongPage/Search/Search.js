@@ -9,7 +9,7 @@ const styles = {
     alignItems: 'center'
   },
   searchInput: {
-    width: '98vw',
+    width: '95vw',
     textAlign: 'center',
     fontSize: '1.8em',
     backgroundColor: '#19181c',
