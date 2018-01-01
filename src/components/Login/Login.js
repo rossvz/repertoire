@@ -58,7 +58,7 @@ const Login = (props) => {
 
   const renderLogin = () => {
     if (props.firebase.auth().currentUser) return <div>Authenticated!!
-      <Redirect to="/" /></div>
+      <Redirect to="/admin" /></div>
     else return loginForm()
   }
 
