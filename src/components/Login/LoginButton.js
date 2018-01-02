@@ -2,10 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import FontAwesome from 'react-fontawesome'
 
-const logout = (firebase) => {
-  firebase.logout()
-  window.location.reload(true)
-}
 const LoginButton = ({firebase}) => {
   if (firebase.auth().currentUser) {
     return <Link style={styles.buttonStyles} to="/admin">

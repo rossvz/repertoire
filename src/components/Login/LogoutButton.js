@@ -22,7 +22,10 @@ const styles = {
     padding: '5%',
     fontSize: '1em',
     color: '#FC1F49',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    position: 'fixed',
+    bottom: '8vh',
+    left: '40vw'
   }
 }
 

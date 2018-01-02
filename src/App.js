@@ -10,7 +10,7 @@ import SongPage from './components/SongPage'
 import Login from './components/Login'
 import About from './components/About/About'
 import Footer from './components/Footer/Footer'
-import Shows from './components/Shows/Shows'
+import Shows from './components/Shows'
 import Admin from './components/Admin'
 
 const App = () =>
