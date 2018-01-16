@@ -1,5 +1,17 @@
+import { connect } from 'react-redux'
 import NewShowForm from './NewShowForm'
+import { toggleEditingNewShow } from 'store/shows/actions'
+import { compose } from 'redux'
+import { firebaseConnect } from 'react-redux-firebase'
 
-// TODO: refactor NewSongForm to use redux and apply react-redux `connect` here
+const connectStateToProps = ({shows}) => ({editingNewShow: shows.editingNewShow})
 
-export default NewShowForm
+export default compose(
+  firebaseConnect([
+    'auth'
+  ]),
+  connect(
+    connectStateToProps,
+    {toggleEditingNewShow}
+  )
+)(NewShowForm)

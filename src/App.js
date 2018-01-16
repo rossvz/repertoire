@@ -4,7 +4,7 @@ import store from 'store'
 import 'typeface-roboto'
 import './App.css'
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import history from 'util/history'
 import SongPage from './components/SongPage'
 import Login from './components/Login'

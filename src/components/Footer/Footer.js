@@ -1,7 +1,6 @@
 import React from 'react'
-import LoginButton from '../Login/LoginButton'
+import LoginButton from './LoginButton'
 import HomeButton from './HomeButton'
-import AboutButton from './AboutButton'
 import ShowsButton from './ShowsButton'
 
 const Footer = ({firebase}) => {
@@ -9,7 +8,7 @@ const Footer = ({firebase}) => {
     <div style={styles.footer}>
       <HomeButton />
       <ShowsButton />
-      <AboutButton />
+      {/*<AboutButton />*/}
       <LoginButton firebase={firebase} />
 
     </div>
@@ -22,7 +21,7 @@ const styles = {
     bottom: 0,
     height: '8vh',
     width: '100%',
-    background: '#333',
+    background: 'rgb(56, 55, 64)',
     display: 'flex',
     flexFlow: 'row',
     alignItems: 'center',

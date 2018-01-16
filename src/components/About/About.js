@@ -1,8 +1,10 @@
 import React from 'react'
+import Header from '../Header/Header'
 
 const About = (props) => {
   return (
     <div style={styles.aboutContainer}>
+      <Header title={'About Me'} />
       <img src={'https://source.unsplash.com/random'} style={styles.image} />
       <h2>Randy Godwin</h2>
       <div>You probably haven't heard of them whatever freegan, single-origin coffee before they sold out chambray hammock hot chicken kickstarter

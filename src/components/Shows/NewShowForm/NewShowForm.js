@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { withFirebase } from 'react-redux-firebase'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import AddShowButton from './AddShowButton'
 
 const INITIAL_STATE = {date: '', venue: '', time: ''}
 
@@ -11,7 +11,8 @@ class NewShowForm extends Component {
     this.onAutocompleteChange = (venue) => this.setState({...this.state, venue})
   }
 
-  saveShow () {
+  saveShow (e) {
+    e.preventDefault()
     const {date, venue, time} = this.state
     geocodeByAddress(this.state.venue)
       .then(results => getLatLng(results[ 0 ]))
@@ -31,6 +32,8 @@ class NewShowForm extends Component {
   }
 
   cancelShow (e) {
+    e.preventDefault()
+    this.props.toggleEditingNewShow()
     this.setState(INITIAL_STATE)
   }
 
@@ -50,23 +53,36 @@ class NewShowForm extends Component {
     const options = {
       types: [ 'establishment' ]
     }
-    return (
-      <div>
-        <form onSubmit={this.saveShow.bind(this)} style={styles.formStyles}>
-          <input style={styles.inputStyles} type="date" placeholder={'Date'} onChange={this.onDateChange.bind(this)} value={this.state.date} />
-          <PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} styles={styles.autocompleteStyles} options={options} />
-          <input style={styles.inputStyles} type="datetime" placeholder={'Time'} onChange={this.onTimeChange.bind(this)} value={this.state.time} />
-        </form>
-        <div style={styles.buttonContainer}>
-          <button style={styles.cancelButton} onClick={this.cancelShow.bind(this)}>CANCEL</button>
-          <button style={styles.saveShowButton} onClick={this.saveShow.bind(this)}>SAVE</button>
-        </div>
-      </div>
-    )
+
+    // todo: refactor this to redux, separate compnents
+    return <div style={styles.container}>
+      {this.props.editingNewShow
+        ? (
+          <div style={styles.container}>
+            <form onSubmit={this.saveShow.bind(this)} style={styles.formStyles}>
+              <input style={styles.inputStyles} type="date" placeholder={'Date'} onChange={this.onDateChange.bind(this)} value={this.state.date} />
+              <PlacesAutocomplete inputProps={inputProps} autocompleteItem={AutocompleteItem} styles={styles.autocompleteStyles} options={options} />
+              <input style={styles.inputStyles} type="datetime" placeholder={'Time'} onChange={this.onTimeChange.bind(this)}
+                     value={this.state.time} />
+              <div style={styles.buttonContainer}>
+                <button style={styles.cancelButton} onClick={this.cancelShow.bind(this)}>CANCEL</button>
+                <button style={styles.saveShowButton} onClick={this.saveShow.bind(this)}>SAVE</button>
+              </div>
+            </form>
+          </div>
+        )
+        : <AddShowButton toggleEditingNewShow={this.props.toggleEditingNewShow} />}
+    </div>
   }
 }
 
 const styles = {
+  container: {
+    display: 'flex',
+    flexFlow: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   formStyles: {
     display: 'flex',
     flexFlow: 'column',
@@ -91,14 +107,6 @@ const styles = {
       width: '90vw',
       padding: '10px 0'
     },
-  },
-  addShowStyles: {
-    fontSize: '1em',
-    borderRadius: '100em',
-    padding: '2%',
-
-    background: '#f8f8f8',
-    color: '#333'
   },
   results: {
     display: 'flex',
@@ -132,7 +140,4 @@ const styles = {
   }
 }
 
-NewShowForm.propTypes = {}
-NewShowForm.defaultProps = {}
-
-export default withFirebase(NewShowForm)
+export default NewShowForm
