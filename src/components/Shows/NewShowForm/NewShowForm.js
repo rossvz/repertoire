@@ -2,33 +2,33 @@ import React, { Component } from 'react'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import AddShowButton from './AddShowButton'
 
-const INITIAL_STATE = {date: '', venue: '', time: ''}
+const INITIAL_STATE = { date: '', venue: '', time: '' }
 
 class NewShowForm extends Component {
-  constructor (props) {
-    super(props)
-    this.state = INITIAL_STATE
-    this.onAutocompleteChange = (venue) => this.setState({...this.state, venue})
+  state = INITIAL_STATE
+
+  onAutocompleteChange (venue) {
+    this.setState({ ...this.state, venue })
   }
 
   saveShow (e) {
     e.preventDefault()
-    const {date, venue, time} = this.state
+    const { date, venue, time } = this.state
     geocodeByAddress(this.state.venue)
-      .then(results => getLatLng(results[ 0 ]))
+      .then(results => getLatLng(results[0]))
       .then(latLng => {
-        this.props.firebase.push('/shows', {date, venue, time, latLng})
+        this.props.firebase.push('/shows', { date, venue, time, latLng })
       })
       .catch(error => console.error('Error', error))
     this.setState(INITIAL_STATE)
   }
 
   onDateChange (e) {
-    this.setState({...this.state, date: e.target.value})
+    this.setState({ ...this.state, date: e.target.value })
   }
 
   onTimeChange (e) {
-    this.setState({...this.state, time: e.target.value})
+    this.setState({ ...this.state, time: e.target.value })
   }
 
   cancelShow (e) {
@@ -40,18 +40,18 @@ class NewShowForm extends Component {
   render () {
     const inputProps = {
       value: this.state.venue,
-      onChange: this.onAutocompleteChange,
+      onChange: this.onAutocompleteChange.bind(this),
       placeholder: 'Search Places...',
     }
 
-    const AutocompleteItem = ({formattedSuggestion}) => <div>
+    const AutocompleteItem = ({ formattedSuggestion }) => <div>
       <strong>{formattedSuggestion.mainText}</strong>
       <br />
       <small>{formattedSuggestion.secondaryText}</small>
     </div>
 
     const options = {
-      types: [ 'establishment' ]
+      types: ['establishment']
     }
 
     // todo: refactor this to redux, separate compnents

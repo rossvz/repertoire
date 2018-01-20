@@ -3,13 +3,13 @@ import LoginButton from './LoginButton'
 import HomeButton from './HomeButton'
 import ShowsButton from './ShowsButton'
 
-const Footer = ({firebase}) => {
+const Footer = () => {
   return (
     <div style={styles.footer}>
       <HomeButton />
       <ShowsButton />
       {/*<AboutButton />*/}
-      <LoginButton firebase={firebase} />
+      <LoginButton />
 
     </div>
   )

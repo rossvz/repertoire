@@ -22,7 +22,7 @@ const App = () =>
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} />
         <Route path="/about" component={About} />
-        <Footer firebase={store.firebase} />
+        <Footer />
       </div>
     </Router>
 
