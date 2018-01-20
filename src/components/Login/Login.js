@@ -1,7 +1,50 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import { Link } from 'react-router-dom'
-import FontAwesome from 'react-fontawesome'
+
+const Login = (props) => {
+  window.scrollTo(0, 0)
+  const onSubmit = e => {
+    e.preventDefault()
+    const credentials = {
+      email: props.authentication.email,
+      password: props.authentication.password
+    }
+    props.firebase.login(credentials)
+      .then(res => localStorage.setItem('uid', res.user.uid))
+      .catch(err => console.error(err))
+  }
+
+  const renderLogin = () => {
+    if (props.firebase.auth().currentUser) return <div>Authenticated!!
+      <Redirect to="/admin" /></div>
+    else return loginForm()
+  }
+
+  const loginForm = () => {
+    return (
+      <div>
+        <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autoComplete={'off'}>
+          <input style={loginStyles.inputStyles}
+                 type="email"
+                 value={props.authentication.email}
+                 onChange={e => props.emailChanged(e.target.value)}
+                 placeholder="user@gmail.com" />
+          <input style={loginStyles.inputStyles}
+                 type="password" value={props.authentication.password}
+                 onChange={e => props.passwordChanged(e.target.value)}
+                 placeholder="********" />
+          <button style={loginStyles.submit} type="submit">Submit</button>
+        </form>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {renderLogin()}
+    </div>
+  )
+}
 
 const loginStyles = {
   formStyles: {
@@ -41,55 +84,6 @@ const loginStyles = {
     color: 'white',
     margin: '3%'
   }
-}
-
-const Login = (props) => {
-  window.scrollTo(0, 0)
-  const onSubmit = e => {
-    e.preventDefault()
-    const credentials = {
-      email: props.authentication.email,
-      password: props.authentication.password
-    }
-    props.firebase.login(credentials)
-      .then(res => localStorage.setItem('uid', res.user.uid))
-      .catch(err => console.error(err))
-  }
-
-  const renderLogin = () => {
-    if (props.firebase.auth().currentUser) return <div>Authenticated!!
-      <Redirect to="/" /></div>
-    else return loginForm()
-  }
-
-  const loginForm = () => {
-    return (
-      <div>
-        <Link to={'/'} style={loginStyles.backButtonContainer}>
-          <FontAwesome name="arrow-left" size="2x" />
-          <div style={loginStyles.backButton}>Back</div>
-        </Link>
-        <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autoComplete={'off'}>
-          <input style={loginStyles.inputStyles}
-                 type="email"
-                 value={props.authentication.email}
-                 onChange={e => props.emailChanged(e.target.value)}
-                 placeholder="user@gmail.com" />
-          <input style={loginStyles.inputStyles}
-                 type="password" value={props.authentication.password}
-                 onChange={e => props.passwordChanged(e.target.value)}
-                 placeholder="********" />
-          <button style={loginStyles.submit} type="submit">Submit</button>
-        </form>
-      </div>
-    )
-  }
-
-  return (
-    <div>
-      {renderLogin()}
-    </div>
-  )
 }
 
 export default Login

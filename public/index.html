@@ -11,6 +11,8 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6xUzPJt1Cbk3H_8G2RbJbiwlGfultvRI&libraries=places"></script>
+
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -27,15 +29,15 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <script>
-      document.addEventListener('touchmove', function (event) {
-        event = event.originalEvent || event
-        if (event.scale !== 1) {
-          event.preventDefault()
-        }
-      }, false)
+    <!--<script>-->
+    <!--document.addEventListener('touchmove', function (event) {-->
+    <!--event = event.originalEvent || event-->
+    <!--if (event.scale !== 1) {-->
+    <!--event.preventDefault()-->
+    <!--}-->
+    <!--}, false)-->
 
-    </script>
+    <!--</script>-->
     <div id="root"></div>
     <!--
       This HTML file is a template.
