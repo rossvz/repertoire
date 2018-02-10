@@ -1,5 +1,13 @@
 import React from 'react'
 import { Redirect } from 'react-router'
+// import Unsplash from 'unsplash-js'
+//
+// const unsplash = new Unsplash({
+//   applicationId: "4fa3d6ec0dabc52297a6ce63c633e5f4ad11bc9ca26f6012b30b3b8e3f9d9ebc",
+//   secret: "7b3e0be6eb569b2ad8af7563a8b98a610c199cd6052ee4fb1934da6394676817",
+//   callbackUrl: "{CALLBACK_URL}",
+//   bearerToken: "{USER_BEARER_TOKEN}"
+// });
 
 const Login = (props) => {
   window.scrollTo(0, 0)
@@ -15,14 +23,13 @@ const Login = (props) => {
   }
 
   const renderLogin = () => {
-    if (props.firebase.auth().currentUser) return <div>Authenticated!!
-      <Redirect to="/admin" /></div>
+    if (props.firebase.auth().currentUser) return <div>Authenticated!!<Redirect to="/admin" /></div>
     else return loginForm()
   }
 
   const loginForm = () => {
     return (
-      <div>
+      <div style={loginStyles.container}>
         <form style={loginStyles.formStyles} onSubmit={e => onSubmit(e)} autoComplete={'off'}>
           <input style={loginStyles.inputStyles}
                  type="email"
@@ -47,6 +54,14 @@ const Login = (props) => {
 }
 
 const loginStyles = {
+  container:{
+    background: `url(https://source.unsplash.com/user/erondu)`,
+    backgroundRepeat:'no-repeat',
+    height:'100vh'
+  },
+  titleStyles: {
+    color:'white',
+  },
   formStyles: {
     marginTop: '20%',
     display: 'flex',
@@ -62,9 +77,11 @@ const loginStyles = {
     backgroundColor: '#f8f8f8',
     margin: '1%',
     width: '90vw',
-    borderRadius: '100em'
+    borderRadius: '100em',
+    opacity:'0.6'
   },
   submit: {
+    width:'90vw',
     fontSize: '1.4em',
     color: 'white',
     padding: '3%',

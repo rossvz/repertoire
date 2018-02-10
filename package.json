@@ -25,7 +25,8 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.83.0",
     "spotify-web-api-js": "^0.23.0",
-    "typeface-roboto": "0.0.45"
+    "typeface-roboto": "0.0.45",
+    "unsplash-js": "^4.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
