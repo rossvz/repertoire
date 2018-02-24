@@ -6,7 +6,7 @@ const About = (props) => {
   return (
     <div style={styles.aboutContainer}>
       <Header title={'About Me'} />
-      <h2>Randy Godwin</h2>
+      <h2>Randyadf Godwin</h2>
       <div>asdfasdf</div>
     </div>
   )
