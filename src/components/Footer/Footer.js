@@ -2,13 +2,14 @@ import React from 'react'
 import LoginButton from './LoginButton'
 import HomeButton from './HomeButton'
 import ShowsButton from './ShowsButton'
+import AboutButton from './AboutButton'
 
 const Footer = () => {
   return (
     <div style={styles.footer}>
       <HomeButton />
       <ShowsButton />
-      {/*<AboutButton />*/}
+      <AboutButton />
       <LoginButton />
 
     </div>
