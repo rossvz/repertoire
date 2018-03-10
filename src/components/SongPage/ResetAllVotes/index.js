@@ -1,12 +1,13 @@
 import React from "react"
-import {resetAllVotes} from 'store/songs/actions'
+import {compose as composeHOC, mapProps} from 'recompose'
+import {changeVote} from 'store/songs/actions'
 import {connect} from 'react-redux'
 import {compose, values, mapObjIndexed} from 'ramda'
 import {firebaseConnect} from 'react-redux-firebase'
 
-const ResetAllVotes = ({resetAllVotes,songs}) => {
+const ResetAllVotes = ({resetAllVotes}) => {
   return (
-  <button onClick={()=>{resetAllVotes(songs)('reset')}}>
+  <button onClick={ resetAllVotes }>
   Reset All Votes
   </button>
 )}
@@ -16,7 +17,7 @@ const toArray = compose(
   mapObjIndexed((song, id) => ({ ...song, id }))
 )
 
-export default compose(
+export default composeHOC(
   firebaseConnect([
     'songs'
   ]),
@@ -25,7 +26,13 @@ export default compose(
       songs: toArray(firebase.data.songs)
     }),
     {
-      resetAllVotes
+      changeVote,
     }
+  ),
+  mapProps(
+    ({ changeVote, songs, ...otherProps }) => ({
+      ...otherProps,
+      resetAllVotes: () => songs.forEach(song => changeVote(song)('reset'))
+    })
   )
 )(ResetAllVotes)
