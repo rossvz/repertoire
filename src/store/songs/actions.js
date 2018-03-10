@@ -20,9 +20,8 @@ export const changeVote = song => (dispatch, getState, getFirebase) =>
     }
   }
 
-export const resetAllVotes = songs => () => async (value = 'reset') => {
-  debugger
-  await songs.map(async song => await changeVote(song)('reset'))
+export const resetAllVotes = songs => (dispatch, getState, getFirebase) => async (value = 'reset') => {
+  await songs.map(async song => await changeVote(song)(dispatch, getState, getFirebase)('reset'))
 }
 
 export const changeSongsFilter = field => value => ({
