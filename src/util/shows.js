@@ -21,7 +21,10 @@ const formatVenueName = show => {
   return show
 }
 
+const futureShows = show => moment(show.date).isAfter(moment())
+
 export const formatShows = shows => shows
   .map(setMomentDate)
   .map(setGooglePlaces)
   .map(formatVenueName)
+  .filter(futureShows)
