@@ -1,22 +1,16 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
+import Button from 'components/common/Button'
 
 const AddShowButton = ({toggleEditingNewShow}) => {
   return (
-    <button style={styles.addShowStyles} onClick={toggleEditingNewShow}>
+    <Button onClick={toggleEditingNewShow}>
       <FontAwesome style={styles.icon} name={'plus-circle'} />
       ADD SHOW
-    </button>)
+    </Button>)
 }
 
 const styles = {
-  addShowStyles: {
-    fontSize: '1em',
-    borderRadius: '100em',
-    padding: '2%',
-    background: '#f8f8f8',
-    color: '#333'
-  },
   icon: {
     marginRight: '10px'
   },
