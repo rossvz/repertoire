@@ -1,13 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-// import Unsplash from 'unsplash-js'
-//
-// const unsplash = new Unsplash({
-//   applicationId: "4fa3d6ec0dabc52297a6ce63c633e5f4ad11bc9ca26f6012b30b3b8e3f9d9ebc",
-//   secret: "7b3e0be6eb569b2ad8af7563a8b98a610c199cd6052ee4fb1934da6394676817",
-//   callbackUrl: "{CALLBACK_URL}",
-//   bearerToken: "{USER_BEARER_TOKEN}"
-// });
+import Button from 'components/common/Button'
 
 const Login = (props) => {
   window.scrollTo(0, 0)
@@ -40,7 +33,7 @@ const Login = (props) => {
                  type="password" value={props.authentication.password}
                  onChange={e => props.passwordChanged(e.target.value)}
                  placeholder="********" />
-          <button style={loginStyles.submit} type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     )

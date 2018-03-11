@@ -1,16 +1,10 @@
-import React from "react"
 import {compose as composeHOC, mapProps} from 'recompose'
 import {changeVote} from 'store/songs/actions'
 import {connect} from 'react-redux'
 import {compose, values, mapObjIndexed} from 'ramda'
 import {firebaseConnect} from 'react-redux-firebase'
+import ResetAllVotes from './ResetAllVotes'
 
-const ResetAllVotes = ({resetAllVotes}) => {
-  return (
-  <button onClick={ resetAllVotes }>
-  Reset All Votes
-  </button>
-)}
 
 const toArray = compose(
   values,
