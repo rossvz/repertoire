@@ -50,7 +50,10 @@ const loginStyles = {
   container:{
     background: `url(https://source.unsplash.com/user/erondu)`,
     backgroundRepeat:'no-repeat',
-    height:'100vh'
+    height:'100vh',
+    width:'100vw',
+    position: 'absolute',
+    backgroundSize: 'cover'
   },
   titleStyles: {
     color:'white',
