@@ -3,7 +3,7 @@ import React from 'react'
 const styles = {
   buttonStyles:{
     fontSize: '1em',
-    padding: '2%',
+    padding: '10px',
     borderRadius: '100em',
     background: '#f8f8f8',
     color: '#333'
