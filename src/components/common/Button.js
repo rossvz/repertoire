@@ -11,7 +11,7 @@ const styles = {
 }
 
 const Button = props => (
-  <button style={styles.buttonStyles} onClick={props.onClick} {...props}>{props.children}</button>
+  <button style={styles.buttonStyles} {...props}>{props.children}</button>
 )
 
 export default Button

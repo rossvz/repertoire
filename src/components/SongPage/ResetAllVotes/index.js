@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {compose, values, mapObjIndexed} from 'ramda'
 import {firebaseConnect} from 'react-redux-firebase'
 import ResetAllVotes from './ResetAllVotes'
+import showIfAuthenticated from "../../../util/showIfAuthenticated";
 
 
 const toArray = compose(
@@ -29,4 +30,4 @@ export default composeHOC(
       resetAllVotes: () => songs.forEach(song => changeVote(song)('reset'))
     })
   )
-)(ResetAllVotes)
+)(showIfAuthenticated(ResetAllVotes))

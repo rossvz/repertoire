@@ -1,6 +1,5 @@
 import React from "react"
 import Button from 'components/common/Button'
-import showIfAuthenticated from "../../../util/showIfAuthenticated";
 
 
 const styles = {
@@ -18,4 +17,4 @@ const ResetAllVotes = ({resetAllVotes}) => {
   </div>
 )}
 
-export default showIfAuthenticated(ResetAllVotes)
+export default ResetAllVotes
