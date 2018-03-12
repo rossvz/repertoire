@@ -3,8 +3,8 @@ import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER } from './constants'
 const initialState = {
   error: '',
   filters: {
-    search: '',
-  },
+    search: ''
+  }
 }
 
 export default (
@@ -15,7 +15,7 @@ export default (
     case CHANGE_VOTE_FAIL:
       return {
         ...state,
-        error: action.error,
+        error: action.error
       }
 
     case CHANGE_SONGS_FILTER:
@@ -23,7 +23,7 @@ export default (
         ...state,
         filters: {
           ...state.filters,
-          [action.field]: action.value,
+          [action.field]: action.value
         }
       }
 

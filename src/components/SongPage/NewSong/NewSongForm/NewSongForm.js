@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withFirebase } from 'react-redux-firebase'
 import { searchSpotify } from 'util/Spotify'
+import Button from 'components/common/Button'
 
 const INITIAL_STATE = {title: '', artist: '', album: '', votes: 0, results: [], resultIndex: 0, visible: true}
 
@@ -103,8 +104,8 @@ class NewSongForm extends Component {
           {this.renderNextResult()}
         </div>
         <div style={styles.buttonContainer}>
-          <button style={styles.cancelButton} onClick={this.cancelSong.bind(this)}>CANCEL</button>
-          <button style={styles.saveSongButton} onClick={this.saveSong.bind(this)}>SAVE</button>
+          <Button onClick={this.cancelSong.bind(this)}>CANCEL</Button>
+          <Button onClick={this.saveSong.bind(this)}>SAVE</Button>
         </div>
       </div>
     )
@@ -131,7 +132,6 @@ const styles = {
     fontSize: '1em',
     borderRadius: '100em',
     padding: '2%',
-
     background: '#f8f8f8',
     color: '#333'
   },
@@ -148,24 +148,6 @@ const styles = {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between'
-  },
-  cancelButton: {
-    backgroundColor: '#19181c',
-    color: 'white',
-    fontSize: '1em',
-    border: 'none',
-    padding: '2%',
-    borderRadius: '100em',
-    flex: '1'
-  },
-  saveSongButton: {
-    backgroundColor: 'white',
-    color: 'black',
-    fontSize: '1em',
-    border: 'none',
-    padding: '2%',
-    borderRadius: '100em',
-    flex: '1'
   }
 }
 
