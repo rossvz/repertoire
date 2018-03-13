@@ -1,4 +1,22 @@
-import showIfAuthenticated from 'util/showIfAuthenticated'
-import ResetVotes from './ResetVotes'
+import React from 'react'
+import FontAwesome from 'react-fontawesome'
 
-export default showIfAuthenticated(ResetVotes)
+const styles = {
+  icon: {
+    marginRight: '10px'
+  },
+  resetButton: {
+    cursor: 'pointer',
+    marginBottom: '10px'
+  }
+}
+
+const ResetVotes = ({ resetVotes }) => (
+  <div style={styles.resetButton} onClick={resetVotes}>
+    <div>
+      <FontAwesome name={'undo'} style={styles.icon} />
+    </div>
+  </div>
+)
+
+export default ResetVotes
