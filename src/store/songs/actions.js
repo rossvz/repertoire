@@ -32,7 +32,6 @@ export const removeSong = song => (
   getState,
   getFirebase
 ) => async () => {
-  debugger
   try {
     const firebase = getFirebase()
     await firebase.remove(`/songs/${song.id}`)
