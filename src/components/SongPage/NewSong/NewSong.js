@@ -7,27 +7,31 @@ import Button from 'components/common/Button'
 const styles = {
   container: {
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   icon: {
     marginRight: '10px'
-  },
+  }
 }
 
-const NewSong = ({isEditing, toggleIsEditing, firebase}) =>
-  firebase.auth().currentUser
-    ? <div style={styles.container}>
-      {
-        isEditing
-          ? <NewSongForm toggleIsEditing={toggleIsEditing} />
-          : <Button onClick={toggleIsEditing}><FontAwesome style={styles.icon} name={'plus-circle'} />ADD SONG</Button>
-      }
+const NewSong = ({ isEditing, toggleIsEditing, firebase }) =>
+  firebase.auth().currentUser ? (
+    <div style={styles.container}>
+      {isEditing ? (
+        <NewSongForm toggleIsEditing={toggleIsEditing} />
+      ) : (
+        <Button onClick={toggleIsEditing}>
+          <FontAwesome style={styles.icon} name={'plus-circle'} />ADD SONG
+        </Button>
+      )}
     </div>
-    : <div></div>
+  ) : (
+    <div />
+  )
 
 NewSong.propTypes = {
   isEditing: PropTypes.bool.isRequired,
-  toggleIsEditing: PropTypes.func.isRequired,
+  toggleIsEditing: PropTypes.func.isRequired
 }
 
 export default NewSong
