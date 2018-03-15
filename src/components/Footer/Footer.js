@@ -11,7 +11,6 @@ const Footer = () => {
       <ShowsButton />
       <AboutButton />
       <LoginButton />
-
     </div>
   )
 }
@@ -21,7 +20,7 @@ const styles = {
     position: 'fixed',
     bottom: 0,
     height: '8vh',
-    width: '100%',
+    width: window.innerWidth > 700 ? '59%' : '100%',
     background: 'rgb(56, 55, 64)',
     display: 'flex',
     flexFlow: 'row',

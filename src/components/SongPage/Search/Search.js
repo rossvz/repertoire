@@ -9,7 +9,6 @@ const styles = {
     alignItems: 'center'
   },
   searchInput: {
-    width: '95vw',
     textAlign: 'center',
     fontSize: '1.8em',
     backgroundColor: '#19181c',
@@ -19,7 +18,7 @@ const styles = {
   }
 }
 
-const Search = ({ value, onChange }) =>
+const Search = ({ value, onChange }) => (
   <div style={styles.searchContainer}>
     <input
       onChange={e => onChange(e.target.value)}
@@ -28,5 +27,6 @@ const Search = ({ value, onChange }) =>
       value={value}
     />
   </div>
+)
 
 export default Search
