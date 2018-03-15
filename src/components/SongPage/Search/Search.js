@@ -1,32 +1,32 @@
 import React from 'react'
+import styled from 'styled-components'
 
-const styles = {
-  searchContainer: {
-    margin: '3% 0',
-    display: 'flex',
-    flexFlow: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  searchInput: {
-    textAlign: 'center',
-    fontSize: '1.8em',
-    backgroundColor: '#19181c',
-    color: 'white',
-    border: 'none',
-    padding: '2%'
-  }
-}
+const Container = styled.div`
+  margin: 3% 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const Input = styled.input`
+  text-align: center;
+  font-size: 1.8em;
+  background-color: #19181c;
+  color: white;
+  border: none;
+  padding: 2%;
+  border-radius: 100em;
+`
 
 const Search = ({ value, onChange }) => (
-  <div style={styles.searchContainer}>
-    <input
+  <Container>
+    <Input
       onChange={e => onChange(e.target.value)}
       placeholder="Search"
-      style={styles.searchInput}
       value={value}
     />
-  </div>
+  </Container>
 )
 
 export default Search
