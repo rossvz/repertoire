@@ -145,7 +145,11 @@ class NewSongForm extends Component {
             onChange={this.onArtistChange.bind(this)}
             value={this.state.artist}
           />
-          <div style={styles.inputStyles}>{this.state.album}</div>
+          <input
+            style={styles.inputStyles}
+            value={this.state.album}
+            onChange={this.onAlbumChange.bind(this)}
+          />
           <div style={styles.findButtonContainer}>
             {this.renderPreviousResult()}
             <Button type="submit">SEARCH</Button>

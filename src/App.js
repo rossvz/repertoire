@@ -13,10 +13,10 @@ import Footer from './components/Footer/Footer'
 import Shows from './components/Shows'
 import Admin from './components/Admin'
 
-const App = () =>
+const App = () => (
   <ReduxProvider store={store}>
     <Router history={history}>
-      <div className="App">
+      <div className="App" style={responsiveStyles()}>
         <Route exact path="/" component={SongPage} />
         <Route exact path="/shows" component={Shows} />
         <Route path="/login" component={Login} />
@@ -25,7 +25,17 @@ const App = () =>
         <Footer />
       </div>
     </Router>
-
   </ReduxProvider>
+)
+
+const responsiveStyles = () => (window.innerWidth > 700 ? styles.app : {})
+
+const styles = {
+  app: {
+    marginLeft: '20vw',
+    marginRight: '20vw',
+    boxShadow: '0px 2px 19px 8px black'
+  }
+}
 
 export default App
