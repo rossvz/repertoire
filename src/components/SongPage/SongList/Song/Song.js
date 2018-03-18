@@ -1,10 +1,10 @@
 import React from 'react'
 import Upvote from './Upvote'
 import AlbumArtwork from './AlbumArtwork'
-import AdminFunctions from './AdminFunctions/AdminFunctions'
+import AdminFunctions from './AdminFunctions'
 
-const Song = ({song, changeVote, changeVisible, firebase}) => {
-  if (!firebase.auth().currentUser && !song.visible) return <div></div>
+const Song = ({ song, changeVote, changeVisible, firebase, removeSong }) => {
+  if (!firebase.auth().currentUser && !song.visible) return <div />
   return (
     <div style={setStyles(song)}>
       <div style={styles.columnStyles}>
@@ -13,7 +13,12 @@ const Song = ({song, changeVote, changeVisible, firebase}) => {
           <div style={styles.title}>{song.title}</div>
           <div style={styles.artist}>{song.artist}</div>
           <div>{song.album}</div>
-          <AdminFunctions song={song} changeVote={changeVote} changeVisible={changeVisible} />
+          <AdminFunctions
+            song={song}
+            changeVote={changeVote}
+            changeVisible={changeVisible}
+            removeSong={removeSong}
+          />
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} songId={song.id} />
@@ -44,7 +49,7 @@ const styles = {
     width: '100%',
     margin: '2% 20%',
     // boxShadow: '#d8d8d8 3px 5px 10px',
-    backgroundSize: 'cover',
+    backgroundSize: 'cover'
     // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
   },
   columnStyles: {
@@ -84,7 +89,7 @@ const styles = {
     padding: '5% 0'
   },
   row: {
-    marginBottom: 10,
+    marginBottom: 10
   }
 }
 

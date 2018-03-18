@@ -2,13 +2,17 @@ import Song from 'components/SongPage/SongList/Song'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const SongList = ({changeVote, songs, changeVisible}) => (
+const SongList = ({ changeVote, songs, changeVisible, removeSong }) => (
   <div style={styles.songListStyles}>
-    {
-      songs.map(
-        song => <Song key={song.id} changeVote={changeVote(song)} song={song} changeVisible={changeVisible(song)} />
-      )
-    }
+    {songs.map(song => (
+      <Song
+        key={song.id}
+        changeVote={changeVote(song)}
+        song={song}
+        changeVisible={changeVisible(song)}
+        removeSong={removeSong(song)}
+      />
+    ))}
   </div>
 )
 
@@ -20,9 +24,9 @@ SongList.propTypes = {
       artist: PropTypes.string,
       id: PropTypes.string,
       title: PropTypes.string,
-      votes: PropTypes.number,
+      votes: PropTypes.number
     })
-  ).isRequired,
+  ).isRequired
 }
 
 const styles = {
@@ -33,6 +37,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '5%',
+    paddingBottom: '15%'
   }
 }
 

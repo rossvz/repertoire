@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../Header/Header'
 
-const About = (props) => {
+const About = props => {
   return (
     <div style={styles.aboutContainer}>
       <Header title={'About Me'} />
@@ -17,13 +17,13 @@ const About = (props) => {
 const styles = {
   aboutContainer: {
     color: 'white',
-    // display: 'flex'
+    padding: '5%',
+    textAlign: 'justify'
   },
   image: {
     width: '100%',
-    height: 'auto',
-  },
-
+    height: 'auto'
+  }
 }
 
 export default About
