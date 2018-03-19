@@ -8,13 +8,7 @@ const About = props => {
 
       <h2>Randy Godwin</h2>
       <div>
-        <p>
-          Thanks for visiting my page. From the bottom of the page, press the
-          "Songs" or "Shows" button to view my current song list and upcoming
-          shows. If you are listening live, feel free to select your favorite
-          songs. Throughout the show, I will play the most popular songs
-          requested.
-        </p>
+        <p>From the bottom of the page, press "Songs" to view the song list I will be playing from -or- press "Shows" to view my upcoming events.  If you are listening live, I invite you to vote for your favorite songs by pressing the "like" image next to the song.  Throughout the show, I will play the most popular song requests.</p>
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ import { values, mapObjIndexed, reverse } from 'ramda'
 import { sortByDate, formatShows } from '../../util/shows'
 
 const sortShows = compose(
-  reverse,
+  //reverse,
   sortByDate,
   formatShows,
   values,
