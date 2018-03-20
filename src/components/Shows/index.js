@@ -2,11 +2,10 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
 import Shows from './Shows'
-import { values, mapObjIndexed, reverse } from 'ramda'
+import { values, mapObjIndexed } from 'ramda'
 import { sortByDate, formatShows } from '../../util/shows'
 
 const sortShows = compose(
-  //reverse,
   sortByDate,
   formatShows,
   values,
