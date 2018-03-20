@@ -176,7 +176,7 @@ const styles = {
   newSongContainer: {
     border: '2px solid white',
     borderRadius: '5px',
-    position: 'fixed',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',

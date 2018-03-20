@@ -20,7 +20,12 @@ const NewSong = ({ isEditing, toggleIsEditing, firebase }) =>
       {isEditing ? (
         <NewSongForm toggleIsEditing={toggleIsEditing} />
       ) : (
-        <Button onClick={toggleIsEditing}>
+        <Button
+          onClick={() => {
+            window.scrollTo(0, 0)
+            toggleIsEditing()
+          }}
+        >
           <FontAwesome style={styles.icon} name={'plus-circle'} />ADD SONG
         </Button>
       )}
