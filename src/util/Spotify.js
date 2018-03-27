@@ -3,7 +3,8 @@ import axios from 'axios'
 
 const Spotify = new SpotifyWebApi()
 const setToken = async () => {
-  const url = 'https://guarded-badlands-11018.herokuapp.com/'
+  const url = 'https://guarded-badlands-11018.herokuapp.com/authenticate?r=t'
+  // const url = 'http://localhost:3002/authenticate?r=t'
   const results = await axios.get(url)
   Spotify.setAccessToken(results.data)
 
