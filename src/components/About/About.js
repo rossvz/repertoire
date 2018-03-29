@@ -5,10 +5,11 @@ const About = props => {
   return (
     <div style={styles.aboutContainer}>
       <Header title={'About Me'} />
-
-      <h2>Randy Godwin</h2>
       <div>
-        <p>From the bottom of the page, press "Songs" to view the song list I will be playing from -or- press "Shows" to view my upcoming events.  If you are listening live, I invite you to vote for your favorite songs by pressing the "like" image next to the song.  Throughout the show, I will play the most popular song requests.</p>
+        <p>&nbsp;</p>
+        <p>I am a singer & guitar player in the Atlanta Georgia area where I perform acoustic covers at local restaurants and private events.  Thank you for using this app!  I hope it will be a fun way for us to interact during our time together.  Grab some food, pull up a chair, and let's sing some songs.</p>
+        <p>&nbsp;</p>
+        <p>Randy</p>
       </div>
     </div>
   )
@@ -17,7 +18,8 @@ const About = props => {
 const styles = {
   aboutContainer: {
     color: 'white',
-    padding: '5%',
+    marginLeft: '5vh',
+    marginRight: '5vh',
     textAlign: 'justify'
   },
   image: {
