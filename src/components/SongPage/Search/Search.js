@@ -11,8 +11,9 @@ const Container = styled.div`
 
 const Input = styled.input`
   text-align: center;
-  font-size: 1.8em;
-  background-color: #19181c;
+  font-size: 1.5em;
+  //background-color: #19181c;
+  background-color: #161519;
   color: white;
   border: none;
   padding: 2%;
