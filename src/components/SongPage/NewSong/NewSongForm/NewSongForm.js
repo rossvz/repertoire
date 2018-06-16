@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { withFirebase } from 'react-redux-firebase'
-import { searchSpotify } from 'util/Spotify'
+import { searchSpotify, getArtistGenre } from 'util/Spotify'
 import Button from 'components/common/Button'
 
 const INITIAL_STATE = {
   title: '',
   artist: '',
+  artistUrl: '',
   album: '',
   votes: 0,
   results: [],
@@ -22,9 +23,7 @@ class NewSongForm extends Component {
   async searchSong(e) {
     e.preventDefault()
     const { title, artist } = this.state
-
     const results = await searchSpotify({ title, artist })
-    console.log('spotify results', results)
     this.setState({
       ...this.state,
       resultIndex: 0,
@@ -33,7 +32,8 @@ class NewSongForm extends Component {
     this.nextResult(false)
   }
 
-  saveSong() {
+  async saveSong() {
+    const genres = await getArtistGenre(this.state.artistId)
     const { title, artist, album, votes, albumArtwork, visible } = this.state
     this.props.firebase.push('/songs', {
       title,
@@ -41,10 +41,12 @@ class NewSongForm extends Component {
       album,
       votes,
       albumArtwork,
-      visible
+      visible,
+      genres
     })
-    this.props.toggleIsEditing()
-    this.setState(INITIAL_STATE)
+    this.setState(INITIAL_STATE, () => {
+      this.props.toggleIsEditing()
+    })
   }
 
   nextResult(increment = true) {
@@ -56,6 +58,7 @@ class NewSongForm extends Component {
     this.setState({
       ...this.state,
       artist: result.artists[0].name,
+      artistId: result.artists[0].id,
       album: result.album.name,
       title: result.name,
       albumArtwork: result.album.images[0].url,
@@ -70,6 +73,7 @@ class NewSongForm extends Component {
     this.setState({
       ...this.state,
       artist: result.artists[0].name,
+      artistId: result.artists[0].id,
       album: result.album.name,
       title: result.name,
       albumArtwork: result.album.images[0].url,
