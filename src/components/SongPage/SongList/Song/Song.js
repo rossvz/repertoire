@@ -12,10 +12,6 @@ const Song = ({ song, changeVote, changeVisible, firebase, removeSong }) => {
           <div style={styles.title}>{song.title}</div>
           <div style={styles.artist}>{song.artist}</div>
           <div>{song.album}</div>
-          <div style={styles.genres}>
-            {song.genres ? song.genres.join(', ') : ''}
-          </div>
-
           <AdminFunctions song={song} changeVote={changeVote} changeVisible={changeVisible} removeSong={removeSong} />
         </div>
         <div style={styles.actionStyles}>
