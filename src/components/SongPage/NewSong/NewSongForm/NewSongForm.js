@@ -33,10 +33,8 @@ class NewSongForm extends Component {
   }
 
   async saveSong() {
-    debugger
     const genres = await getArtistGenre(this.state.artistId)
     const { title, artist, album, votes, albumArtwork, visible } = this.state
-    debugger
     this.props.firebase.push('/songs', {
       title,
       artist,

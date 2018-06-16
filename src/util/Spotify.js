@@ -22,7 +22,6 @@ export const searchSpotify = ({ title, artist }) => {
 export const getArtistGenre = async artistId => {
   try {
     const results = await Spotify.getArtist(artistId)
-    debugger
     return results.genres || []
   } catch (e) {
     return []
