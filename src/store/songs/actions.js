@@ -13,7 +13,7 @@ export const changeVote = song => (
   const firebase = getFirebase()
   const votes = song.votes || 0
   let newVotes = votes + value
-  if (value === 'reset') newVotes = 0
+  if (value === 'reset' || newVotes < 0) newVotes = 0
   try {
     if (value === 'reset') removeVoteFromStorage(song.id)
     else toggleVoteInStorage(song.id)

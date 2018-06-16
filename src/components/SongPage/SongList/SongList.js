@@ -41,6 +41,4 @@ const styles = {
   }
 }
 
-//1E1D22
-
 export default SongList

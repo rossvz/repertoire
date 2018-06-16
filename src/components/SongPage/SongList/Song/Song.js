@@ -5,20 +5,18 @@ import AdminFunctions from './AdminFunctions'
 
 const Song = ({ song, changeVote, changeVisible, firebase, removeSong }) => {
   if (!firebase.auth().currentUser && !song.visible) return <div />
-  return (
-    <div style={setStyles(song)}>
+  return <div style={setStyles(song)}>
       <div style={styles.columnStyles}>
         <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div style={styles.songInfoStyles}>
           <div style={styles.title}>{song.title}</div>
           <div style={styles.artist}>{song.artist}</div>
           <div>{song.album}</div>
-          <AdminFunctions
-            song={song}
-            changeVote={changeVote}
-            changeVisible={changeVisible}
-            removeSong={removeSong}
-          />
+          <div style={styles.genres}>
+            {song.genres ? song.genres.join(', ') : ''}
+          </div>
+
+          <AdminFunctions song={song} changeVote={changeVote} changeVisible={changeVisible} removeSong={removeSong} />
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} songId={song.id} />
@@ -26,7 +24,6 @@ const Song = ({ song, changeVote, changeVisible, firebase, removeSong }) => {
         </div>
       </div>
     </div>
-  )
 }
 
 const setStyles = song => {
@@ -87,6 +84,11 @@ const styles = {
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     padding: '5% 0'
+  },
+  genres: {
+    fontSize: 'smaller',
+    opacity: 0.5,
+    marginTop: '2em '
   },
   row: {
     marginBottom: 10

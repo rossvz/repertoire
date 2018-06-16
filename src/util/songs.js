@@ -1,11 +1,14 @@
 import { pick, values } from 'ramda'
 
-const cleanSearchTerm = term => term.toLowerCase().replace(/ /g,'')
+const cleanSearchTerm = term => term.toLowerCase().replace(/ /g, '')
 
 export const songContainsSearchTerm = searchTerm => song => {
   const cleanedSearchTerm = cleanSearchTerm(searchTerm)
-
-  return values(pick(['album', 'artist', 'title'], song))
+  const vales = values(pick(['album', 'artist', 'title'], song))
+  const genres = song.genres || []
+  debugger
+  return vales
+    .concat(genres)
     .map(cleanSearchTerm)
     .some(v => v.includes(cleanedSearchTerm))
 }
