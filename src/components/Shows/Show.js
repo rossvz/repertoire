@@ -1,13 +1,5 @@
 import React from 'react'
-import showIfAuthenticated from '../../util/showIfAuthenticated'
-import Button from '../common/Button'
-import FontAwesome from 'react-fontawesome'
-
-const DeleteShow = showIfAuthenticated(({deleteShow})=> <div style={styles.deleteShow}>
-  <Button onClick={deleteShow}>
-    <FontAwesome name={'trash'} />
-  </Button>
-</div>)
+import { DeleteShow } from './DeleteShow'
 
 const Show = ({show, deleteShow}) => <div style={styles.card}>
   <div style={styles.header}>
@@ -35,9 +27,6 @@ const styles = {
     display: 'flex',
     justifyContent:'space-between'
   },
-  deleteShow:{
-    maxWidth: '20%'
-  }
 }
 
 export default Show
