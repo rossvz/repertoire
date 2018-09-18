@@ -6,3 +6,11 @@ export const toggleEditingNewShow = () => {
     payload: {}
   }
 }
+
+export const deleteShow = show => (
+  dispatch,
+  getState,
+  getFirebase
+) => async () => {
+  await getFirebase().remove(`/shows/${show.id}`)
+}
