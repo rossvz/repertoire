@@ -1,16 +1,21 @@
 import React from 'react'
 import { DeleteShow } from './DeleteShow'
 
-const Show = ({show, deleteShow}) => <div style={styles.card}>
-  <div style={styles.header}>
-    <h2>{show._date}</h2>
-    <DeleteShow deleteShow={deleteShow(show)} />
+const Show = ({ show, deleteShow }) => (
+  <div style={styles.card}>
+    <div style={styles.header}>
+      <h2>{show._date}</h2>
+      <DeleteShow deleteShow={deleteShow(show)} />
+    </div>
+    <div style={styles.content}>
+      <h3>{show.time}</h3>
+      <h3>{show.venue}</h3>
+      <a style={styles.location} href={show._location} target={'_blank'}>
+        Get Directions
+      </a>
+    </div>
   </div>
-  <div style={styles.content}>
-    <h3>{show.time}</h3>
-  <h3>{show.venue}</h3>
-  <a style={styles.location} href={show._location} target={'_blank'}>Get Directions</a></div>
-</div>
+)
 
 const styles = {
   card: {
@@ -25,8 +30,8 @@ const styles = {
   location: {},
   header: {
     display: 'flex',
-    justifyContent:'space-between'
-  },
+    justifyContent: 'space-between'
+  }
 }
 
 export default Show

@@ -7,6 +7,10 @@ export const toggleEditingNewShow = () => {
   }
 }
 
-export const deleteShow = show => (dispatch, getState, getFirebase) => async() => {
+export const deleteShow = show => (
+  dispatch,
+  getState,
+  getFirebase
+) => async () => {
   await getFirebase().remove(`/shows/${show.id}`)
 }

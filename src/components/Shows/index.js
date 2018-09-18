@@ -10,7 +10,7 @@ const sortShows = compose(
   sortByDate,
   formatShows,
   values,
-  mapObjIndexed((show, id) => ({...show, id}))
+  mapObjIndexed((show, id) => ({ ...show, id }))
 )
 
 const mapStateToProps = ({ firebase }) => ({
@@ -18,11 +18,6 @@ const mapStateToProps = ({ firebase }) => ({
 })
 
 export default compose(
-  firebaseConnect([
-    'shows'
-  ]),
-  connect(
-    mapStateToProps,
-    { deleteShow}
-  )
+  firebaseConnect(['shows']),
+  connect(mapStateToProps, { deleteShow })
 )(Shows)
