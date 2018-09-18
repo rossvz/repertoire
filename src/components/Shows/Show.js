@@ -1,11 +1,23 @@
 import React from 'react'
+import showIfAuthenticated from '../../util/showIfAuthenticated'
+import Button from '../common/Button'
+import FontAwesome from 'react-fontawesome'
 
-const Show = ({show}) => <div style={styles.card}>
-  <h2>{show._date}</h2>
-  <h3>{show.time}</h3>
+const DeleteShow = showIfAuthenticated(({deleteShow})=> <div style={styles.deleteShow}>
+  <Button onClick={deleteShow}>
+    <FontAwesome name={'trash'} />
+  </Button>
+</div>)
 
+const Show = ({show, deleteShow}) => <div style={styles.card}>
+  <div style={styles.header}>
+    <h2>{show._date}</h2>
+    <DeleteShow deleteShow={deleteShow(show)} />
+  </div>
+  <div style={styles.content}>
+    <h3>{show.time}</h3>
   <h3>{show.venue}</h3>
-  <a style={styles.location} href={show._location} target={'_blank'}>Get Directions</a>
+  <a style={styles.location} href={show._location} target={'_blank'}>Get Directions</a></div>
 </div>
 
 const styles = {
@@ -18,7 +30,14 @@ const styles = {
     borderRadius: '5px',
     boxShadow: '10px 10px 5px 0 rgba(0,0,0,0.75)'
   },
-  location: {}
+  location: {},
+  header: {
+    display: 'flex',
+    justifyContent:'space-between'
+  },
+  deleteShow:{
+    maxWidth: '20%'
+  }
 }
 
 export default Show
