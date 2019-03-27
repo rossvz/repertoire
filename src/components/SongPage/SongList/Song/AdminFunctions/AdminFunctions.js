@@ -1,30 +1,29 @@
-import React from 'react'
-import Visibility from './Visibility'
-import ResetVotes from './ResetVotes'
-import DeleteSong from './DeleteSong'
+import React from "react";
+import Visibility from "./Visibility";
+import ResetVotes from "./ResetVotes";
+import DeleteSong from "./DeleteSong";
+import styled from "styled-components";
 
-const AdminFunctions = ({ song, changeVote, changeVisible, removeSong }) => {
+const Container = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 7%;
+  color: #fc1f49;
+  opacity: 1;
+  font-size: 1.2em;
+  font-weight: bold;
+`;
+
+const AdminFunctions = ({ song, changeVote, toggleVisible, removeSong }) => {
   return (
-    <div style={styles.adminFunctionsContainer}>
-      <Visibility visible={song.visible} changeVisible={changeVisible} />
-      <ResetVotes resetVotes={() => changeVote('reset')} />
-      <DeleteSong removeSong={() => removeSong()} />
-    </div>
-  )
-}
+    <Container>
+      <Visibility visible={song.visible} toggleVisible={toggleVisible} />
+      <ResetVotes resetVotes={() => changeVote("reset")} />
+      <DeleteSong removeSong={removeSong} />
+    </Container>
+  );
+};
 
-const styles = {
-  adminFunctionsContainer: {
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: '7%',
-    color: '#FC1F49',
-    opacity: '1',
-    fontSize: '0.8em',
-    fontWeight: 'bold'
-  }
-}
-
-export default AdminFunctions
+export default AdminFunctions;

@@ -1,23 +1,16 @@
-import Song from 'components/SongPage/SongList/Song'
-import PropTypes from 'prop-types'
-import React from 'react'
+import Song from "components/SongPage/SongList/Song";
+import PropTypes from "prop-types";
+import React from "react";
 
-const SongList = ({ changeVote, songs, changeVisible, removeSong }) => (
+const SongList = ({ songs, changeVisible }) => (
   <div style={styles.songListStyles}>
     {songs.map(song => (
-      <Song
-        key={song.id}
-        changeVote={changeVote(song)}
-        song={song}
-        changeVisible={changeVisible(song)}
-        removeSong={removeSong(song)}
-      />
+      <Song key={song.id} song={song} />
     ))}
   </div>
-)
+);
 
 SongList.propTypes = {
-  changeVote: PropTypes.func.isRequired,
   songs: PropTypes.arrayOf(
     PropTypes.shape({
       album: PropTypes.string,
@@ -27,18 +20,18 @@ SongList.propTypes = {
       votes: PropTypes.number
     })
   ).isRequired
-}
+};
 
 const styles = {
   songListStyles: {
-    margin: '0 auto !important',
-    display: 'flex',
-    flexFlow: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '5%',
-    paddingBottom: '15%'
+    margin: "0 auto !important",
+    display: "flex",
+    flexFlow: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "5%",
+    paddingBottom: "15%"
   }
-}
+};
 
-export default SongList
+export default SongList;

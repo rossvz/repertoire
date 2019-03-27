@@ -1,15 +1,15 @@
-import React from 'react'
-import Header from '../Header'
-import Search from './Search'
-import NewSong from './NewSong'
-import SongList from './SongList'
-import HelperText from './HelperText'
-import ResetAllVotes from './ResetAllVotes'
+import React from "react";
+import Header from "../Header";
+import Search from "./Search";
+import NewSong from "./NewSong";
+import SongList from "./SongList";
+import HelperText from "./HelperText";
+import ResetAllVotes from "./ResetAllVotes";
 
 const styles = {
   songPage: {}
-}
-const SongPage = (props) => {
+};
+const SongPage = props => {
   return (
     <div style={styles.songPage}>
       <Header />
@@ -19,7 +19,7 @@ const SongPage = (props) => {
       <ResetAllVotes />
       <SongList />
     </div>
-  )
-}
+  );
+};
 
-export default SongPage
+export default SongPage;

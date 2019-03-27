@@ -1,63 +1,34 @@
-import { toggleVoteInStorage, removeVoteFromStorage } from 'util/votes'
-import {
-  CHANGE_VOTE_FAIL,
-  CHANGE_SONGS_FILTER,
-  CHANGE_VISIBLE_FAIL
-} from './constants'
-
-export const changeVote = song => (
-  dispatch,
-  getState,
-  getFirebase
-) => async value => {
-  const firebase = getFirebase()
-  const votes = song.votes || 0
-  let newVotes = votes + value
-  if (value === 'reset' || newVotes < 0) newVotes = 0
-  try {
-    if (value === 'reset') removeVoteFromStorage(song.id)
-    else toggleVoteInStorage(song.id)
-    await firebase.update(`/songs/${song.id}`, { votes: newVotes })
-  } catch (error) {
-    toggleVoteInStorage(song.id)
-    dispatch({
-      type: CHANGE_VOTE_FAIL,
-      error
-    })
-  }
-}
-
-export const removeSong = song => (
-  dispatch,
-  getState,
-  getFirebase
-) => async () => {
-  try {
-    const firebase = getFirebase()
-    await firebase.remove(`/songs/${song.id}`)
-  } catch (error) {
-    console.log(error)
-  }
-}
+import { CHANGE_SONGS_FILTER, CHANGE_VISIBLE_FAIL } from "./constants";
+import { toggleVoteInStorage } from "../../util/votes";
 
 export const changeSongsFilter = field => value => ({
   type: CHANGE_SONGS_FILTER,
   field,
   value
-})
+});
 
 export const changeVisible = song => (
   dispatch,
   getState,
   getFirebase
 ) => async visible => {
-  const firebase = getFirebase()
+  const firebase = getFirebase();
   try {
-    await firebase.update(`/songs/${song.id}`, { visible })
+    await firebase.update(`/songs/${song.id}`, { visible });
   } catch (error) {
     dispatch({
       type: CHANGE_VISIBLE_FAIL,
       error
-    })
+    });
   }
-}
+};
+
+export const changeVote = props => value => {
+  console.log(props);
+  const votes =
+    props.song.votes < 0 || value === "reset" ? 0 : props.song.votes + value;
+  props.firebase.update(`/songs/${props.song.id}`, { votes });
+  toggleVoteInStorage(props.song.id);
+};
+export const toggleVisible = ({ firebase, song }) => _event =>
+  firebase.update(`/songs/${song.id}`, { visible: !song.visible });

@@ -1,14 +1,22 @@
-import { firebaseConnect } from 'react-redux-firebase'
-import { connect } from 'react-redux'
-import Song from './Song'
+import { withFirebase } from "react-redux-firebase";
+import { connect } from "react-redux";
+import Song from "./Song";
+import { compose } from "redux";
+import { withHandlers } from "recompose";
+import { toggleVisible, changeVote } from "../../../../store/songs/actions";
 
-const wrappedSong = firebaseConnect([
-  'auth'
-])(Song)
+const mapStateToProps = ({ firebase: auth }) => ({
+  auth
+});
 
-export default connect(
-  ({firebase}) => ({
-    firebase
+export default compose(
+  withFirebase,
+  withHandlers({
+    changeVote,
+    toggleVisible
   }),
-  {}
-)(wrappedSong)
+  connect(
+    mapStateToProps,
+    {}
+  )
+)(Song);
