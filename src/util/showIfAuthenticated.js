@@ -1,18 +1,16 @@
-import React from 'react'
-import { firebaseConnect } from 'react-redux-firebase'
+import React from "react";
+import { withFirebase, isEmpty, isLoaded } from "react-redux-firebase";
 
 const showIfAuthenticated = DecoratedComponent => {
-  const OnlyShowIfAuthenticated = ({ firebase, ...otherProps }) => {
-    if (firebase.auth().currentUser) {
-      return <DecoratedComponent { ...otherProps } />
+  const OnlyShowIfAuthenticated = ({ firebase: { auth }, ...otherProps }) => {
+    if (isLoaded(auth) && !isEmpty(auth)) {
+      return <DecoratedComponent {...otherProps} />;
     }
 
-    return <div />
-  }
+    return <div />;
+  };
 
-  return firebaseConnect([
-    'auth'
-  ])(OnlyShowIfAuthenticated)
-}
+  return withFirebase(OnlyShowIfAuthenticated);
+};
 
-export default showIfAuthenticated
+export default showIfAuthenticated;

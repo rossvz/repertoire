@@ -1,6 +1,7 @@
-import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER } from './constants'
+import { CHANGE_VOTE_FAIL, CHANGE_SONGS_FILTER, STARTED_LOADING, FINISHED_LOADING } from './constants'
 
 const initialState = {
+  isLoading: false,
   error: '',
   filters: {
     search: ''
@@ -26,6 +27,12 @@ export default (
           [action.field]: action.value
         }
       }
+
+    case STARTED_LOADING:
+      return {...state, isLoading: true}
+
+    case FINISHED_LOADING:
+      return {...state, isLoading: false}
 
     default: return state
   }
