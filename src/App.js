@@ -18,7 +18,7 @@ import createReduxStore from "store";
 import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBuh0w14McaZOdHA3S6xtLKQcpGj_AvhEU",
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   authDomain: "rg-music.firebaseapp.com",
   databaseURL: "https://rg-music.firebaseio.com",
   projectId: "rg-music",

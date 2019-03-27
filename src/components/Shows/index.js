@@ -4,8 +4,6 @@ import { firebaseConnect } from "react-redux-firebase";
 import Shows from "./Shows";
 import { values, mapObjIndexed } from "ramda";
 import { sortByDate, formatShows } from "../../util/shows";
-import { deleteShow } from "../../store/shows/actions";
-import { withHandlers } from "recompose";
 
 const sortShows = compose(
   sortByDate,

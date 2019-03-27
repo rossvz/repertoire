@@ -4,6 +4,7 @@ import { withFirebase } from "react-redux-firebase";
 import { withHandlers } from "recompose";
 import { deleteShow } from "../../store/shows/actions";
 import { compose } from "redux";
+
 const Show = ({ show, deleteShow }) => (
   <div style={styles.card}>
     <div style={styles.header}>

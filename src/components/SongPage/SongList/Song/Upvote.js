@@ -1,5 +1,4 @@
 import React from "react";
-import { isUpvoted } from "util/votes";
 
 const Upvote = ({ changeVote, upvoted }) => {
   const styles = {

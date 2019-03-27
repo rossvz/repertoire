@@ -1,5 +1,5 @@
-import { applyMiddleware, createStore, compose } from "redux";
-import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
+import { applyMiddleware, createStore } from "redux";
+import { getFirebase } from "react-redux-firebase";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import reducers from "./reducers";

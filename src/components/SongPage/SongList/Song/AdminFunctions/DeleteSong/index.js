@@ -1,8 +1,6 @@
 import React from "react";
 import FontAwesome from "react-fontawesome";
-import { withHandlers } from "recompose";
-import { compose } from "redux";
-import { withFirebase } from "react-redux-firebase";
+
 const styles = {
   icon: {
     marginRight: "10px"

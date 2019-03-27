@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import NewSongForm from "./NewSongForm/index";
 import FontAwesome from "react-fontawesome";
 import Button from "components/common/Button";
-import { isLoaded, isEmpty } from "react-redux-firebase";
+import { isEmpty } from "react-redux-firebase";
 
 const styles = {
   container: {
