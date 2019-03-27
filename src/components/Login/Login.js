@@ -1,36 +1,38 @@
-import React from 'react'
-import { Redirect } from 'react-router'
-import Button from 'components/common/Button'
-import styled from 'styled-components'
+import React from "react";
+import { Redirect } from "react-router";
+import Button from "components/common/Button";
+import styled from "styled-components";
 
 const Login = props => {
-  window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
   const onSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     const credentials = {
       email: props.authentication.email,
       password: props.authentication.password
-    }
+    };
     props.firebase
       .login(credentials)
-      .then(res => localStorage.setItem('uid', res.user.uid))
-      .catch(err => console.error(err))
-  }
+      .then(res => localStorage.setItem("uid", res.user.uid))
+      .catch(err => console.error(err));
+  };
 
   const renderLogin = () => {
-    if (props.firebase.auth().currentUser)
+    console.log(props.auth);
+    if (!props.auth.isEmpty)
       return (
         <div>
-          Authenticated!!<Redirect to="/admin" />
+          Authenticated!!
+          <Redirect to="/admin" />
         </div>
-      )
-    else return loginForm()
-  }
+      );
+    else return loginForm();
+  };
 
   const loginForm = () => {
     return (
       <Container style={limitWidth()}>
-        <Form onSubmit={e => onSubmit(e)} autoComplete={'off'}>
+        <Form onSubmit={e => onSubmit(e)} autoComplete={"off"}>
           <Input
             type="email"
             value={props.authentication.email}
@@ -46,11 +48,11 @@ const Login = props => {
           <Button type="submit">Submit</Button>
         </Form>
       </Container>
-    )
-  }
+    );
+  };
 
-  return <div>{renderLogin()}</div>
-}
+  return <div>{renderLogin()}</div>;
+};
 
 const Container = styled.div`
   background: url(https://source.unsplash.com/user/erondu);
@@ -58,7 +60,7 @@ const Container = styled.div`
   height: 100vh;
   position: absolute;
   background-size: cover;
-`
+`;
 
 const Form = styled.form`
   margin-top: 20%;
@@ -66,7 +68,7 @@ const Form = styled.form`
   flex-flow: column;
   align-items: center;
   padding: 5%;
-`
+`;
 
 const Input = styled.input`
   line-height: 1.8em;
@@ -77,8 +79,8 @@ const Input = styled.input`
   margin: 1%;
   border-radius: 100em;
   opacity: 0.6;
-`
+`;
 
-const limitWidth = () => ({ width: window.innerWidth > 700 ? '59%' : '100%' })
+const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" });
 
-export default Login
+export default Login;
