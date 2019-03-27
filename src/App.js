@@ -25,7 +25,8 @@ const firebaseConfig = {
   projectId: "rg-music",
   storageBucket: "rg-music.appspot.com",
   messagingSenderId: "390024634944",
-  perserveOnLogout: ["songs"]
+  preserveOnLogout: { data: ["songs"] },
+  preserveOnEmptyAuthChange: { data: ["songs"] }
 };
 
 const reactReduxFirebaseConfig = {

@@ -31,6 +31,8 @@ export default (state = INITIAL_STATE, action) => {
         error: "Authentication Failed",
         loading: false
       };
+    case "@@reactReduxFirebase/LOGOUT":
+      return INITIAL_STATE;
     default:
       return state;
   }
