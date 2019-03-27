@@ -15,7 +15,8 @@ import Shows from "./components/Shows";
 import Admin from "./components/Admin";
 
 import createReduxStore from "store";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/app";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,

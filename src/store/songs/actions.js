@@ -24,7 +24,6 @@ export const changeVisible = song => (
 };
 
 export const changeVote = props => value => {
-  console.log(props);
   const votes =
     props.song.votes < 0 || value === "reset" ? 0 : props.song.votes + value;
   props.firebase.update(`/songs/${props.song.id}`, { votes });
