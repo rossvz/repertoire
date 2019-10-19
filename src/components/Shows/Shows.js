@@ -1,6 +1,6 @@
-import React from "react";
-import Header from "../Header/Header";
-import Show from "./Show";
+import React from "react"
+import Header from "../Header/Header"
+import Show from "./Show"
 
 const Shows = ({ shows = [] }) => {
   return (
@@ -12,8 +12,8 @@ const Shows = ({ shows = [] }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const styles = {
   container: {
@@ -23,6 +23,6 @@ const styles = {
     justifyContent: "center",
     marginBottom: "8vh"
   }
-};
+}
 
-export default Shows;
+export default Shows

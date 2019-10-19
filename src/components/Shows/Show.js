@@ -1,9 +1,9 @@
-import React from "react";
-import { DeleteShow } from "./DeleteShow";
-import { withFirebase } from "react-redux-firebase";
-import { withHandlers } from "recompose";
-import { deleteShow } from "../../store/shows/actions";
-import { compose } from "redux";
+import React from "react"
+import { DeleteShow } from "./DeleteShow"
+import { withFirebase } from "react-redux-firebase"
+import { withHandlers } from "recompose"
+import { deleteShow } from "../../store/shows/actions"
+import { compose } from "redux"
 
 const Show = ({ show, deleteShow }) => (
   <div style={styles.card}>
@@ -19,7 +19,7 @@ const Show = ({ show, deleteShow }) => (
       </a>
     </div>
   </div>
-);
+)
 
 const styles = {
   card: {
@@ -36,11 +36,11 @@ const styles = {
     display: "flex",
     justifyContent: "space-between"
   }
-};
+}
 
 export default compose(
   withFirebase,
   withHandlers({
     deleteShow
   })
-)(Show);
+)(Show)

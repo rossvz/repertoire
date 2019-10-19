@@ -1,12 +1,12 @@
-import React from "react";
-import Upvote from "./Upvote";
-import AlbumArtwork from "./AlbumArtwork";
-import AdminFunctions from "./AdminFunctions";
-import { isEmpty } from "react-redux-firebase";
-import { isUpvoted } from "../../../../util/votes";
+import React from "react"
+import Upvote from "./Upvote"
+import AlbumArtwork from "./AlbumArtwork"
+import AdminFunctions from "./AdminFunctions"
+import { isUpvoted } from "../../../../util/votes"
+import { isEmpty } from "react-redux-firebase"
 
 const Song = ({ song, changeVote, toggleVisible, auth }) => {
-  if (isEmpty(auth) && !song.visible) return <div />;
+  if (isEmpty(auth) && !song.visible) return <div />
   return (
     <div style={setStyles(song)}>
       <div style={styles.columnStyles}>
@@ -30,13 +30,11 @@ const Song = ({ song, changeVote, toggleVisible, auth }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const setStyles = song => {
-  if (song.visible) return styles.songStyles;
-  else return styles.invisibleSongStyles;
-};
+const setStyles = song =>
+  song.visible ? styles.songStyles : styles.invisibleSongStyles
 
 const styles = {
   songStyles: {
@@ -100,6 +98,6 @@ const styles = {
   row: {
     marginBottom: 10
   }
-};
+}
 
-export default Song;
+export default Song
