@@ -31,3 +31,9 @@ export const changeVote = props => value => {
 };
 export const toggleVisible = ({ firebase, song }) => _event =>
   firebase.update(`/songs/${song.id}`, { visible: !song.visible });
+
+export const deleteSong = ({ firebase, song }) => _event => {
+  console.log(`deleting song`, song)
+  return firebase.remove(`/songs/${song.id}`)
+
+}

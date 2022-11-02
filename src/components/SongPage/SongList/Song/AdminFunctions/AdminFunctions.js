@@ -16,12 +16,12 @@ const Container = styled.div`
   font-weight: bold;
 `;
 
-const AdminFunctions = ({ song, changeVote, toggleVisible, removeSong }) => {
+const AdminFunctions = ({ song, changeVote, toggleVisible, deleteSong }) => {
   return (
     <Container>
       <Visibility visible={song.visible} toggleVisible={toggleVisible} />
       <ResetVotes resetVotes={() => changeVote("reset")} />
-      <DeleteSong removeSong={removeSong} />
+      <DeleteSong deleteSong={deleteSong} />
     </Container>
   );
 };

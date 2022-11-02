@@ -5,7 +5,7 @@ import AdminFunctions from "./AdminFunctions"
 import { isUpvoted } from "../../../../util/votes"
 import { isEmpty } from "react-redux-firebase"
 
-const Song = ({ song, changeVote, toggleVisible, auth }) => {
+const Song = ({ song, changeVote, toggleVisible, auth, deleteSong }) => {
   if (isEmpty(auth) && !song.visible) return <div />
   return (
     <div style={setStyles(song)}>
@@ -19,6 +19,7 @@ const Song = ({ song, changeVote, toggleVisible, auth }) => {
             song={song}
             changeVote={changeVote}
             toggleVisible={toggleVisible}
+            deleteSong={deleteSong}
           />
         </div>
         <div style={styles.actionStyles}>

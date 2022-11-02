@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import Song from "./Song"
 import { compose } from "redux"
 import { withHandlers } from "recompose"
-import { toggleVisible, changeVote } from "../../../../store/songs/actions"
+import { toggleVisible, changeVote, deleteSong } from "../../../../store/songs/actions"
 
 const mapStateToProps = ({ firebase }) => ({
   auth: firebase.auth
@@ -13,7 +13,8 @@ export default compose(
   withFirebase,
   withHandlers({
     changeVote,
-    toggleVisible
+    toggleVisible,
+    deleteSong
   }),
   connect(
     mapStateToProps,

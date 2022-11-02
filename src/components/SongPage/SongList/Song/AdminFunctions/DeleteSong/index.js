@@ -11,9 +11,9 @@ const styles = {
   }
 };
 
-const DeleteSong = ({ removeSong }) => {
+const DeleteSong = ({ deleteSong }) => {
   return (
-    <div style={styles.resetButton} onClick={() => removeSong()}>
+    <div style={styles.resetButton} onClick={() => deleteSong()}>
       <div>
         <FontAwesome name={"trash"} style={styles.icon} />
       </div>
