@@ -45,7 +45,7 @@ export const NewSongForm = ({ toggleIsEditing }) => {
   const saveSong = () => {
     const newSongRef = push(songsRef)
     set(newSongRef, newSong)
-    console.log("saved new song", newSong)
+    toggleIsEditing()
   }
 
   useEffect(() => {
