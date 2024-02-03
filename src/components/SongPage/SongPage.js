@@ -5,6 +5,7 @@ import { getDatabase } from "firebase/database"
 import { SongList } from "./SongList/SongList"
 import { Header } from "components/Header"
 import { HelperText } from "./HelperText"
+import { NewSong } from "./NewSong/NewSong"
 export const SongListPage = () => {
   const firebaseApp = useFirebaseApp()
   const database = getDatabase(firebaseApp)
@@ -13,8 +14,8 @@ export const SongListPage = () => {
     <DatabaseProvider sdk={database}>
       <Header title={"Songs"} />
       <HelperText />
-      {/*<NewSong />
-      <ResetAllVotes /> */}
+      <NewSong />
+      {/* <ResetAllVotes /> */}
       <SongList />
     </DatabaseProvider>
   )
