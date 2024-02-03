@@ -1,58 +1,47 @@
-import React from "react";
-import { Redirect } from "react-router";
-import Button from "components/common/Button";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react"
+import { Redirect } from "react-router"
+import Button from "components/common/Button"
+import styled from "styled-components"
+import { useSigninCheck, useAuth } from "reactfire"
+import { set } from "ramda"
 
-const Login = props => {
-  window.scrollTo(0, 0);
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
+
+export const Login = () => {
+  const auth = useAuth()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   const onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     const credentials = {
-      email: props.authentication.email,
-      password: props.authentication.password
-    };
-    props.firebase
-      .login(credentials)
+      email,
+      password
+    }
+    signInWithEmailAndPassword(auth, credentials.email, credentials.password)
       .then(res => localStorage.setItem("uid", res.user.uid))
-      .catch(err => console.error(err));
-  };
-
-  const renderLogin = () => {
-    console.log(props.auth);
-    if (!props.auth.isEmpty)
-      return (
-        <div>
-          Authenticated!!
-          <Redirect to="/admin" />
-        </div>
-      );
-    else return loginForm();
-  };
-
-  const loginForm = () => {
-    return (
-      <Container style={limitWidth()}>
-        <Form onSubmit={e => onSubmit(e)} autoComplete={"off"}>
-          <Input
-            type="email"
-            value={props.authentication.email}
-            onChange={e => props.emailChanged(e.target.value)}
-            placeholder="user@gmail.com"
-          />
-          <Input
-            type="password"
-            value={props.authentication.password}
-            onChange={e => props.passwordChanged(e.target.value)}
-            placeholder="********"
-          />
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Container>
-    );
-  };
-
-  return <div>{renderLogin()}</div>;
-};
+      .catch(err => console.error(err))
+  }
+  return (
+    <Container style={limitWidth()}>
+      <Form onSubmit={e => onSubmit(e)} autoComplete={"off"}>
+        <Input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="user@gmail.com"
+        />
+        <Input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="********"
+        />
+        <Button type="submit">Submit</Button>
+      </Form>
+    </Container>
+  )
+}
 
 const Container = styled.div`
   background: url(https://source.unsplash.com/user/erondu);
@@ -60,7 +49,7 @@ const Container = styled.div`
   height: 100vh;
   position: absolute;
   background-size: cover;
-`;
+`
 
 const Form = styled.form`
   margin-top: 20%;
@@ -68,7 +57,7 @@ const Form = styled.form`
   flex-flow: column;
   align-items: center;
   padding: 5%;
-`;
+`
 
 const Input = styled.input`
   line-height: 1.8em;
@@ -79,8 +68,6 @@ const Input = styled.input`
   margin: 1%;
   border-radius: 100em;
   opacity: 0.6;
-`;
+`
 
-const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" });
-
-export default Login;
+const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" })

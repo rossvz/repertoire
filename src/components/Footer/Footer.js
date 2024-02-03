@@ -1,6 +1,6 @@
-import React from 'react'
-import FooterButton from './FooterButton'
-import styled from 'styled-components'
+import React from "react"
+import FooterButton from "./FooterButton"
+import styled from "styled-components"
 
 const FooterContainer = styled.div`
   position: fixed;
@@ -16,15 +16,14 @@ const FooterContainer = styled.div`
 const Footer = () => {
   return (
     <FooterContainer style={limitWidth()}>
-      <FooterButton title={'Songs'} icon={'music'} route={'/'} />
-      <FooterButton title={'Shows'} icon={'calendar-alt'} route={'/shows'} />
-      <FooterButton title={'About'} icon={'user-circle'} route={'/about'} />
-      <FooterButton title={'Settings'} icon={'cogs'} route={routeIfAuth()} />
+      <FooterButton title={"Songs"} icon={"music"} route={"/"} />
+      <FooterButton title={"Shows"} icon={"calendar-alt"} route={"/shows"} />
+      <FooterButton title={"About"} icon={"user-circle"} route={"/about"} />
+      <FooterButton title={"Settings"} icon={"cogs"} route="/admin" />
     </FooterContainer>
   )
 }
 
-const routeIfAuth = isAuthenticated => (isAuthenticated ? '/admin' : '/login')
-const limitWidth = () => ({ width: window.innerWidth > 700 ? '59%' : '100%' })
+const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" })
 
 export default Footer

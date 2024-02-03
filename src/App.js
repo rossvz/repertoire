@@ -7,12 +7,11 @@ import "./App.css"
 
 import { Router, Route } from "react-router-dom"
 import history from "util/history"
-import Login from "./components/Login"
 import About from "./components/About/About"
 import Footer from "./components/Footer/Footer"
 import { ShowsPage } from "./components/Shows/ShowsPage"
-import Admin from "./components/Admin"
 import { SongListPage } from "./components/SongPage/SongPage"
+import { AdminPage } from "./components/Login/AdminPage"
 
 const App = () => {
   const firebaseApp = useFirebaseApp()
@@ -28,9 +27,7 @@ const App = () => {
           <Route exact path="/" component={SongListPage} />
           <Route path="/about" component={About} />
           <Route exact path="/shows" component={ShowsPage} />
-          {/* <Route path="/admin" component={Admin} /> */}
-          <Route path="/login" component={Login} />
-          */}
+          <Route path="/admin" component={AdminPage} />
           <Footer />
         </div>
       </Router>

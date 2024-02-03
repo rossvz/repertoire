@@ -1,18 +1,22 @@
 import React from "react"
 import { Header } from "components/Header"
 
-import LogoutButton from "components/Login/LogoutButton"
-import NewShowForm from "components/Shows/NewShowForm"
-// import NewSong from "components/SongPage/NewSong"
+import { LogoutButton } from "components/Login/LogoutButton"
+import { NewShowForm } from "components/Shows/NewShowForm/NewShowForm"
 import ResetAllVotes from "components/SongPage/ResetAllVotes"
 import styled from "styled-components"
+import { useAuth } from "reactfire"
 
 const Heading = styled.h2`
   color: white;
   text-align: center;
 `
 
-const Admin = ({ firebase }) => {
+export const Admin = ({ user }) => {
+  const auth = useAuth()
+  const logout = React.useCallback(() => {
+    auth.signOut().then(() => console.log("signed out"))
+  }, [auth])
   return (
     <div>
       <Header title={"Settings"} />
@@ -24,9 +28,7 @@ const Admin = ({ firebase }) => {
         {/* <NewSong /> */}
         <ResetAllVotes />
       </div>
-      <LogoutButton />
+      <LogoutButton logout={logout} />
     </div>
   )
 }
-
-export default Admin

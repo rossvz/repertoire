@@ -1,15 +1,16 @@
-import React from "react";
-import FontAwesome from "react-fontawesome";
-import { compose } from "redux";
-import { withFirebase } from "react-redux-firebase";
-import { withHandlers } from "recompose";
-import history from "util/history";
-const LogoutButton = ({ logout }) => (
+import React from "react"
+import FontAwesome from "react-fontawesome"
+import { compose } from "redux"
+import { withFirebase } from "react-redux-firebase"
+import { withHandlers } from "recompose"
+import history from "util/history"
+
+export const LogoutButton = ({ logout }) => (
   <div style={styles.buttonStyles} onClick={logout}>
     <FontAwesome name={"sign-out-alt"} />
     <span>Log Out</span>
   </div>
-);
+)
 
 const styles = {
   buttonStyles: {
@@ -26,16 +27,16 @@ const styles = {
     bottom: "8vh",
     left: "40vw"
   }
-};
+}
 
-export default compose(
-  withFirebase,
-  withHandlers({
-    logout: props => evt => {
-      setTimeout(() => {
-        history.replace("/login");
-      }, 500);
-      props.firebase.logout();
-    }
-  })
-)(LogoutButton);
+// export default compose(
+//   withFirebase,
+//   withHandlers({
+//     logout: props => evt => {
+//       setTimeout(() => {
+//         history.replace("/login");
+//       }, 500);
+//       props.firebase.logout();
+//     }
+//   })
+// )(LogoutButton);

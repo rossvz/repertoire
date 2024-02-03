@@ -3,6 +3,7 @@ import { NewSongForm } from "./NewSongForm"
 import FontAwesome from "react-fontawesome"
 import Button from "components/common/Button"
 
+import { useSigninCheck } from "reactfire"
 const styles = {
   container: {
     marginTop: 20,
@@ -15,7 +16,9 @@ const styles = {
 
 export const NewSong = () => {
   const [isEditing, setIsEditing] = useState(false)
+  const { status, data } = useSigninCheck()
   const toggleIsEditing = () => setIsEditing(!isEditing)
+  if (status === "loading" || !data.signedIn) return null
   return (
     <div style={styles.container}>
       {isEditing ? (
