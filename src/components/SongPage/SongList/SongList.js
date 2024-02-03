@@ -1,17 +1,9 @@
 import Song from "components/SongPage/SongList/Song/Song"
-import React, { useMemo, useState } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 
 import "firebase/database"
-import { ref, query, orderByChild } from "firebase/database"
-import {
-  DatabaseProvider,
-  useDatabase,
-  useDatabaseListData,
-  useSigninCheck
-} from "reactfire"
-import { mapObjIndexed, reverse } from "ramda"
-import { songContainsSearchTerm } from "../../../util/songs"
+import { useSigninCheck } from "reactfire"
 import { useSongs } from "./useSongs"
 
 export const SongList = () => {

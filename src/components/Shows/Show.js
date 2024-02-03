@@ -1,15 +1,11 @@
 import React from "react"
-import { DeleteShow } from "./DeleteShow"
-import { withFirebase } from "react-redux-firebase"
-import { withHandlers } from "recompose"
-import { deleteShow } from "../../store/shows/actions"
-import { compose } from "redux"
+// import { DeleteShow } from "./DeleteShow"
 
-const Show = ({ show, deleteShow }) => (
+export const Show = ({ show }) => (
   <div style={styles.card}>
     <div style={styles.header}>
       <h2>{show._date}</h2>
-      <DeleteShow deleteShow={deleteShow} />
+      {/* <DeleteShow deleteShow={deleteShow} /> */}
     </div>
     <div style={styles.content}>
       <h3>{show.time}</h3>
@@ -37,10 +33,3 @@ const styles = {
     justifyContent: "space-between"
   }
 }
-
-export default compose(
-  withFirebase,
-  withHandlers({
-    deleteShow
-  })
-)(Show)

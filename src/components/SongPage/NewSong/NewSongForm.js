@@ -1,8 +1,8 @@
-import React, { Component, useEffect, useReducer, useState } from "react"
-import { searchSpotify, getArtistGenre, search } from "util/Spotify"
+import React, { useEffect, useState } from "react"
+import { search } from "util/Spotify"
 import Button from "components/common/Button"
 import moment from "moment"
-import { ref, set, push, child, update } from "firebase/database"
+import { ref, set, push } from "firebase/database"
 import { useDatabase } from "reactfire"
 
 const INITIAL_SONG_STATE = {

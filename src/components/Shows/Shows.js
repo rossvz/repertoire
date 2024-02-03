@@ -1,9 +1,11 @@
 import React from "react"
 import { Header } from "components/Header"
+import { Show } from "./Show"
+import { useShows } from "./useShows"
+export const Shows = () => {
+  const { status, shows } = useShows()
 
-import Show from "./Show"
-
-const Shows = ({ shows = [] }) => {
+  if (status === "loading") return <div>Loading...</div>
   return (
     <div>
       <Header title={"Upcoming Shows"} />
@@ -25,5 +27,3 @@ const styles = {
     marginBottom: "8vh"
   }
 }
-
-export default Shows

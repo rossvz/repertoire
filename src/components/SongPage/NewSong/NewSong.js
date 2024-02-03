@@ -1,9 +1,7 @@
 import React, { useState } from "react"
-import PropTypes from "prop-types"
 import { NewSongForm } from "./NewSongForm"
 import FontAwesome from "react-fontawesome"
 import Button from "components/common/Button"
-import { isEmpty } from "react-redux-firebase"
 
 const styles = {
   container: {
@@ -15,7 +13,7 @@ const styles = {
   }
 }
 
-export const NewSong = ({}) => {
+export const NewSong = () => {
   const [isEditing, setIsEditing] = useState(false)
   const toggleIsEditing = () => setIsEditing(!isEditing)
   return (
