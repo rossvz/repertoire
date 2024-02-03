@@ -1,28 +1,16 @@
 import Song from "components/SongPage/SongList/Song/Song"
-import PropTypes from "prop-types"
 import React, { useMemo, useState } from "react"
 import styled from "styled-components"
 
 import "firebase/database"
-import {
-  getDatabase,
-  ref,
-  query,
-  orderByChild,
-  push,
-  set,
-  increment as rtdbIncrement
-} from "firebase/database"
+import { orderByChild, query, ref } from "firebase/database"
+import { mapObjIndexed, reverse } from "ramda"
 import {
   DatabaseProvider,
   useDatabase,
   useDatabaseListData,
-  useDatabaseObjectData,
-  useFirebaseApp,
-  useUser,
   useSigninCheck
 } from "reactfire"
-import { mapObjIndexed, reverse } from "ramda"
 import { songContainsSearchTerm } from "../../../util/songs"
 
 export const SongList = () => {

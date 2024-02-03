@@ -1,10 +1,10 @@
 import React from "react"
 import Upvote from "./Upvote"
 import AlbumArtwork from "./AlbumArtwork"
-import AdminFunctions from "./AdminFunctions/AdminFunctions"
+import { AdminFunctions } from "./AdminFunctions"
 import { isUpvoted } from "../../../../util/votes"
 import { toggleVoteInStorage } from "../../../../util/votes"
-import { getDatabase, ref, remove, update } from "firebase/database"
+import { ref, remove, update } from "firebase/database"
 import { useDatabase } from "reactfire"
 const Song = ({ song, signedIn }) => {
   const database = useDatabase()
