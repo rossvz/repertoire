@@ -1,12 +1,29 @@
 import React from "react"
 import Upvote from "./Upvote"
 import AlbumArtwork from "./AlbumArtwork"
-import AdminFunctions from "./AdminFunctions"
+import AdminFunctions from "./AdminFunctions/AdminFunctions"
 import { isUpvoted } from "../../../../util/votes"
-import { isEmpty } from "react-redux-firebase"
+import { toggleVoteInStorage } from "../../../../util/votes"
+import { getDatabase, ref, remove, update } from "firebase/database"
+import { useDatabase } from "reactfire"
+const Song = ({ song, signedIn }) => {
+  const database = useDatabase()
+  const songRef = ref(database, `songs/${song.id}`)
 
-const Song = ({ song, changeVote, toggleVisible, auth, deleteSong }) => {
-  if (isEmpty(auth) && !song.visible) return <div />
+  const changeVote = value => {
+    const votes = song.votes < 0 || value === "reset" ? 0 : song.votes + value
+    update(songRef, { votes })
+    toggleVoteInStorage(song.id)
+  }
+
+  const toggleVisible = () => {
+    update(songRef, { visible: !song.visible })
+  }
+  const deleteSong = () => {
+    remove(songRef)
+  }
+
+  if (!signedIn && !song.visible) return <div />
   return (
     <div style={setStyles(song)}>
       <div style={styles.columnStyles}>
@@ -15,18 +32,17 @@ const Song = ({ song, changeVote, toggleVisible, auth, deleteSong }) => {
           <div style={styles.title}>{song.title}</div>
           <div style={styles.artist}>{song.artist}</div>
           <div>{song.album}</div>
-          <AdminFunctions
-            song={song}
-            changeVote={changeVote}
-            toggleVisible={toggleVisible}
-            deleteSong={deleteSong}
-          />
+          {signedIn ? (
+            <AdminFunctions
+              song={song}
+              changeVote={changeVote}
+              toggleVisible={toggleVisible}
+              deleteSong={deleteSong}
+            />
+          ) : null}
         </div>
         <div style={styles.actionStyles}>
-          <Upvote
-            changeVote={changeVote}
-            upvoted={song.votes > 0 && isUpvoted(song.id)}
-          />
+          <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
           <p>{song.votes}</p>
         </div>
       </div>

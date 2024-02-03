@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -18,11 +18,10 @@ const Title = styled.div`
   font-size: 1.4em;
 `
 
-const Header = ({ title }) => {
+export const Header = ({ title }) => {
   return (
     <HeaderContainer>
       <Title>{title}</Title>
     </HeaderContainer>
   )
 }
-export default Header

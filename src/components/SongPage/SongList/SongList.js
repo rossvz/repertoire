@@ -1,26 +1,70 @@
-import Song from "components/SongPage/SongList/Song";
-import PropTypes from "prop-types";
-import React from "react";
+import Song from "components/SongPage/SongList/Song/Song"
+import PropTypes from "prop-types"
+import React, { useMemo, useState } from "react"
+import styled from "styled-components"
 
-const SongList = ({ songs, changeVisible }) => (
-  <div style={styles.songListStyles}>
-    {songs.map(song => (
-      <Song key={song.id} song={song} />
-    ))}
-  </div>
-);
+import "firebase/database"
+import {
+  getDatabase,
+  ref,
+  query,
+  orderByChild,
+  push,
+  set,
+  increment as rtdbIncrement
+} from "firebase/database"
+import {
+  DatabaseProvider,
+  useDatabase,
+  useDatabaseListData,
+  useDatabaseObjectData,
+  useFirebaseApp,
+  useUser,
+  useSigninCheck
+} from "reactfire"
+import { mapObjIndexed, reverse } from "ramda"
+import { songContainsSearchTerm } from "../../../util/songs"
 
-SongList.propTypes = {
-  songs: PropTypes.arrayOf(
-    PropTypes.shape({
-      album: PropTypes.string,
-      artist: PropTypes.string,
-      id: PropTypes.string,
-      title: PropTypes.string,
-      votes: PropTypes.number
-    })
-  ).isRequired
-};
+export const SongList = () => {
+  const { status: authStatus, data: user } = useSigninCheck()
+  const [searchFilter, setSearchFilter] = useState("")
+
+  const database = useDatabase()
+  const songsRef = ref(database, "songs")
+  const songsQuery = query(songsRef, orderByChild("votes"))
+
+  const { status: songsStatus, data: songData } = useDatabaseListData(
+    songsQuery,
+    {
+      idField: "id"
+    }
+  )
+  const songs = useMemo(() => {
+    if (!songData) return []
+    return reverse(songData).filter(songContainsSearchTerm(searchFilter))
+  }, [songData, searchFilter])
+
+  if (authStatus === "loading" || songsStatus === "loading") {
+    return <div>Loading...</div>
+  }
+
+  return (
+    <>
+      <SearchContainer>
+        <SearchInput
+          onChange={e => setSearchFilter(e.target.value)}
+          placeholder="Search"
+          value={searchFilter}
+        />
+      </SearchContainer>
+      <div style={styles.songListStyles}>
+        {songs.map(song => (
+          <Song key={song.id} song={song} signedIn={user.signedIn} />
+        ))}
+      </div>
+    </>
+  )
+}
 
 const styles = {
   songListStyles: {
@@ -32,6 +76,23 @@ const styles = {
     padding: "5%",
     paddingBottom: "15%"
   }
-};
+}
 
-export default SongList;
+const SearchContainer = styled.div`
+  margin: 3% 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const SearchInput = styled.input`
+  text-align: left;
+  font-size: 1.5em;
+  //background-color: #19181c;
+  background-color: #161519;
+  color: white;
+  border: 2px solid #b4cbea;
+  padding: 2%;
+  border-radius: 100em;
+`

@@ -1,5 +1,6 @@
 import React from "react"
-import Header from "../Header/Header"
+import { Header } from "components/Header"
+
 import Show from "./Show"
 
 const Shows = ({ shows = [] }) => {
