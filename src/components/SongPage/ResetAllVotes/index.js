@@ -3,7 +3,7 @@ import { changeVote } from "store/songs/actions"
 import { connect } from "react-redux"
 import { compose, values, mapObjIndexed } from "ramda"
 import { withFirebase } from "react-redux-firebase"
-import ResetAllVotes from "./ResetAllVotes"
+import ResetAllVotes from "../ResetAllVotes"
 import showIfAuthenticated from "../../../util/showIfAuthenticated"
 import { removeVoteFromStorage } from "../../../util/votes"
 

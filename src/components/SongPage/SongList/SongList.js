@@ -12,27 +12,14 @@ import {
 } from "reactfire"
 import { mapObjIndexed, reverse } from "ramda"
 import { songContainsSearchTerm } from "../../../util/songs"
+import { useSongs } from "./useSongs"
 
 export const SongList = () => {
   const { status: authStatus, data: user } = useSigninCheck()
   const [searchFilter, setSearchFilter] = useState("")
+  const { status: songStatus, songs } = useSongs(searchFilter)
 
-  const database = useDatabase()
-  const songsRef = ref(database, "songs")
-  const songsQuery = query(songsRef, orderByChild("votes"))
-
-  const { status: songsStatus, data: songData } = useDatabaseListData(
-    songsQuery,
-    {
-      idField: "id"
-    }
-  )
-  const songs = useMemo(() => {
-    if (!songData) return []
-    return reverse(songData).filter(songContainsSearchTerm(searchFilter))
-  }, [songData, searchFilter])
-
-  if (authStatus === "loading" || songsStatus === "loading") {
+  if (authStatus === "loading" || songStatus === "loading") {
     return <div>Loading...</div>
   }
 
