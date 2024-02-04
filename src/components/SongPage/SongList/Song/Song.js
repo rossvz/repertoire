@@ -26,12 +26,12 @@ const Song = ({ song, signedIn }) => {
   if (!signedIn && !song.visible) return <div />
   return (
     <div style={setStyles(song)}>
+      <div style={styles.title}>{song.title}</div>
       <div style={styles.columnStyles}>
         <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div style={styles.songInfoStyles}>
-          <div style={styles.title}>{song.title}</div>
           <div style={styles.artist}>{song.artist}</div>
-          <div>{song.album}</div>
+          <div style={styles.album}>{song.album}</div>
           {signedIn ? (
             <AdminFunctions
               song={song}
@@ -56,20 +56,18 @@ const setStyles = song =>
 const styles = {
   songStyles: {
     width: "100%",
-    margin: "2% 20%",
-    // boxShadow: '#d8d8d8 3px 5px 10px',
+    margin: "2% 5%",
     backgroundSize: "cover",
-    paddingBottom: "3%",
-    borderBottom: "2px solid #544E58"
-    // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
+    paddingTop: "2%",
+    borderTop: "2px solid rgb(84 78 88 / 47%)",
+    color: "#fff"
   },
   invisibleSongStyles: {
     opacity: 0.4,
     width: "100%",
     margin: "2% 20%",
-    // boxShadow: '#d8d8d8 3px 5px 10px',
-    backgroundSize: "cover"
-    // background: 'linear-gradient(135deg, rgba(136, 17, 204, 0.4), rgba(17, 136, 204, 0.4)) fixed'
+    backgroundSize: "cover",
+    color: "#fff"
   },
   columnStyles: {
     display: "flex",
@@ -95,8 +93,10 @@ const styles = {
 
   title: {
     fontWeight: "bold",
-    fontSize: "1.3em",
-    letterSpacing: "0.1em"
+    fontSize: "1.2em",
+    letterSpacing: "0.1em",
+    textAlign: "center",
+    marginBottom: "10px"
     // textTransform: 'uppercase'
   },
   artist: {
@@ -106,6 +106,11 @@ const styles = {
     textTransform: "uppercase",
     letterSpacing: "0.1em",
     padding: "5% 0"
+  },
+  album: {
+    // fontStyle: "italic",
+    fontSize: "smaller",
+    opacity: 0.7
   },
   genres: {
     fontSize: "smaller",

@@ -14,10 +14,20 @@ export const SongListPage = () => {
   return (
     <DatabaseProvider sdk={database}>
       <Header title={"Songs"} />
-      <HelperText />
-      <NewSong />
-      <ResetAllVotes />
+      {/* <HelperText /> */}
+      <div style={styles.adminTopButtons}>
+        <NewSong />
+        <ResetAllVotes />
+      </div>
       <SongList />
     </DatabaseProvider>
   )
+}
+
+const styles = {
+  adminTopButtons: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center"
+  }
 }

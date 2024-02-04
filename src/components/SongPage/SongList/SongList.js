@@ -40,13 +40,13 @@ const styles = {
     flexFlow: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "5%",
+    padding: "3%",
     paddingBottom: "15%"
   }
 }
 
 const SearchContainer = styled.div`
-  margin: 3% 0;
+  margin: 2% 0;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -55,7 +55,7 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1.3em;
   //background-color: #19181c;
   background-color: #161519;
   color: white;

@@ -6,7 +6,6 @@ import Button from "components/common/Button"
 import { useSigninCheck } from "reactfire"
 const styles = {
   container: {
-    marginTop: 20,
     textAlign: "center"
   },
   icon: {
@@ -31,7 +30,7 @@ export const NewSong = () => {
           }}
         >
           <FontAwesome style={styles.icon} name={"plus-circle"} />
-          ADD SONG
+          Add Song
         </Button>
       )}
     </div>

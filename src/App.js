@@ -37,8 +37,8 @@ const App = () => {
 
 const styles = {
   app: {
-    marginLeft: "20vw",
-    marginRight: "20vw",
+    // marginLeft: "20vw",
+    // marginRight: "20vw",
     boxShadow: "0px 2px 19px 8px black"
   }
 }
