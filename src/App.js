@@ -11,7 +11,7 @@ import About from "./components/About/About"
 import Footer from "./components/Footer/Footer"
 import { ShowsPage } from "./components/Shows/ShowsPage"
 import { SongListPage } from "./components/SongPage/SongPage"
-import { AdminPage } from "./components/Login/AdminPage"
+import { AdminPage } from "./components/Admin/AdminPage"
 
 const App = () => {
   const firebaseApp = useFirebaseApp()

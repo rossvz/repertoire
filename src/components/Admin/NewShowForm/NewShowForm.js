@@ -3,9 +3,38 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete"
-import AddShowButton from "./AddShowButton"
+import FontAwesome from "react-fontawesome"
+import Button from "components/common/Button"
+import { ref, set, push } from "firebase/database"
+import { useDatabase } from "reactfire"
 
 const INITIAL_STATE = { date: "", venue: "", time: "" }
+
+export const NewShowWrapper = () => {
+  const database = useDatabase()
+  const showsRef = ref(database, "shows")
+  const [editingNewShow, setEditingNewShow] = React.useState(false)
+
+  const saveShow = newShow => {
+    const newShowRef = push(showsRef)
+    set(newShowRef, newShow)
+  }
+  return (
+    <div style={styles.container}>
+      {editingNewShow ? (
+        <NewShowForm
+          saveShow={saveShow}
+          toggleEditingNewShow={() => setEditingNewShow(false)}
+        />
+      ) : (
+        <Button onClick={() => setEditingNewShow(true)}>
+          <FontAwesome style={styles.icon} name={"plus-circle"} />
+          ADD SHOW
+        </Button>
+      )}
+    </div>
+  )
+}
 
 export class NewShowForm extends Component {
   state = INITIAL_STATE
@@ -20,7 +49,7 @@ export class NewShowForm extends Component {
     geocodeByAddress(this.state.venue)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
-        this.props.firebase.push("/shows", { date, venue, time, latLng })
+        this.props.saveShow({ date, venue, time, latLng })
       })
       .catch(error => console.error("Error", error))
     this.setState(INITIAL_STATE)
@@ -62,50 +91,44 @@ export class NewShowForm extends Component {
     // todo: refactor this to redux, separate compnents
     return (
       <div style={styles.container}>
-        {this.props.editingNewShow ? (
-          <div style={styles.container}>
-            <form onSubmit={this.saveShow.bind(this)} style={styles.formStyles}>
-              <input
-                style={styles.inputStyles}
-                type="date"
-                placeholder={"Date"}
-                onChange={this.onDateChange.bind(this)}
-                value={this.state.date}
-              />
-              <PlacesAutocomplete
-                inputProps={inputProps}
-                autocompleteItem={AutocompleteItem}
-                styles={styles.autocompleteStyles}
-                options={options}
-              />
-              <input
-                style={styles.inputStyles}
-                type="datetime"
-                placeholder={"Time"}
-                onChange={this.onTimeChange.bind(this)}
-                value={this.state.time}
-              />
-              <div style={styles.buttonContainer}>
-                <button
-                  style={styles.cancelButton}
-                  onClick={this.cancelShow.bind(this)}
-                >
-                  CANCEL
-                </button>
-                <button
-                  style={styles.saveShowButton}
-                  onClick={this.saveShow.bind(this)}
-                >
-                  SAVE
-                </button>
-              </div>
-            </form>
-          </div>
-        ) : (
-          <AddShowButton
-            toggleEditingNewShow={this.props.toggleEditingNewShow}
-          />
-        )}
+        <div style={styles.container}>
+          <form onSubmit={this.saveShow.bind(this)} style={styles.formStyles}>
+            <input
+              style={styles.inputStyles}
+              type="date"
+              placeholder={"Date"}
+              onChange={this.onDateChange.bind(this)}
+              value={this.state.date}
+            />
+            <PlacesAutocomplete
+              inputProps={inputProps}
+              autocompleteItem={AutocompleteItem}
+              styles={styles.autocompleteStyles}
+              options={options}
+            />
+            <input
+              style={styles.inputStyles}
+              type="datetime"
+              placeholder={"Time"}
+              onChange={this.onTimeChange.bind(this)}
+              value={this.state.time}
+            />
+            <div style={styles.buttonContainer}>
+              <button
+                style={styles.cancelButton}
+                onClick={this.cancelShow.bind(this)}
+              >
+                CANCEL
+              </button>
+              <button
+                style={styles.saveShowButton}
+                onClick={this.saveShow.bind(this)}
+              >
+                SAVE
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

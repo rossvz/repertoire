@@ -1,9 +1,9 @@
 import { Login } from "./Login"
 import { useFirebaseApp, DatabaseProvider } from "reactfire"
 import { getDatabase } from "firebase/database"
-import React, { useEffect } from "react"
-import { useSigninCheck, useAuth } from "reactfire"
-import { Admin } from "../Admin"
+import React from "react"
+import { useSigninCheck } from "reactfire"
+import { Admin } from "./Admin"
 
 export const AdminPage = () => {
   const firebaseApp = useFirebaseApp()
@@ -16,6 +16,6 @@ export const AdminPage = () => {
   )
 }
 const CheckAuthenticated = () => {
-  const { status: authStatus, data: user } = useSigninCheck()
+  const { data: user } = useSigninCheck()
   return user && user.signedIn ? <Admin user={user} /> : <Login />
 }

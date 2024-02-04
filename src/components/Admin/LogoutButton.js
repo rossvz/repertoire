@@ -1,9 +1,5 @@
 import React from "react"
 import FontAwesome from "react-fontawesome"
-import { compose } from "redux"
-import { withFirebase } from "react-redux-firebase"
-import { withHandlers } from "recompose"
-import history from "util/history"
 
 export const LogoutButton = ({ logout }) => (
   <div style={styles.buttonStyles} onClick={logout}>

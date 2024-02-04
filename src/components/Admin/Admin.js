@@ -1,8 +1,8 @@
 import React from "react"
 import { Header } from "components/Header"
 
-import { LogoutButton } from "components/Login/LogoutButton"
-import { NewShowForm } from "components/Shows/NewShowForm/NewShowForm"
+import { LogoutButton } from "./LogoutButton"
+import { NewShowWrapper } from "./NewShowForm/NewShowForm"
 import ResetAllVotes from "components/SongPage/ResetAllVotes"
 import styled from "styled-components"
 import { useAuth } from "reactfire"
@@ -22,7 +22,7 @@ export const Admin = ({ user }) => {
       <Header title={"Settings"} />
       <div>
         <Heading>Shows</Heading>
-        <NewShowForm />
+        <NewShowWrapper />
         <br />
         <Heading>Songs</Heading>
         {/* <NewSong /> */}

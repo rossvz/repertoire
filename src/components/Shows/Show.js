@@ -1,11 +1,11 @@
 import React from "react"
-// import { DeleteShow } from "./DeleteShow"
+import { DeleteShow } from "./DeleteShow"
 
 export const Show = ({ show }) => (
   <div style={styles.card}>
     <div style={styles.header}>
       <h2>{show._date}</h2>
-      {/* <DeleteShow deleteShow={deleteShow} /> */}
+      <DeleteShow show={show} />
     </div>
     <div style={styles.content}>
       <h3>{show.time}</h3>

@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react"
-import { Redirect } from "react-router"
+import React, { useState } from "react"
 import Button from "components/common/Button"
 import styled from "styled-components"
-import { useSigninCheck, useAuth } from "reactfire"
-import { set } from "ramda"
-
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth"
+import { useAuth } from "reactfire"
+import { signInWithEmailAndPassword } from "firebase/auth"
 
 export const Login = () => {
   const auth = useAuth()
