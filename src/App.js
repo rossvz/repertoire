@@ -1,12 +1,12 @@
 import React from "react"
-import { AuthProvider, useFirebaseApp, useInitPerformance } from "reactfire"
+import { AuthProvider, useFirebaseApp } from "reactfire"
 import { getAuth } from "firebase/auth"
 
-import "typeface-roboto"
+import "fontsource-roboto/latin.css"
 import "./App.css"
 
 import { Router, Route } from "react-router-dom"
-import history from "util/history"
+import history from "./util/history"
 import About from "./components/About/About"
 import Footer from "./components/Footer/Footer"
 import { ShowsPage } from "./components/Shows/ShowsPage"
@@ -16,10 +16,6 @@ import { AdminPage } from "./components/Admin/AdminPage"
 const App = () => {
   const firebaseApp = useFirebaseApp()
   const auth = getAuth(firebaseApp)
-  useInitPerformance(async firebaseApp => {
-    const { getPerformance } = await import("firebase/performance")
-    return getPerformance(firebaseApp)
-  })
   return (
     <AuthProvider sdk={auth}>
       <Router history={history}>

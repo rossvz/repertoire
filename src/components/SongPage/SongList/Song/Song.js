@@ -108,8 +108,8 @@ const styles = {
     padding: "5% 0"
   },
   album: {
-    // fontStyle: "italic",
-    fontSize: "smaller",
+    fontStyle: "italic",
+    // fontSize: "smaller",
     opacity: 0.7
   },
   genres: {

@@ -4,9 +4,10 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete"
 import FontAwesome from "react-fontawesome"
-import Button from "components/common/Button"
 import { ref, set, push } from "firebase/database"
 import { useDatabase } from "reactfire"
+
+import Button from "../../common/Button"
 
 const INITIAL_STATE = { date: "", venue: "", time: "" }
 
@@ -88,7 +89,6 @@ export class NewShowForm extends Component {
       types: ["establishment"]
     }
 
-    // todo: refactor this to redux, separate compnents
     return (
       <div style={styles.container}>
         <div style={styles.container}>

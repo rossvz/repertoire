@@ -1,11 +1,11 @@
 import React from "react"
-import { Header } from "components/Header"
-
-import { LogoutButton } from "./LogoutButton"
-import { NewShowWrapper } from "./NewShowForm/NewShowForm"
-import ResetAllVotes from "components/SongPage/ResetAllVotes"
 import styled from "styled-components"
 import { useAuth } from "reactfire"
+
+import { Header } from "../Header"
+import { LogoutButton } from "./LogoutButton"
+import { NewShowWrapper } from "./NewShowForm/NewShowForm"
+import ResetAllVotes from "./ResetAllVotes"
 
 const Heading = styled.h2`
   color: white;

@@ -1,8 +1,9 @@
 import React, { useState } from "react"
-import Button from "components/common/Button"
 import styled from "styled-components"
 import { useAuth } from "reactfire"
 import { signInWithEmailAndPassword } from "firebase/auth"
+
+import Button from "../common/Button"
 
 export const Login = () => {
   const auth = useAuth()

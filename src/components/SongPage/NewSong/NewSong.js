@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { NewSongForm } from "./NewSongForm"
 import FontAwesome from "react-fontawesome"
-import Button from "components/common/Button"
-
 import { useSigninCheck } from "reactfire"
+
+import { NewSongForm } from "./NewSongForm"
+import Button from "../../common/Button"
+
 const styles = {
   container: {
     textAlign: "center"

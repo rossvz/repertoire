@@ -1,9 +1,8 @@
-import Song from "components/SongPage/SongList/Song/Song"
 import React, { useState } from "react"
 import styled from "styled-components"
-
-import "firebase/database"
 import { useSigninCheck } from "reactfire"
+
+import Song from "./Song/Song"
 import { useSongs } from "./useSongs"
 
 export const SongList = () => {

@@ -1,8 +1,9 @@
 import React from "react"
-import Button from "components/common/Button"
-import { useSongs } from "./SongList/useSongs"
-import { useResetAllVotes } from "./ResetAllVotes/useResetAllVotes"
 import { useSigninCheck } from "reactfire"
+
+import Button from "../common/Button"
+import { useSongs } from "../SongPage/SongList/useSongs"
+import { useResetAllVotes } from "./useResetAllVotes"
 
 const styles = {
   container: {

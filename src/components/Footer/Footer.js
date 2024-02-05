@@ -24,6 +24,6 @@ const Footer = () => {
   )
 }
 
-const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" })
+const limitWidth = () => ({ width: "100%" })
 
 export default Footer

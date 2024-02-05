@@ -1,7 +1,8 @@
-import { removeVoteFromStorage } from "util/votes"
 import { useDatabase } from "reactfire"
 import { update, ref } from "firebase/database"
 import React from "react"
+
+import { removeVoteFromStorage } from "../../util/votes"
 
 export const useResetAllVotes = () => {
   const database = useDatabase()
