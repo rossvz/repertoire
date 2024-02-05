@@ -26,26 +26,27 @@ const Song = ({ song, signedIn }) => {
   if (!signedIn && !song.visible) return <div />
   return (
     <div style={setStyles(song)}>
-      <div style={styles.title}>{song.title}</div>
       <div style={styles.columnStyles}>
         <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div style={styles.songInfoStyles}>
+          <div style={styles.title}>{song.title}</div>
+
           <div style={styles.artist}>{song.artist}</div>
           <div style={styles.album}>{song.album}</div>
-          {signedIn ? (
-            <AdminFunctions
-              song={song}
-              changeVote={changeVote}
-              toggleVisible={toggleVisible}
-              deleteSong={deleteSong}
-            />
-          ) : null}
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
-          <p>{song.votes}</p>
+          {/* <p style={styles.voteCount}>{song.votes}</p> */}
         </div>
       </div>
+      {signedIn ? (
+        <AdminFunctions
+          song={song}
+          changeVote={changeVote}
+          toggleVisible={toggleVisible}
+          deleteSong={deleteSong}
+        />
+      ) : null}
     </div>
   )
 }
@@ -83,23 +84,28 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
+    flex: 0.5,
     opacity: 0.5,
     color: "#fff",
+    height: "80px",
   },
   songInfoStyles: {
     padding: "0 20px",
     flex: 3,
     color: "#fff",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "space-around",
+    minHeight: "80px",
   },
 
   title: {
     fontWeight: "bold",
     fontSize: "1.2em",
     letterSpacing: "0.1em",
-    textAlign: "center",
+    // textAlign: "center",
     marginBottom: "10px",
-    // textTransform: 'uppercase'
   },
   artist: {
     color: "#B4CBEA",
@@ -107,7 +113,7 @@ const styles = {
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
-    padding: "20px 0",
+    // padding: "1em 0",
   },
   album: {
     fontStyle: "italic",
@@ -121,6 +127,11 @@ const styles = {
   },
   row: {
     marginBottom: 10,
+  },
+  voteCount: {
+    fontSize: "0.7em",
+    color: "#B4CBEA",
+    fontWeight: "bold",
   },
 }
 

@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+html {
+  background: black;
+}
+
 .hide {
   visibility: hidden;
 }

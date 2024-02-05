@@ -20,9 +20,9 @@ const styles = {
     color: "#FC1F49",
     textDecoration: "none",
     position: "fixed",
-    bottom: "8vh",
-    left: "40vw"
-  }
+    top: 0,
+    right: 0,
+  },
 }
 
 // export default compose(

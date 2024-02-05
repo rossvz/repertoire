@@ -39,7 +39,7 @@ const styles = {
     flexFlow: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "20px",
+    padding: "10px",
     paddingBottom: "15%",
   },
 }

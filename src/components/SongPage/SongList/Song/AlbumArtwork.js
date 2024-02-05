@@ -9,13 +9,12 @@ const styles = {
   placeholder: {
     width: "25vw",
     height: "25vw",
-    backgroundColor: "gray"
+    backgroundColor: "gray",
   },
   image: {
-    width: "10vh",
-    maxWidth: "200px",
-    borderRadius: "10px"
-  }
+    width: "80px",
+    borderRadius: "10px",
+  },
 }
 
 export default AlbumArtwork

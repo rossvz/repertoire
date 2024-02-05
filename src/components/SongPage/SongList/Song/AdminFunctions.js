@@ -12,21 +12,22 @@ const Container = styled.div`
   opacity: 1;
   font-size: 1.2em;
   font-weight: bold;
+  width: 100%;
 `
 const styles = {
   icon: {
-    marginRight: "10px"
+    marginRight: "10px",
   },
   resetButton: {
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 }
 
 export const AdminFunctions = ({
   song,
   changeVote,
   toggleVisible,
-  deleteSong
+  deleteSong,
 }) => {
   return (
     <Container>
@@ -39,29 +40,28 @@ export const AdminFunctions = ({
 
 export const DeleteSong = ({ deleteSong }) => {
   return (
-    <FontAwesome
-      style={styles.resetButton}
-      onClick={deleteSong}
-      name={"trash"}
-      style={styles.icon}
-    />
+    <div onClick={deleteSong}>
+      <FontAwesome
+        style={styles.resetButton}
+        name={"trash"}
+        style={styles.icon}
+      />
+    </div>
   )
 }
 
 const ResetVotes = ({ resetVotes }) => (
-  <FontAwesome
-    style={styles.resetButton}
-    onClick={resetVotes}
-    name={"undo"}
-    style={styles.icon}
-  />
+  <div onClick={resetVotes}>
+    <FontAwesome style={styles.resetButton} name={"undo"} style={styles.icon} />
+  </div>
 )
 
 const Visibility = ({ visible = true, toggleVisible }) => (
-  <FontAwesome
-    style={styles.resetButton}
-    onClick={toggleVisible}
-    name={visible ? "eye-slash" : "eye"}
-    style={styles.icon}
-  />
+  <div onClick={toggleVisible}>
+    <FontAwesome
+      style={styles.resetButton}
+      name={visible ? "eye-slash" : "eye"}
+      style={styles.icon}
+    />
+  </div>
 )
