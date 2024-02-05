@@ -17,8 +17,6 @@
 	"postCreateCommand": "npm install",
 	"remoteUser": "node",
 	"containerEnv": {
-		"NODE_ENV": "development",
-		"PORT": "3000",
 		"REACT_APP_GOOGLE_API_KEY": "${localEnv:REACT_APP_GOOGLE_API_KEY}",
 		"REACT_APP_SPOTIFY_API_URL": "${localEnv:REACT_APP_SPOTIFY_API_URL}"
 	}
