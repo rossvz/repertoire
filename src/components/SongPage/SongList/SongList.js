@@ -1,26 +1,53 @@
-import Song from "components/SongPage/SongList/Song";
-import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react"
+import styled from "styled-components"
+import { useSigninCheck } from "reactfire"
 
-const SongList = ({ songs, changeVisible }) => (
-  <div style={styles.songListStyles}>
-    {songs.map(song => (
-      <Song key={song.id} song={song} />
-    ))}
-  </div>
-);
+import Song from "./Song/Song"
+import { useSongs } from "./useSongs"
+import FontAwesome from "react-fontawesome"
 
-SongList.propTypes = {
-  songs: PropTypes.arrayOf(
-    PropTypes.shape({
-      album: PropTypes.string,
-      artist: PropTypes.string,
-      id: PropTypes.string,
-      title: PropTypes.string,
-      votes: PropTypes.number
-    })
-  ).isRequired
-};
+export const SongList = () => {
+  const { status: authStatus, data: user } = useSigninCheck()
+  const [searchFilter, setSearchFilter] = useState("")
+  const { status: songStatus, songs } = useSongs(searchFilter)
+
+  if (authStatus === "loading" || songStatus === "loading") {
+    return <div>Loading...</div>
+  }
+
+  const resetSearch = () => {
+    setSearchFilter("")
+  }
+
+  return (
+    <>
+      <SearchContainer>
+        <SearchInput
+          onChange={(e) => setSearchFilter(e.target.value)}
+          placeholder="Search title or artist"
+          value={searchFilter}
+        />
+        <div onClick={resetSearch}>
+          <FontAwesome
+            name="times-circle"
+            style={{
+              color: "white",
+              fontSize: "1.8em",
+              fontWeight: "bold",
+              cursor: "pointer",
+              margin: "0 10px",
+            }}
+          />
+        </div>
+      </SearchContainer>
+      <div style={styles.songListStyles}>
+        {songs.map((song) => (
+          <Song key={song.id} song={song} signedIn={user.signedIn} />
+        ))}
+      </div>
+    </>
+  )
+}
 
 const styles = {
   songListStyles: {
@@ -29,9 +56,27 @@ const styles = {
     flexFlow: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "5%",
-    paddingBottom: "15%"
-  }
-};
+    padding: "10px",
+    paddingBottom: "15%",
+  },
+}
 
-export default SongList;
+const SearchContainer = styled.div`
+  margin: 2% 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+`
+
+const SearchInput = styled.input`
+  text-align: left;
+  font-size: 1.3em;
+  background-color: #161519;
+  color: white;
+  border: none;
+  borderbottom: 2px solid #b4cbea;
+  padding: 20px;
+  width: 85%;
+`

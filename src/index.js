@@ -1,6 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import React from "react"
+import ReactDOM from "react-dom"
+import { FirebaseAppProvider } from "reactfire"
+import "./index.css"
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import App from "./App"
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+  authDomain: "rg-music.firebaseapp.com",
+  databaseURL: "https://rg-music.firebaseio.com",
+  projectId: "rg-music",
+  storageBucket: "rg-music.appspot.com",
+  appId: "390024634944",
+  messagingSenderId: "390024634944",
+  preserveOnLogout: { data: ["songs"] },
+  preserveOnEmptyAuthChange: { data: ["songs"] }
+}
+ReactDOM.render(
+  <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <App />
+  </FirebaseAppProvider>,
+  document.getElementById("root")
+)

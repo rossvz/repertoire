@@ -1,48 +1,39 @@
-import React from "react";
-import PropTypes from "prop-types";
-import NewSongForm from "./NewSongForm/index";
-import FontAwesome from "react-fontawesome";
-import Button from "components/common/Button";
-import { isEmpty } from "react-redux-firebase";
+import React, { useState } from "react"
+import FontAwesome from "react-fontawesome"
+import { useSigninCheck } from "reactfire"
 
-const styles = {
-  container: {
-    marginTop: 20,
-    textAlign: "center"
-  },
-  icon: {
-    marginRight: "10px"
-  }
-};
+import { NewSongForm } from "./NewSongForm"
+import Button from "../../common/Button"
 
-const NewSong = ({ isEditing, toggleIsEditing, auth }) =>
-  !isEmpty(auth) ? (
+export const NewSong = () => {
+  const [isEditing, setIsEditing] = useState(false)
+  const { status, data } = useSigninCheck()
+  const toggleIsEditing = () => setIsEditing(!isEditing)
+  if (status === "loading" || !data.signedIn) return null
+  return (
     <div style={styles.container}>
       {isEditing ? (
         <NewSongForm toggleIsEditing={toggleIsEditing} />
       ) : (
         <Button
           onClick={() => {
-            window.scrollTo(0, 0);
-            toggleIsEditing();
+            window.scrollTo(0, 0)
+            toggleIsEditing()
           }}
         >
           <FontAwesome style={styles.icon} name={"plus-circle"} />
-          ADD SONG
+          Add Song
         </Button>
       )}
     </div>
-  ) : (
-    <div />
-  );
+  )
+}
 
-NewSong.propTypes = {
-  isEditing: PropTypes.bool.isRequired,
-  toggleIsEditing: PropTypes.func.isRequired,
-  firebase: PropTypes.shape({
-    login: PropTypes.func.isRequired
-  }),
-  auth: PropTypes.object
-};
-
-export default NewSong;
+const styles = {
+  container: {
+    textAlign: "center",
+  },
+  icon: {
+    marginRight: "10px",
+  },
+}

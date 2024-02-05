@@ -1,8 +1,5 @@
 .App {
   min-height: 105vh;
   font-family: Roboto, SansSerif;
-  background: #1e1d22; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #1e1d22 0%, #28272d 100%);
-  background: -webkit-linear-gradient(-45deg, #1e1d22 0%, #28272d 100%);
   background: linear-gradient(135deg, #1e1d22 0%, #28272d 100%);
 }

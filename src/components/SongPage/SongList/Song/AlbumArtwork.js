@@ -1,20 +1,20 @@
-import React from "react";
+import React from "react"
 
 const AlbumArtwork = ({ albumArtwork }) => {
-  if (!albumArtwork) return <div style={styles.placeholder} />;
-  return <img style={styles.image} src={albumArtwork} alt={"albumArtwork"} />;
-};
+  if (!albumArtwork) return <div style={styles.placeholder} />
+  return <img style={styles.image} src={albumArtwork} alt={"albumArtwork"} />
+}
 
 const styles = {
   placeholder: {
     width: "25vw",
     height: "25vw",
-    backgroundColor: "gray"
+    backgroundColor: "gray",
   },
   image: {
-    width: "18vw",
-    maxWidth: "200px"
-  }
-};
+    width: "80px",
+    borderRadius: "10px",
+  },
+}
 
-export default AlbumArtwork;
+export default AlbumArtwork

@@ -1,74 +1,44 @@
-import React from "react";
-import { Provider as ReduxProvider } from "react-redux";
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import React from "react"
+import { AuthProvider, useFirebaseApp } from "reactfire"
+import { getAuth } from "firebase/auth"
 
-import "typeface-roboto";
-import "./App.css";
+import "fontsource-roboto/latin.css"
+import "./App.css"
 
-import { Router, Route } from "react-router-dom";
-import history from "util/history";
-import SongPage from "./components/SongPage";
-import Login from "./components/Login";
-import About from "./components/About/About";
-import Footer from "./components/Footer/Footer";
-import Shows from "./components/Shows";
-import Admin from "./components/Admin";
+import { Router, Route } from "react-router-dom"
+import history from "./util/history"
+import About from "./components/About/About"
+import Footer from "./components/Footer/Footer"
+import { ShowsPage } from "./components/Shows/ShowsPage"
+import { SongListPage } from "./components/SongPage/SongPage"
+import { AdminPage } from "./components/Admin/AdminPage"
 
-import createReduxStore from "store";
-import firebase from "firebase/app";
-import "firebase/app";
-
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  authDomain: "rg-music.firebaseapp.com",
-  databaseURL: "https://rg-music.firebaseio.com",
-  projectId: "rg-music",
-  storageBucket: "rg-music.appspot.com",
-  messagingSenderId: "390024634944",
-  preserveOnLogout: { data: ["songs"] },
-  preserveOnEmptyAuthChange: { data: ["songs"] }
-};
-
-const reactReduxFirebaseConfig = {
-  userProfile: "users",
-  attachAuthIsReady: true,
-  firebaseStateName: "firebase"
-};
-
-firebase.initializeApp(firebaseConfig);
-const store = createReduxStore();
-
-const reactReduxFirebaseProps = {
-  firebase,
-  config: reactReduxFirebaseConfig,
-  dispatch: store.dispatch
-};
-
-const App = () => (
-  <ReduxProvider store={store}>
-    <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
+const App = () => {
+  const firebaseApp = useFirebaseApp()
+  const auth = getAuth(firebaseApp)
+  return (
+    <AuthProvider sdk={auth}>
       <Router history={history}>
         <div className="App" style={responsiveStyles}>
-          <Route exact path="/" component={SongPage} />
-          <Route exact path="/shows" component={Shows} />
-          <Route path="/login" component={Login} />
-          <Route path="/admin" component={Admin} />
+          <Route exact path="/" component={SongListPage} />
           <Route path="/about" component={About} />
+          <Route exact path="/shows" component={ShowsPage} />
+          <Route path="/admin" component={AdminPage} />
           <Footer />
         </div>
       </Router>
-    </ReactReduxFirebaseProvider>
-  </ReduxProvider>
-);
+    </AuthProvider>
+  )
+}
 
 const styles = {
   app: {
-    marginLeft: "20vw",
-    marginRight: "20vw",
+    // marginLeft: "20vw",
+    // marginRight: "20vw",
     boxShadow: "0px 2px 19px 8px black"
   }
-};
+}
 
-const responsiveStyles = window.innerWidth > 700 ? styles.app : {};
+const responsiveStyles = window.innerWidth > 700 ? styles.app : {}
 
-export default App;
+export default App
