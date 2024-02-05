@@ -39,14 +39,12 @@ export const AdminFunctions = ({
 
 export const DeleteSong = ({ deleteSong }) => {
   return (
-    <div>
-      <FontAwesome
-        style={styles.resetButton}
-        onClick={deleteSong}
-        name={"trash"}
-        style={styles.icon}
-      />
-    </div>
+    <FontAwesome
+      style={styles.resetButton}
+      onClick={deleteSong}
+      name={"trash"}
+      style={styles.icon}
+    />
   )
 }
 

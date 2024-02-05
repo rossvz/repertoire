@@ -20,7 +20,7 @@ export const SongList = () => {
       <SearchContainer>
         <SearchInput
           onChange={e => setSearchFilter(e.target.value)}
-          placeholder="Search"
+          placeholder="Search songs by title, artist, or album..."
           value={searchFilter}
         />
       </SearchContainer>
@@ -61,5 +61,5 @@ const SearchInput = styled.input`
   color: white;
   border: 2px solid #b4cbea;
   padding: 2%;
-  border-radius: 100em;
+  width: 90%;
 `
