@@ -5,15 +5,6 @@ import { useSigninCheck } from "reactfire"
 import { NewSongForm } from "./NewSongForm"
 import Button from "../../common/Button"
 
-const styles = {
-  container: {
-    textAlign: "center"
-  },
-  icon: {
-    marginRight: "10px"
-  }
-}
-
 export const NewSong = () => {
   const [isEditing, setIsEditing] = useState(false)
   const { status, data } = useSigninCheck()
@@ -36,4 +27,13 @@ export const NewSong = () => {
       )}
     </div>
   )
+}
+
+const styles = {
+  container: {
+    textAlign: "center",
+  },
+  icon: {
+    marginRight: "10px",
+  },
 }

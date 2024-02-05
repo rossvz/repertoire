@@ -12,10 +12,11 @@ const INITIAL_SONG_STATE = {
   artistUrl: "",
   album: "",
   votes: 0,
-  visible: true
+  visible: true,
 }
 
 export const NewSongForm = ({ toggleIsEditing }) => {
+  const [searching, setSearching] = useState(false)
   const [titleQuery, setTitleQuery] = useState("")
   const [artistQuery, setArtistQuery] = useState("")
   const [results, setResults] = useState([])
@@ -25,13 +26,15 @@ export const NewSongForm = ({ toggleIsEditing }) => {
   const database = useDatabase()
   const songsRef = ref(database, "songs")
 
-  const searchSong = e => {
+  const searchSong = (e) => {
+    setSearching(true)
     e.preventDefault()
-    search({ title: titleQuery, artist: artistQuery }).then(results => {
+    search({ title: titleQuery, artist: artistQuery }).then((results) => {
       setResults(results.data.items)
       setTitleQuery("")
       setArtistQuery("")
       setResultIndex(0)
+      setSearching(false)
     })
   }
   const nextResult = () => {
@@ -60,79 +63,93 @@ export const NewSongForm = ({ toggleIsEditing }) => {
       albumArtwork: result.album.images[0].url,
       releaseDate: result.album.release_date,
       votes: 0,
-      visible: true
+      visible: true,
     })
   }, [results, resultIndex])
 
   return (
-    <div style={styles.newSongContainer}>
-      <div style={styles.closeButton}>
-        <Button onClick={toggleIsEditing}>X</Button>
-      </div>
-      <form onSubmit={searchSong} style={styles.formStyles}>
-        <input
-          style={styles.inputStyles}
-          type="text"
-          placeholder={"Title"}
-          onChange={e => setTitleQuery(e.target.value)}
-          value={titleQuery || newSong.title}
-        />
-        <input
-          style={styles.inputStyles}
-          type="text"
-          placeholder={"Artist (optional)"}
-          onChange={e => setArtistQuery(e.target.value)}
-          value={artistQuery || newSong.artist}
-        />
-        <input style={styles.inputStyles} value={newSong.album} />
-        <div style={styles.findButtonContainer}>
-          <Button type="submit">SEARCH</Button>
+    <div style={styles.backdrop}>
+      <div style={styles.newSongContainer}>
+        <div style={styles.closeButton}>
+          <Button onClick={toggleIsEditing}>X</Button>
         </div>
-      </form>
-      {results.length > 0 && (
-        <>
-          <div style={styles.results}>
-            <img
-              height="250px"
-              width="250px"
-              src={newSong.albumArtwork}
-              alt=""
-            />
-            <span style={styles.releaseDate}>
-              {moment(newSong.releaseDate).format("MMMM Do, YYYY")}
-            </span>
+        <form onSubmit={searchSong} style={styles.formStyles}>
+          <input
+            style={styles.inputStyles}
+            type="text"
+            placeholder={"Title"}
+            onChange={(e) => setTitleQuery(e.target.value)}
+            value={titleQuery || newSong.title}
+          />
+          <input
+            style={styles.inputStyles}
+            type="text"
+            placeholder={"Artist (optional)"}
+            onChange={(e) => setArtistQuery(e.target.value)}
+            value={artistQuery || newSong.artist}
+          />
+          <input style={styles.inputStyles} value={newSong.album} />
+          <div style={styles.findButtonContainer}>
+            <Button type="submit">SEARCH</Button>
           </div>
-          <div style={styles.buttonContainer}>
-            <Button type="button" onClick={previousResult}>
-              ←
-            </Button>
-            <Button onClick={saveSong}>Save</Button>
-            <Button type="button" onClick={nextResult}>
-              →
-            </Button>
-          </div>
-        </>
-      )}
+        </form>
+        {results.length > 0 && (
+          <>
+            <div style={styles.results}>
+              <img
+                height="250px"
+                width="250px"
+                src={newSong.albumArtwork}
+                alt=""
+              />
+              <span style={styles.releaseDate}>
+                {moment(newSong.releaseDate).format("MMMM Do, YYYY")}
+              </span>
+            </div>
+            <div style={styles.buttonContainer}>
+              <Button type="button" onClick={previousResult}>
+                ←
+              </Button>
+              <Button onClick={saveSong}>Save</Button>
+              <Button type="button" onClick={nextResult}>
+                →
+              </Button>
+            </div>
+          </>
+        )}
+        {searching && <div style={styles.searching}>Searching...</div>}
+      </div>
     </div>
   )
 }
 
 const styles = {
+  backdrop: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    background: "rgba(0, 0, 0, 0.8)",
+    zIndex: 1,
+  },
   newSongContainer: {
+    opacity: 1,
     border: "2px solid white",
     borderRadius: "5px",
     position: "absolute",
-    top: "30%",
+    top: "40%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     background: "black",
     zIndex: "2",
-    boxShadow: "rgba(0, 0, 0, 0.75) -1px 4px 20px 8px"
+    boxShadow: "rgba(0, 0, 0, 0.75) -1px 4px 20px 8px",
+    width: "95%",
   },
   formStyles: {
     display: "flex",
     flexFlow: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   inputStyles: {
     lineHeight: "1.8em",
@@ -142,41 +159,47 @@ const styles = {
     backgroundColor: "#3a3a3a",
     color: "#b3b3b3",
     margin: "1%",
-    width: "45vw"
+    width: "70vw",
   },
   addSongStyles: {
     fontSize: "1em",
     borderRadius: "100em",
     padding: "2%",
     background: "#f8f8f8",
-    color: "#333"
+    color: "#333",
   },
   results: {
     display: "flex",
     justifyContent: "space-evenly",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   releaseDate: {
-    color: "#b3b3b3"
+    color: "#b3b3b3",
   },
   disabled: {
-    opacity: 0.5
+    opacity: 0.5,
   },
   buttonContainer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   findButtonContainer: {
     display: "flex",
     flexFlow: "row nowrap",
     alignItems: "center",
     justifyContent: "space-evenly",
-    width: "85vw"
+    width: "85vw",
+    margin: "2%",
   },
   closeButton: {
     display: "flex",
-    justifyContent: "flex-end"
-  }
+    justifyContent: "flex-end",
+  },
+  searching: {
+    color: "white",
+    textAlign: "center",
+    fontSize: "2em",
+  },
 }
