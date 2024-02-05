@@ -93,31 +93,37 @@ export const NewSongForm = ({ toggleIsEditing }) => {
             <Button type="submit">SEARCH</Button>
           </div>
         </form>
-        {results.length > 0 && (
-          <>
-            <div style={styles.results}>
-              <img
-                height="250px"
-                width="250px"
-                src={newSong.albumArtwork}
-                alt=""
-              />
-              <span style={styles.releaseDate}>
-                {moment(newSong.releaseDate).format("MMMM Do, YYYY")}
-              </span>
-            </div>
-            <div style={styles.buttonContainer}>
-              <Button type="button" onClick={previousResult}>
-                ←
-              </Button>
-              <Button onClick={saveSong}>Save</Button>
-              <Button type="button" onClick={nextResult}>
-                →
-              </Button>
-            </div>
-          </>
-        )}
-        {searching && <div style={styles.searching}>Searching...</div>}
+        <div style={styles.results}>
+          <img
+            height="200px"
+            width="200px"
+            src={newSong.albumArtwork}
+            alt=""
+            class={results.length === 0 ? "hide" : ""}
+          />
+          <span
+            style={styles.releaseDate}
+            class={results.length === 0 ? "hide" : ""}
+          >
+            {moment(newSong.releaseDate).format("MMMM Do, YYYY")}
+          </span>
+        </div>
+        <div
+          style={styles.buttonContainer}
+          class={results.length === 0 ? "hide" : ""}
+        >
+          <Button type="button" onClick={previousResult}>
+            ←
+          </Button>
+          <Button onClick={saveSong}>Save</Button>
+          <Button type="button" onClick={nextResult}>
+            →
+          </Button>
+        </div>
+
+        <div class={!searching && "hide"} style={styles.searching}>
+          Searching...
+        </div>
       </div>
     </div>
   )
@@ -138,7 +144,7 @@ const styles = {
     border: "2px solid white",
     borderRadius: "5px",
     position: "absolute",
-    top: "40%",
+    top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     background: "black",

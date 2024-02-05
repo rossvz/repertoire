@@ -10,7 +10,7 @@ const Song = ({ song, signedIn }) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
 
-  const changeVote = value => {
+  const changeVote = (value) => {
     const votes = song.votes < 0 || value === "reset" ? 0 : song.votes + value
     update(songRef, { votes })
     toggleVoteInStorage(song.id)
@@ -50,31 +50,33 @@ const Song = ({ song, signedIn }) => {
   )
 }
 
-const setStyles = song =>
+const setStyles = (song) =>
   song.visible ? styles.songStyles : styles.invisibleSongStyles
 
 const styles = {
   songStyles: {
     width: "100%",
-    margin: "2% 5%",
+    margin: "10px 20px",
     backgroundSize: "cover",
-    paddingTop: "2%",
+    paddingTop: "10px",
     borderTop: "2px solid rgb(84 78 88 / 47%)",
-    color: "#fff"
+    color: "#fff",
   },
   invisibleSongStyles: {
     opacity: 0.4,
     width: "100%",
-    margin: "2% 20%",
+    margin: "10px 20px",
     backgroundSize: "cover",
-    color: "#fff"
+    paddingTop: "10px",
+    borderTop: "2px solid rgb(84 78 88 / 47%)",
+    color: "#fff",
   },
   columnStyles: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    flex: 1
+    flex: 1,
   },
   actionStyles: {
     display: "flex",
@@ -83,12 +85,12 @@ const styles = {
     justifyContent: "center",
     flex: 1,
     opacity: 0.5,
-    color: "#fff"
+    color: "#fff",
   },
   songInfoStyles: {
-    padding: "0 5%",
+    padding: "0 20px",
     flex: 3,
-    color: "#fff"
+    color: "#fff",
   },
 
   title: {
@@ -96,7 +98,7 @@ const styles = {
     fontSize: "1.2em",
     letterSpacing: "0.1em",
     textAlign: "center",
-    marginBottom: "10px"
+    marginBottom: "10px",
     // textTransform: 'uppercase'
   },
   artist: {
@@ -105,21 +107,21 @@ const styles = {
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
-    padding: "5% 0"
+    padding: "20px 0",
   },
   album: {
     fontStyle: "italic",
     // fontSize: "smaller",
-    opacity: 0.7
+    opacity: 0.7,
   },
   genres: {
     fontSize: "smaller",
     opacity: 0.5,
-    marginTop: "2em "
+    marginTop: "2em ",
   },
   row: {
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 }
 
 export default Song

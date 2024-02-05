@@ -18,13 +18,13 @@ export const SongList = () => {
     <>
       <SearchContainer>
         <SearchInput
-          onChange={e => setSearchFilter(e.target.value)}
+          onChange={(e) => setSearchFilter(e.target.value)}
           placeholder="Search songs by title, artist, or album..."
           value={searchFilter}
         />
       </SearchContainer>
       <div style={styles.songListStyles}>
-        {songs.map(song => (
+        {songs.map((song) => (
           <Song key={song.id} song={song} signedIn={user.signedIn} />
         ))}
       </div>
@@ -39,9 +39,9 @@ const styles = {
     flexFlow: "column",
     alignItems: "center",
     justifyContent: "center",
-    padding: "3%",
-    paddingBottom: "15%"
-  }
+    padding: "20px",
+    paddingBottom: "15%",
+  },
 }
 
 const SearchContainer = styled.div`
@@ -59,6 +59,6 @@ const SearchInput = styled.input`
   background-color: #161519;
   color: white;
   border: 2px solid #b4cbea;
-  padding: 2%;
+  padding: 20px;
   width: 90%;
 `
