@@ -1,24 +1,7 @@
 import React from "react"
 import FontAwesome from "react-fontawesome"
 import styled from "styled-components"
-
-const Container = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  color: #fc1f49;
-  opacity: 1;
-  font-size: 1em;
-  font-weight: bold;
-  width: 25%;
-`
-const styles = {
-  icon: {
-    cursor: "pointer",
-  },
-}
+import { min } from "ramda"
 
 export const AdminFunctions = ({
   song,
@@ -37,20 +20,45 @@ export const AdminFunctions = ({
 
 export const DeleteSong = ({ deleteSong }) => {
   return (
-    <div onClick={deleteSong}>
+    <div onClick={deleteSong} style={styles.clickable}>
       <FontAwesome name={"trash"} style={styles.icon} />
     </div>
   )
 }
 
 const ResetVotes = ({ resetVotes }) => (
-  <div onClick={resetVotes}>
+  <div onClick={resetVotes} style={styles.clickable}>
     <FontAwesome name={"undo"} style={styles.icon} />
   </div>
 )
 
 const Visibility = ({ visible = true, toggleVisible }) => (
-  <div onClick={toggleVisible}>
+  <div onClick={toggleVisible} style={styles.clickable}>
     <FontAwesome name={visible ? "eye-slash" : "eye"} style={styles.icon} />
   </div>
 )
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #fc1f49;
+  opacity: 1;
+  font-size: 1em;
+  font-weight: bold;
+`
+const styles = {
+  clickable: {
+    cursor: "pointer",
+    borderRadius: "5%",
+    flex: 1,
+    background: "",
+    width: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "30px",
+    marginTop: "5px",
+  },
+}
