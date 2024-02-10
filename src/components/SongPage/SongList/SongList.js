@@ -72,11 +72,11 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   text-align: left;
-  font-size: 1.2em;
+  font-size: 1.3em;
   background-color: #161519;
   color: white;
   border: none;
-  borderbottom: 2px solid #b4cbea;
-  padding: 10px;
+  border-bottom: 2px solid #b4cbea;
+  padding: 5px;
   width: 75%;
 `
