@@ -10,6 +10,7 @@ export const SongList = () => {
   const { status: authStatus, data: user } = useSigninCheck()
   const [searchFilter, setSearchFilter] = useState("")
   const { status: songStatus, songs } = useSongs(searchFilter)
+  const [edittingSong, setEdittingSong] = useState(null)
 
   if (authStatus === "loading" || songStatus === "loading") {
     return <div>Loading...</div>
@@ -42,7 +43,13 @@ export const SongList = () => {
       </SearchContainer>
       <div style={styles.songListStyles}>
         {songs.map((song) => (
-          <Song key={song.id} song={song} signedIn={user.signedIn} />
+          <Song
+            editting={edittingSong === song.id}
+            setEdittingSong={setEdittingSong}
+            key={song.id}
+            song={song}
+            signedIn={user.signedIn}
+          />
         ))}
       </div>
     </>

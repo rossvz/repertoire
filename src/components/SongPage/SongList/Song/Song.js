@@ -6,11 +6,9 @@ import { isUpvoted } from "../../../../util/votes"
 import { toggleVoteInStorage } from "../../../../util/votes"
 import { ref, remove, update } from "firebase/database"
 import { useDatabase } from "reactfire"
-const Song = ({ song, signedIn }) => {
+const Song = ({ song, signedIn, editting, setEdittingSong }) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
-
-  const [editting, setEditting] = useState(false)
 
   const changeVote = (value) => {
     const votes = song.votes < 0 || value === "reset" ? 0 : song.votes + value
@@ -32,7 +30,10 @@ const Song = ({ song, signedIn }) => {
         <AlbumArtwork albumArtwork={song.albumArtwork} />
         <div
           style={styles.songInfoStyles}
-          onClick={() => setEditting(!editting)}
+          onClick={() => {
+            if (editting) setEdittingSong(null)
+            else setEdittingSong(song.id)
+          }}
         >
           <div style={styles.title}>{song.title}</div>
 
