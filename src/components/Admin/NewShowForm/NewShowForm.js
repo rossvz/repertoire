@@ -20,20 +20,16 @@ export const NewShowWrapper = () => {
     const newShowRef = push(showsRef)
     set(newShowRef, newShow)
   }
-  return (
-    <div style={styles.container}>
-      {editingNewShow ? (
-        <NewShowForm
-          saveShow={saveShow}
-          toggleEditingNewShow={() => setEditingNewShow(false)}
-        />
-      ) : (
-        <Button onClick={() => setEditingNewShow(true)}>
-          <FontAwesome style={styles.icon} name={"plus-circle"} />
-          Show
-        </Button>
-      )}
-    </div>
+  return editingNewShow ? (
+    <NewShowForm
+      saveShow={saveShow}
+      toggleEditingNewShow={() => setEditingNewShow(false)}
+    />
+  ) : (
+    <Button onClick={() => setEditingNewShow(true)}>
+      <FontAwesome style={styles.icon} name={"plus-circle"} />
+      Show
+    </Button>
   )
 }
 
@@ -90,7 +86,7 @@ export class NewShowForm extends Component {
     }
 
     return (
-      <div style={styles.container}>
+      <div style={styles.backdrop}>
         <div style={styles.container}>
           <form onSubmit={this.saveShow.bind(this)} style={styles.formStyles}>
             <input
@@ -135,7 +131,19 @@ export class NewShowForm extends Component {
 }
 
 const styles = {
+  backdrop: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    background: "rgba(0, 0, 0, 0.8)",
+    zIndex: 1,
+  },
   container: {
+    position: "absolute",
+    top: "25%",
+    left: "5%",
     display: "flex",
     flexFlow: "column",
     alignItems: "center",
