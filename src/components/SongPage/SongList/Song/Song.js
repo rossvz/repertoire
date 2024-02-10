@@ -42,7 +42,7 @@ const Song = ({ song, signedIn, editting, setEdittingSong }) => {
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
-          <p style={styles.voteCount}>{song.votes}</p>
+          {song.votes > 0 && <p style={styles.voteCount}>{song.votes}</p>}
         </div>
       </div>
       {signedIn && editting ? (
