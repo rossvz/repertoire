@@ -3,25 +3,36 @@ import styled from "styled-components"
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 8vh;
+  height: 50px;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  // box-shadow: 0 0px 10px black;
-  font-size: 1.5em;
   color: #b4cbea;
   font-weight: bold;
+  padding: 0 0px;
 `
 
 const Title = styled.div`
-  font-size: 1.4em;
+  font-size: 18px;
+  text-align: center;
 `
 
-export const Header = ({ title }) => {
+export const Header = (props) => {
+  const title = props.title || "Randy Godwin Music"
+  const left = props.left || null
+  const right = props.right || <div></div>
   return (
     <HeaderContainer>
-      <Title>{title}</Title>
+      <Section>{left}</Section>
+      <Section>
+        <Title>{title}</Title>
+      </Section>
+      <Section>{right}</Section>
     </HeaderContainer>
   )
 }
+
+const Section = styled.div`
+  flex: 1;
+`

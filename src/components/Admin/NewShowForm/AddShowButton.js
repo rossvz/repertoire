@@ -6,15 +6,15 @@ const AddShowButton = ({ toggleEditingNewShow }) => {
   return (
     <Button onClick={toggleEditingNewShow}>
       <FontAwesome style={styles.icon} name={"plus-circle"} />
-      ADD SHOW
+      Show
     </Button>
   )
 }
 
 const styles = {
   icon: {
-    marginRight: "10px"
-  }
+    marginRight: "10px",
+  },
 }
 
 export default AddShowButton

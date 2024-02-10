@@ -52,6 +52,11 @@ export const NewSongForm = ({ toggleIsEditing }) => {
     toggleIsEditing()
   }
 
+  const resetSearch = () => {
+    setResults([])
+    setNewSong(INITIAL_SONG_STATE)
+  }
+
   useEffect(() => {
     const result = results[resultIndex]
     if (!result) return
@@ -78,7 +83,10 @@ export const NewSongForm = ({ toggleIsEditing }) => {
             style={styles.inputStyles}
             type="text"
             placeholder={"Title"}
-            onChange={(e) => setTitleQuery(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value === "") resetSearch()
+              setTitleQuery(e.target.value)
+            }}
             value={titleQuery || newSong.title}
           />
           <input
@@ -88,9 +96,18 @@ export const NewSongForm = ({ toggleIsEditing }) => {
             onChange={(e) => setArtistQuery(e.target.value)}
             value={artistQuery || newSong.artist}
           />
-          <input style={styles.inputStyles} value={newSong.album} />
+          <input
+            style={styles.inputStyles}
+            value={newSong.album}
+            onChange={(e) => {
+              setNewSong({ ...newSong, album: e.target.value })
+            }}
+          />
           <div style={styles.findButtonContainer}>
-            <Button type="submit">SEARCH</Button>
+            <Button type="button" onClick={resetSearch}>
+              Clear
+            </Button>
+            <Button type="submit">Search</Button>
           </div>
         </form>
         <div style={styles.results}>

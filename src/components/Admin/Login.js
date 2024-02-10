@@ -10,29 +10,29 @@ export const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault()
     const credentials = {
       email,
-      password
+      password,
     }
     signInWithEmailAndPassword(auth, credentials.email, credentials.password)
-      .then(res => localStorage.setItem("uid", res.user.uid))
-      .catch(err => console.error(err))
+      .then((res) => localStorage.setItem("uid", res.user.uid))
+      .catch((err) => console.error(err))
   }
   return (
-    <Container style={limitWidth()}>
-      <Form onSubmit={e => onSubmit(e)} autoComplete={"off"}>
+    <Container>
+      <Form onSubmit={(e) => onSubmit(e)} autoComplete={"off"}>
         <Input
           type="email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="user@gmail.com"
         />
         <Input
           type="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="********"
         />
         <Button type="submit">Submit</Button>
@@ -47,6 +47,7 @@ const Container = styled.div`
   height: 100vh;
   position: absolute;
   background-size: cover;
+  width: 100%;
 `
 
 const Form = styled.form`
@@ -68,4 +69,4 @@ const Input = styled.input`
   opacity: 0.6;
 `
 
-const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" })
+// const limitWidth = () => ({ width: window.innerWidth > 700 ? "59%" : "100%" })

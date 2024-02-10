@@ -1,24 +1,21 @@
 import React from "react"
-import styled from "styled-components"
 import FontAwesome from "react-fontawesome"
+import styled from "styled-components"
 
 const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  margin-top: 5%;
+  margin-top: 10px;
   color: #fc1f49;
   opacity: 1;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
-  width: 100%;
+  width: 25%;
 `
 const styles = {
   icon: {
-    marginRight: "10px",
-  },
-  resetButton: {
     cursor: "pointer",
   },
 }
@@ -41,27 +38,19 @@ export const AdminFunctions = ({
 export const DeleteSong = ({ deleteSong }) => {
   return (
     <div onClick={deleteSong}>
-      <FontAwesome
-        style={styles.resetButton}
-        name={"trash"}
-        style={styles.icon}
-      />
+      <FontAwesome name={"trash"} style={styles.icon} />
     </div>
   )
 }
 
 const ResetVotes = ({ resetVotes }) => (
   <div onClick={resetVotes}>
-    <FontAwesome style={styles.resetButton} name={"undo"} style={styles.icon} />
+    <FontAwesome name={"undo"} style={styles.icon} />
   </div>
 )
 
 const Visibility = ({ visible = true, toggleVisible }) => (
   <div onClick={toggleVisible}>
-    <FontAwesome
-      style={styles.resetButton}
-      name={visible ? "eye-slash" : "eye"}
-      style={styles.icon}
-    />
+    <FontAwesome name={visible ? "eye-slash" : "eye"} style={styles.icon} />
   </div>
 )

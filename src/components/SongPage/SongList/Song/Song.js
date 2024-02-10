@@ -36,7 +36,7 @@ const Song = ({ song, signedIn }) => {
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
-          {/* <p style={styles.voteCount}>{song.votes}</p> */}
+          <p style={styles.voteCount}>{song.votes}</p>
         </div>
       </div>
       {signedIn ? (

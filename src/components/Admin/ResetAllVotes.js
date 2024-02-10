@@ -1,16 +1,10 @@
 import React from "react"
 import { useSigninCheck } from "reactfire"
+import FontAwesome from "react-fontawesome"
 
 import Button from "../common/Button"
 import { useSongs } from "../SongPage/SongList/useSongs"
 import { useResetAllVotes } from "./useResetAllVotes"
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center"
-  }
-}
 
 export const ResetAllVotes = () => {
   const { songs } = useSongs()
@@ -22,9 +16,22 @@ export const ResetAllVotes = () => {
   }
   return (
     <div style={styles.container}>
-      <Button onClick={() => resetAllVotes(songs)}>Reset All Votes</Button>
+      <Button onClick={() => resetAllVotes(songs)}>
+        <FontAwesome style={styles.icon} name={"undo"} />
+        Votes
+      </Button>
     </div>
   )
 }
 
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    fontSize: "14px",
+  },
+  icon: {
+    marginRight: "10px",
+  },
+}
 export default ResetAllVotes

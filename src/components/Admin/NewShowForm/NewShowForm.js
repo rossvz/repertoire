@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng
+  getLatLng,
 } from "react-places-autocomplete"
 import FontAwesome from "react-fontawesome"
 import { ref, set, push } from "firebase/database"
@@ -16,7 +16,7 @@ export const NewShowWrapper = () => {
   const showsRef = ref(database, "shows")
   const [editingNewShow, setEditingNewShow] = React.useState(false)
 
-  const saveShow = newShow => {
+  const saveShow = (newShow) => {
     const newShowRef = push(showsRef)
     set(newShowRef, newShow)
   }
@@ -30,7 +30,7 @@ export const NewShowWrapper = () => {
       ) : (
         <Button onClick={() => setEditingNewShow(true)}>
           <FontAwesome style={styles.icon} name={"plus-circle"} />
-          ADD SHOW
+          Show
         </Button>
       )}
     </div>
@@ -48,11 +48,11 @@ export class NewShowForm extends Component {
     e.preventDefault()
     const { date, venue, time } = this.state
     geocodeByAddress(this.state.venue)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => {
         this.props.saveShow({ date, venue, time, latLng })
       })
-      .catch(error => console.error("Error", error))
+      .catch((error) => console.error("Error", error))
     this.setState(INITIAL_STATE)
   }
 
@@ -74,7 +74,7 @@ export class NewShowForm extends Component {
     const inputProps = {
       value: this.state.venue,
       onChange: this.onAutocompleteChange.bind(this),
-      placeholder: "Search Places..."
+      placeholder: "Search Places...",
     }
 
     const AutocompleteItem = ({ formattedSuggestion }) => (
@@ -86,7 +86,7 @@ export class NewShowForm extends Component {
     )
 
     const options = {
-      types: ["establishment"]
+      types: ["establishment"],
     }
 
     return (
@@ -139,13 +139,14 @@ const styles = {
     display: "flex",
     flexFlow: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
+  icon: { marginRight: "10px" },
   formStyles: {
     display: "flex",
     flexFlow: "column",
     alignItems: "center",
-    padding: "5%"
+    padding: "5%",
   },
   inputStyles: {
     lineHeight: "1.8em",
@@ -154,7 +155,7 @@ const styles = {
     border: "none",
     backgroundColor: "#f8f8f8",
     margin: "1%",
-    width: "90vw"
+    width: "90vw",
   },
   autocompleteStyles: {
     input: {
@@ -163,21 +164,21 @@ const styles = {
       border: "none",
       backgroundColor: "#f8f8f8",
       width: "90vw",
-      padding: "10px 0"
-    }
+      padding: "10px 0",
+    },
   },
   results: {
     display: "flex",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   disabled: {
-    opacity: 0.5
+    opacity: 0.5,
   },
   buttonContainer: {
     display: "flex",
     width: "100%",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   cancelButton: {
     backgroundColor: "#19181c",
@@ -185,7 +186,7 @@ const styles = {
     fontSize: "1em",
     border: "none",
     padding: "2%",
-    flex: "1"
+    flex: "1",
   },
   saveShowButton: {
     backgroundColor: "white",
@@ -193,6 +194,6 @@ const styles = {
     fontSize: "1em",
     border: "none",
     padding: "2%",
-    flex: "1"
-  }
+    flex: "1",
+  },
 }

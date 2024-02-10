@@ -22,7 +22,7 @@ export const NewSong = () => {
           }}
         >
           <FontAwesome style={styles.icon} name={"plus-circle"} />
-          Add Song
+          Song
         </Button>
       )}
     </div>
@@ -32,6 +32,7 @@ export const NewSong = () => {
 const styles = {
   container: {
     textAlign: "center",
+    fontSize: "14px",
   },
   icon: {
     marginRight: "10px",
