@@ -18,7 +18,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^5.0.1",
     "reactfire": "^4.2.3",
-    "styled-components": "^4.4.0",
+    "styled-components": "^5.0.0",
     "unsplash-js": "^7.0.19"
   },
   "scripts": {
