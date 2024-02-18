@@ -32,7 +32,7 @@ export const NewSong = () => {
 const styles = {
   container: {
     textAlign: "center",
-    fontSize: "14px",
+    // fontSize: "14px",
   },
   icon: {
     marginRight: "10px",

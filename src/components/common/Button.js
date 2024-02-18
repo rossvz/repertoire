@@ -9,6 +9,7 @@ const styles = {
     maxHeight: "3em",
     minWidth: "3em",
     border: "0",
+    fontSize: "16px",
   },
 }
 

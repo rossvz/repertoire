@@ -28,7 +28,7 @@ const styles = {
   container: {
     display: "flex",
     justifyContent: "center",
-    fontSize: "14px",
+    // fontSize: "14px",
   },
   icon: {
     marginRight: "10px",

@@ -175,8 +175,8 @@ const styles = {
     alignItems: "center",
   },
   inputStyles: {
-    lineHeight: "1.8em",
-    fontSize: "1.5em",
+    lineHeight: "1.4em",
+    fontSize: "1.2em",
     textAlign: "center",
     border: "none",
     backgroundColor: "#3a3a3a",
