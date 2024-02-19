@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Upvote from "./Upvote"
 import AlbumArtwork from "./AlbumArtwork"
 import { AdminFunctions } from "./AdminFunctions"
@@ -6,7 +6,7 @@ import { isUpvoted } from "../../../../util/votes"
 import { toggleVoteInStorage } from "../../../../util/votes"
 import { ref, remove, update } from "firebase/database"
 import { useDatabase } from "reactfire"
-const Song = ({ song, signedIn }) => {
+const Song = ({ song, signedIn, editting, setEdittingSong }) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
 
@@ -28,7 +28,13 @@ const Song = ({ song, signedIn }) => {
     <div style={setStyles(song)}>
       <div style={styles.columnStyles}>
         <AlbumArtwork albumArtwork={song.albumArtwork} />
-        <div style={styles.songInfoStyles}>
+        <div
+          style={styles.songInfoStyles}
+          onClick={() => {
+            if (editting) setEdittingSong(null)
+            else setEdittingSong(song.id)
+          }}
+        >
           <div style={styles.title}>{song.title}</div>
 
           <div style={styles.artist}>{song.artist}</div>
@@ -36,10 +42,10 @@ const Song = ({ song, signedIn }) => {
         </div>
         <div style={styles.actionStyles}>
           <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
-          {/* <p style={styles.voteCount}>{song.votes}</p> */}
+          {song.votes > 0 && <p style={styles.voteCount}>{song.votes}</p>}
         </div>
       </div>
-      {signedIn ? (
+      {signedIn && editting ? (
         <AdminFunctions
           song={song}
           changeVote={changeVote}
@@ -52,7 +58,9 @@ const Song = ({ song, signedIn }) => {
 }
 
 const setStyles = (song) =>
-  song.visible ? styles.songStyles : styles.invisibleSongStyles
+  song.visible
+    ? styles.songStyles
+    : { ...styles.songStyles, ...styles.invisibleSongStyles }
 
 const styles = {
   songStyles: {
@@ -62,15 +70,11 @@ const styles = {
     paddingTop: "10px",
     borderTop: "2px solid rgb(84 78 88 / 47%)",
     color: "#fff",
+    display: "flex",
+    flexDirection: "column",
   },
   invisibleSongStyles: {
     opacity: 0.4,
-    width: "100%",
-    margin: "10px 20px",
-    backgroundSize: "cover",
-    paddingTop: "10px",
-    borderTop: "2px solid rgb(84 78 88 / 47%)",
-    color: "#fff",
   },
   columnStyles: {
     display: "flex",
@@ -104,7 +108,6 @@ const styles = {
     fontWeight: "bold",
     fontSize: "1.2em",
     letterSpacing: "0.1em",
-    // textAlign: "center",
     marginBottom: "10px",
   },
   artist: {
@@ -113,11 +116,9 @@ const styles = {
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
-    // padding: "1em 0",
   },
   album: {
     fontStyle: "italic",
-    // fontSize: "smaller",
     opacity: 0.7,
   },
   genres: {

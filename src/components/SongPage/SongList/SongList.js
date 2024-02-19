@@ -4,12 +4,14 @@ import { useSigninCheck } from "reactfire"
 
 import Song from "./Song/Song"
 import { useSongs } from "./useSongs"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons"
 
 export const SongList = () => {
   const { status: authStatus, data: user } = useSigninCheck()
   const [searchFilter, setSearchFilter] = useState("")
   const { status: songStatus, songs } = useSongs(searchFilter)
+  const [edittingSong, setEdittingSong] = useState(null)
 
   if (authStatus === "loading" || songStatus === "loading") {
     return <div>Loading...</div>
@@ -24,12 +26,12 @@ export const SongList = () => {
       <SearchContainer>
         <SearchInput
           onChange={(e) => setSearchFilter(e.target.value)}
-          placeholder="Search title or artist"
+          placeholder="Search title, artist, album"
           value={searchFilter}
         />
         <div onClick={resetSearch}>
-          <FontAwesome
-            name="times-circle"
+          <FontAwesomeIcon
+            icon={faTimesCircle}
             style={{
               color: "white",
               fontSize: "1.8em",
@@ -42,7 +44,13 @@ export const SongList = () => {
       </SearchContainer>
       <div style={styles.songListStyles}>
         {songs.map((song) => (
-          <Song key={song.id} song={song} signedIn={user.signedIn} />
+          <Song
+            editting={edittingSong === song.id}
+            setEdittingSong={setEdittingSong}
+            key={song.id}
+            song={song}
+            signedIn={user.signedIn}
+          />
         ))}
       </div>
     </>
@@ -62,10 +70,10 @@ const styles = {
 }
 
 const SearchContainer = styled.div`
-  margin: 2% 0;
+  margin: 1% 0;
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-direction: row;
 `
@@ -76,7 +84,7 @@ const SearchInput = styled.input`
   background-color: #161519;
   color: white;
   border: none;
-  borderbottom: 2px solid #b4cbea;
-  padding: 20px;
-  width: 85%;
+  border-bottom: 2px solid #b4cbea;
+  padding: 5px;
+  width: 75%;
 `

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { useSigninCheck } from "reactfire"
 
 import { NewSongForm } from "./NewSongForm"
@@ -21,8 +22,8 @@ export const NewSong = () => {
             toggleIsEditing()
           }}
         >
-          <FontAwesome style={styles.icon} name={"plus-circle"} />
-          Add Song
+          <FontAwesomeIcon style={styles.icon} icon={faPlusCircle} />
+          Song
         </Button>
       )}
     </div>
@@ -32,6 +33,7 @@ export const NewSong = () => {
 const styles = {
   container: {
     textAlign: "center",
+    // fontSize: "14px",
   },
   icon: {
     marginRight: "10px",

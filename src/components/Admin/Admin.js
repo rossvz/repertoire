@@ -19,16 +19,21 @@ export const Admin = ({ user }) => {
   }, [auth])
   return (
     <div>
-      <Header title={"Settings"} />
-      <div>
+      <Header title={"Settings"} right={<LogoutButton logout={logout} />} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Heading>Shows</Heading>
         <NewShowWrapper />
-        <br />
         <Heading>Songs</Heading>
-        {/* <NewSong /> */}
+
         <ResetAllVotes />
       </div>
-      <LogoutButton logout={logout} />
     </div>
   )
 }

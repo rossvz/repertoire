@@ -1,9 +1,10 @@
 import Button from "../common/Button"
-import FontAwesome from "react-fontawesome"
 import React from "react"
 import { useDeleteShow } from "./useDeleteShow"
 
 import { useSigninCheck } from "reactfire"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 export const DeleteShow = ({ show }) => {
   const deleteShow = useDeleteShow(show)
 
@@ -13,7 +14,7 @@ export const DeleteShow = ({ show }) => {
   return (
     <div style={styles.deleteShow}>
       <Button onClick={deleteShow}>
-        <FontAwesome name={"trash"} />
+        <FontAwesomeIcon icon={faTrash} />
       </Button>
     </div>
   )
@@ -21,6 +22,6 @@ export const DeleteShow = ({ show }) => {
 
 const styles = {
   deleteShow: {
-    maxWidth: "20%"
-  }
+    maxWidth: "20%",
+  },
 }

@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { FirebaseAppProvider } from "reactfire"
 import "./index.css"
 
@@ -13,11 +13,13 @@ const firebaseConfig = {
   appId: "390024634944",
   messagingSenderId: "390024634944",
   preserveOnLogout: { data: ["songs"] },
-  preserveOnEmptyAuthChange: { data: ["songs"] }
+  preserveOnEmptyAuthChange: { data: ["songs"] },
 }
-ReactDOM.render(
+
+const container = document.getElementById("root")
+const root = createRoot(container)
+root.render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>
     <App />
   </FirebaseAppProvider>,
-  document.getElementById("root")
 )

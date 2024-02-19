@@ -1,27 +1,13 @@
 import React from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faTrash,
+  faUndo,
+  faEyeSlash,
+  faEye,
+} from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components"
-import FontAwesome from "react-fontawesome"
-
-const Container = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5%;
-  color: #fc1f49;
-  opacity: 1;
-  font-size: 1.2em;
-  font-weight: bold;
-  width: 100%;
-`
-const styles = {
-  icon: {
-    marginRight: "10px",
-  },
-  resetButton: {
-    cursor: "pointer",
-  },
-}
+import { min } from "ramda"
 
 export const AdminFunctions = ({
   song,
@@ -40,28 +26,45 @@ export const AdminFunctions = ({
 
 export const DeleteSong = ({ deleteSong }) => {
   return (
-    <div onClick={deleteSong}>
-      <FontAwesome
-        style={styles.resetButton}
-        name={"trash"}
-        style={styles.icon}
-      />
+    <div onClick={deleteSong} style={styles.clickable}>
+      <FontAwesomeIcon icon={faTrash} style={styles.icon} />
     </div>
   )
 }
 
 const ResetVotes = ({ resetVotes }) => (
-  <div onClick={resetVotes}>
-    <FontAwesome style={styles.resetButton} name={"undo"} style={styles.icon} />
+  <div onClick={resetVotes} style={styles.clickable}>
+    <FontAwesomeIcon icon={faUndo} style={styles.icon} />
   </div>
 )
 
 const Visibility = ({ visible = true, toggleVisible }) => (
-  <div onClick={toggleVisible}>
-    <FontAwesome
-      style={styles.resetButton}
-      name={visible ? "eye-slash" : "eye"}
-      style={styles.icon}
-    />
+  <div onClick={toggleVisible} style={styles.clickable}>
+    <FontAwesomeIcon icon={visible ? faEyeSlash : faEye} style={styles.icon} />
   </div>
 )
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #fc1f49;
+  opacity: 1;
+  font-size: 1em;
+  font-weight: bold;
+`
+const styles = {
+  clickable: {
+    cursor: "pointer",
+    borderRadius: "5%",
+    flex: 1,
+    background: "",
+    width: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "30px",
+    marginTop: "5px",
+  },
+}
