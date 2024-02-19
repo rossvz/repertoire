@@ -3,8 +3,8 @@ import React from "react"
 import { AuthProvider, useFirebaseApp } from "reactfire"
 import { BrowserRouter, Route, Routes, Switch } from "react-router-dom"
 
-import "fontsource-roboto/latin.css"
 import "./App.css"
+import "@fontsource/roboto"
 
 import About from "./components/About/About"
 import { AdminPage } from "./components/Admin/AdminPage"
