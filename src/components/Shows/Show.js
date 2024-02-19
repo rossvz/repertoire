@@ -12,15 +12,14 @@ export const Show = ({ show }) => (
     <div style={styles.content}>
       <div style={styles.info}>
         <FontAwesomeIcon icon={faMap} />
-        <span style={{ marginLeft: "10px" }}>{show.venue}</span>
+        <a href={show._location} target="_blank" style={{ marginLeft: "10px" }}>
+          {show.venue}
+        </a>
       </div>
       <div style={styles.info}>
         <FontAwesomeIcon icon={faClock} />
         <span style={{ marginLeft: "10px" }}>{show.time}</span>
       </div>
-      <a style={styles.location} href={show._location} target={"_blank"}>
-        Get Directions
-      </a>
     </div>
   </div>
 )
@@ -39,8 +38,6 @@ const styles = {
     display: "flex",
     padding: "5px",
   },
-
-  location: {},
   header: {
     display: "flex",
     justifyContent: "space-between",

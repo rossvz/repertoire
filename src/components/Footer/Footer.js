@@ -13,7 +13,6 @@ const Footer = () => {
   const [isScrolling, setIsScrolling] = useState(false)
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY)
       return setIsScrolling(window.scrollY > 50)
     }
     window.addEventListener("scroll", handleScroll)

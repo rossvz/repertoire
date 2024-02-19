@@ -5,7 +5,6 @@ const compareDate = comparator((a, b) => new Date(a.date) < new Date(b.date))
 export const sortByDate = sort(compareDate)
 
 const setMomentDate = (show) => {
-  console.log(show.date)
   show._date = moment(show.date).format("dddd, MMMM Do")
   return show
 }
@@ -18,7 +17,6 @@ const setGooglePlaces = (show) => {
 }
 
 const formatVenueName = (show) => {
-  console.log(show.venue)
   const parts = show.venue.split(",")
   show.venue = `${parts[0]}, ${parts[2]}`
   return show
@@ -31,8 +29,4 @@ const futureShows = (show) => {
 }
 
 export const formatShows = (shows) =>
-  shows
-    .map(setMomentDate)
-    .map(setGooglePlaces)
-    .map(formatVenueName)
-    .filter(futureShows)
+  shows.map(setMomentDate).map(setGooglePlaces).filter(futureShows)
