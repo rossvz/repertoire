@@ -134,7 +134,10 @@ export class NewShowForm extends Component {
                         ? { backgroundColor: "#f8f8f8", color: "#3a3a3a" }
                         : {}
                       return (
-                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                        <div
+                          key={suggestion.description}
+                          {...getSuggestionItemProps(suggestion, { style })}
+                        >
                           <AutocompleteItem
                             formattedSuggestion={suggestion.formattedSuggestion}
                           />
