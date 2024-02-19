@@ -1,5 +1,15 @@
 {
   "rules": {
+    "songs": {
+      ".indexOn": [
+        "votes"
+      ]
+    },
+    "shows": {
+      ".indexOn": [
+        "date"
+      ]
+    },
     ".read": true,
     ".write": true
   }
