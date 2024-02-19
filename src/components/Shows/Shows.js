@@ -4,6 +4,7 @@ import { Header } from "../Header"
 import { Show } from "./Show"
 import { useShows } from "./useShows"
 import { NewShowWrapper } from "../Admin/NewShowForm/NewShowForm"
+
 export const Shows = () => {
   const { status, shows } = useShows()
 

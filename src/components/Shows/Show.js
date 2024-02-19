@@ -1,6 +1,7 @@
 import React from "react"
 import { DeleteShow } from "./DeleteShow"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock, faMap } from "@fortawesome/free-solid-svg-icons"
 
 export const Show = ({ show }) => (
   <div style={styles.card}>
@@ -10,11 +11,11 @@ export const Show = ({ show }) => (
     </div>
     <div style={styles.content}>
       <div style={styles.info}>
-        <FontAwesome name="map" />
+        <FontAwesomeIcon icon={faMap} />
         <span style={{ marginLeft: "10px" }}>{show.venue}</span>
       </div>
       <div style={styles.info}>
-        <FontAwesome name="clock" />
+        <FontAwesomeIcon icon={faClock} />
         <span style={{ marginLeft: "10px" }}>{show.time}</span>
       </div>
       <a style={styles.location} href={show._location} target={"_blank"}>
@@ -32,16 +33,16 @@ const styles = {
     padding: "3%",
     margin: "2% 0",
     borderRadius: "5px",
-    boxShadow: "10px 10px 5px 0 rgba(0,0,0,0.75)"
+    boxShadow: "10px 10px 5px 0 rgba(0,0,0,0.75)",
   },
   info: {
     display: "flex",
-    padding: "5px"
+    padding: "5px",
   },
 
   location: {},
   header: {
     display: "flex",
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 }

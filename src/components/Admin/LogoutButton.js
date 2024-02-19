@@ -1,9 +1,10 @@
 import React from "react"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 
 export const LogoutButton = ({ logout }) => (
   <div style={styles.buttonStyles} onClick={logout}>
-    <FontAwesome name={"sign-out-alt"} />
+    <FontAwesomeIcon icon={faSignOutAlt} />
     <span>Log Out</span>
   </div>
 )

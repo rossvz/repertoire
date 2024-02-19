@@ -2,10 +2,20 @@ import React from "react"
 
 import { useFirebaseApp, DatabaseProvider } from "reactfire"
 import { getDatabase } from "firebase/database"
+import { Loader } from "@googlemaps/js-api-loader"
 
 import { Shows } from "./Shows"
 
+const loader = new Loader({
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  version: "weekly",
+  libraries: ["places"],
+})
+
 export const ShowsPage = () => {
+  loader.load().then(async () => {
+    const { Map } = await google.maps.importLibrary("maps")
+  })
   const firebaseApp = useFirebaseApp()
   const database = getDatabase(firebaseApp)
 

@@ -1,5 +1,11 @@
 import React from "react"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faTrash,
+  faUndo,
+  faEyeSlash,
+  faEye,
+} from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components"
 import { min } from "ramda"
 
@@ -21,20 +27,20 @@ export const AdminFunctions = ({
 export const DeleteSong = ({ deleteSong }) => {
   return (
     <div onClick={deleteSong} style={styles.clickable}>
-      <FontAwesome name={"trash"} style={styles.icon} />
+      <FontAwesomeIcon icon={faTrash} style={styles.icon} />
     </div>
   )
 }
 
 const ResetVotes = ({ resetVotes }) => (
   <div onClick={resetVotes} style={styles.clickable}>
-    <FontAwesome name={"undo"} style={styles.icon} />
+    <FontAwesomeIcon icon={faUndo} style={styles.icon} />
   </div>
 )
 
 const Visibility = ({ visible = true, toggleVisible }) => (
   <div onClick={toggleVisible} style={styles.clickable}>
-    <FontAwesome name={visible ? "eye-slash" : "eye"} style={styles.icon} />
+    <FontAwesomeIcon icon={visible ? faEyeSlash : faEye} style={styles.icon} />
   </div>
 )
 

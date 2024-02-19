@@ -4,7 +4,8 @@ import { useSigninCheck } from "reactfire"
 
 import Song from "./Song/Song"
 import { useSongs } from "./useSongs"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons"
 
 export const SongList = () => {
   const { status: authStatus, data: user } = useSigninCheck()
@@ -29,8 +30,8 @@ export const SongList = () => {
           value={searchFilter}
         />
         <div onClick={resetSearch}>
-          <FontAwesome
-            name="times-circle"
+          <FontAwesomeIcon
+            icon={faTimesCircle}
             style={{
               color: "white",
               fontSize: "1.8em",

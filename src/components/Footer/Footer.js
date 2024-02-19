@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react"
 import FooterButton from "./FooterButton"
 import styled from "styled-components"
 
+import {
+  faMusic,
+  faCalendarAlt,
+  faUserCircle,
+  faCogs,
+} from "@fortawesome/free-solid-svg-icons"
+
 const Footer = () => {
   const [isScrolling, setIsScrolling] = useState(false)
   useEffect(() => {
@@ -17,10 +24,10 @@ const Footer = () => {
     <FooterContainer
       style={isScrolling ? styles.scrolling : { transition: "bottom 1s" }}
     >
-      <FooterButton title={"Songs"} icon={"music"} route={"/"} />
-      <FooterButton title={"Shows"} icon={"calendar-alt"} route={"/shows"} />
-      <FooterButton title={"About"} icon={"user-circle"} route={"/about"} />
-      <FooterButton title={"Settings"} icon={"cogs"} route="/admin" />
+      <FooterButton title={"Songs"} icon={faMusic} route={"/"} />
+      <FooterButton title={"Shows"} icon={faCalendarAlt} route={"/shows"} />
+      <FooterButton title={"About"} icon={faUserCircle} route={"/about"} />
+      <FooterButton title={"Settings"} icon={faCogs} route="/admin" />
     </FooterContainer>
   )
 }

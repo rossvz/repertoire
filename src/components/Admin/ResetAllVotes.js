@@ -1,6 +1,7 @@
 import React from "react"
 import { useSigninCheck } from "reactfire"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUndo } from "@fortawesome/free-solid-svg-icons"
 
 import Button from "../common/Button"
 import { useSongs } from "../SongPage/SongList/useSongs"
@@ -17,7 +18,7 @@ export const ResetAllVotes = () => {
   return (
     <div style={styles.container}>
       <Button onClick={() => resetAllVotes(songs)}>
-        <FontAwesome style={styles.icon} name={"undo"} />
+        <FontAwesomeIcon style={styles.icon} icon={faUndo} />
         Votes
       </Button>
     </div>

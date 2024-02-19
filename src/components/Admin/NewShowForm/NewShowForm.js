@@ -3,11 +3,12 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete"
-import FontAwesome from "react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ref, set, push } from "firebase/database"
-import { useDatabase } from "reactfire"
+import { useDatabase, useSigninCheck } from "reactfire"
 
 import Button from "../../common/Button"
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 
 const INITIAL_STATE = { date: "", venue: "", time: "" }
 
@@ -15,11 +16,13 @@ export const NewShowWrapper = () => {
   const database = useDatabase()
   const showsRef = ref(database, "shows")
   const [editingNewShow, setEditingNewShow] = React.useState(false)
+  const { status, data } = useSigninCheck()
 
   const saveShow = (newShow) => {
     const newShowRef = push(showsRef)
     set(newShowRef, newShow)
   }
+  if (status === "loading" || !data.signedIn) return null
   return editingNewShow ? (
     <NewShowForm
       saveShow={saveShow}
@@ -27,7 +30,7 @@ export const NewShowWrapper = () => {
     />
   ) : (
     <Button onClick={() => setEditingNewShow(true)}>
-      <FontAwesome style={styles.icon} name={"plus-circle"} />
+      <FontAwesomeIcon style={styles.icon} icon={faPlusCircle} />
       Show
     </Button>
   )

@@ -1,18 +1,17 @@
+import { getAuth } from "firebase/auth"
 import React from "react"
 import { AuthProvider, useFirebaseApp } from "reactfire"
-import { getAuth } from "firebase/auth"
+import { BrowserRouter, Route, Routes, Switch } from "react-router-dom"
 
 import "fontsource-roboto/latin.css"
 import "./App.css"
 
-import { BrowserRouter, Route, Switch } from "react-router-dom"
-// import history from "./util/history"
 import About from "./components/About/About"
+import { AdminPage } from "./components/Admin/AdminPage"
 import Footer from "./components/Footer/Footer"
 import { ShowsPage } from "./components/Shows/ShowsPage"
-import { SongListPage } from "./components/SongPage/SongPage"
-import { AdminPage } from "./components/Admin/AdminPage"
 import Song from "./components/SongPage/SongList/Song/Song"
+import { SongListPage } from "./components/SongPage/SongPage"
 
 const App = () => {
   const firebaseApp = useFirebaseApp()
@@ -21,20 +20,12 @@ const App = () => {
     <AuthProvider sdk={auth}>
       <BrowserRouter>
         <div className="App" style={responsiveStyles}>
-          <Switch>
-            <Route exact path="/">
-              <SongListPage />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route exact path="/shows">
-              <ShowsPage />
-            </Route>
-            <Route path="/admin">
-              <AdminPage />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route exact path="/" element={<SongListPage />} />
+            <Route path="/about" element={<About />} />
+            <Route exact path="/shows" element={<ShowsPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
           <Footer />
         </div>
       </BrowserRouter>
