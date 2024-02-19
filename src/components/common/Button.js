@@ -10,6 +10,7 @@ const styles = {
     minWidth: "3em",
     border: "0",
     fontSize: "16px",
+    cursor: "pointer",
   },
 }
 

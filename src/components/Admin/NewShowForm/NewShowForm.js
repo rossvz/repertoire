@@ -67,17 +67,21 @@ export class NewShowForm extends Component {
   }
 
   render() {
-    const inputProps = {
-      value: this.state.venue,
-      onChange: this.onAutocompleteChange.bind(this),
-      placeholder: "Search Places...",
-    }
-
     const AutocompleteItem = ({ formattedSuggestion }) => (
-      <div>
+      <div
+        style={{
+          paddingTop: "8px",
+          borderBottom: "2px solid black",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <strong>{formattedSuggestion.mainText}</strong>
-        <br />
-        <small>{formattedSuggestion.secondaryText}</small>
+        <small style={{ fontSize: "12px", textAlign: "right" }}>
+          {formattedSuggestion.secondaryText}
+        </small>
       </div>
     )
 
@@ -97,11 +101,47 @@ export class NewShowForm extends Component {
               value={this.state.date}
             />
             <PlacesAutocomplete
-              inputProps={inputProps}
-              autocompleteItem={AutocompleteItem}
-              styles={styles.autocompleteStyles}
-              options={options}
-            />
+              value={this.state.venue}
+              onChange={this.onAutocompleteChange.bind(this)}
+              searchOptions={options}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search Places ...",
+                      style: styles.inputStyles,
+                    })}
+                  />
+                  <div
+                    style={{
+                      backgroundColor: "#3a3a3a",
+                      color: "#f8f8f8",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => {
+                      const style = suggestion.active
+                        ? { backgroundColor: "#f8f8f8", color: "#3a3a3a" }
+                        : {}
+                      return (
+                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                          <AutocompleteItem
+                            formattedSuggestion={suggestion.formattedSuggestion}
+                          />
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
             <input
               style={styles.inputStyles}
               type="datetime"
@@ -110,18 +150,20 @@ export class NewShowForm extends Component {
               value={this.state.time}
             />
             <div style={styles.buttonContainer}>
-              <button
-                style={styles.cancelButton}
-                onClick={this.cancelShow.bind(this)}
-              >
-                CANCEL
-              </button>
-              <button
-                style={styles.saveShowButton}
-                onClick={this.saveShow.bind(this)}
-              >
-                SAVE
-              </button>
+              {/* <button */}
+              {/*   style={styles.cancelButton} */}
+              {/*   onClick={this.cancelShow.bind(this)} */}
+              {/* > */}
+              {/*   CANCEL */}
+              {/* </button> */}
+              <Button onClick={this.cancelShow.bind(this)}>Cancel</Button>
+              {/* <button */}
+              {/*   style={styles.saveShowButton} */}
+              {/*   onClick={this.saveShow.bind(this)} */}
+              {/* > */}
+              {/*   SAVE */}
+              {/* </button> */}
+              <Button onClick={this.saveShow.bind(this)}>Save</Button>
             </div>
           </form>
         </div>
@@ -143,11 +185,15 @@ const styles = {
   container: {
     position: "absolute",
     top: "25%",
-    left: "5%",
+    left: "3%",
     display: "flex",
     flexFlow: "column",
     alignItems: "center",
     justifyContent: "center",
+    border: "2px solid white",
+    borderRadius: "10px",
+    padding: "5px",
+    backgroundColor: "black",
   },
   icon: { marginRight: "10px" },
   formStyles: {
@@ -157,12 +203,13 @@ const styles = {
     padding: "5%",
   },
   inputStyles: {
-    lineHeight: "1.8em",
-    fontSize: "1.5em",
+    lineHeight: "1.4em",
+    fontSize: "1.2em",
     textAlign: "center",
     border: "none",
-    backgroundColor: "#f8f8f8",
-    margin: "1%",
+    backgroundColor: "#3a3a3a",
+    color: "#b3b3b3",
+    margin: "1% 0",
     width: "90vw",
   },
   autocompleteStyles: {
@@ -186,7 +233,7 @@ const styles = {
     display: "flex",
     width: "100%",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   cancelButton: {
     backgroundColor: "#19181c",
