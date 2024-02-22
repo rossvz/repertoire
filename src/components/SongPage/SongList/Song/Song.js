@@ -106,14 +106,13 @@ const styles = {
 
   title: {
     fontWeight: "bold",
-    fontSize: "1.2em",
-    letterSpacing: "0.1em",
+    fontSize: "16px",
     marginBottom: "10px",
+    fontWeight: "bold",
   },
   artist: {
     color: "#B4CBEA",
-    fontSize: "1em",
-    fontWeight: "bold",
+    fontSize: "14px",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
   },

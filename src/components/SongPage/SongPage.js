@@ -15,7 +15,7 @@ export const SongListPage = () => {
   return (
     <DatabaseProvider sdk={database}>
       <Header title={"Songs"} left={<NewSong />} right={<ResetAllVotes />} />
-      {/* <HelperText /> */}
+      <HelperText />
       <SongList />
     </DatabaseProvider>
   )
