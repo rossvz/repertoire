@@ -190,8 +190,8 @@ const styles = {
   },
   container: {
     position: "absolute",
-    top: "25%",
-    left: "3%",
+    top: "5%",
+    left: "1%",
     display: "flex",
     flexFlow: "column",
     alignItems: "center",
@@ -206,7 +206,7 @@ const styles = {
     display: "flex",
     flexFlow: "column",
     alignItems: "center",
-    padding: "5%",
+    padding: "0",
   },
   inputStyles: {
     lineHeight: "1.4em",
