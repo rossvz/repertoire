@@ -1,7 +1,7 @@
 import React from "react"
 import { Header } from "../Header"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInstagram } from "@fortawesome/free-brands-svg-icons"
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import Button from "../common/Button"
 
 const About = (props) => {
@@ -19,23 +19,45 @@ const About = (props) => {
         <p>-- Randy Godwin</p>
       </div>
 
-      <a
-        style={{
-          marginTop: "2em",
-          display: "flex",
-          justifyContent: "center",
-          textDecoration: "none",
-        }}
-        href="https://www.instagram.com/randy.godwin.music/?utm_source=ig_embed&utm_campaign=loading"
-        target="_blank"
-      >
-        <Button>
-          <div style={styles.instagram}>
-            <span>Follow me on Instagram</span>
-            <FontAwesomeIcon style={styles.instagramIcon} icon={faInstagram} />
-          </div>
-        </Button>
-      </a>
+      <div style={styles.socialButtons}>
+        <a
+          style={{
+            marginTop: "2em",
+            display: "flex",
+            justifyContent: "center",
+            textDecoration: "none",
+          }}
+          href="https://www.instagram.com/randy.godwin.music/?utm_source=ig_embed&utm_campaign=loading"
+          target="_blank"
+        >
+          <Button>
+            <div style={styles.instagram}>
+              <span>Instagram</span>
+              <FontAwesomeIcon
+                style={styles.instagramIcon}
+                icon={faInstagram}
+              />
+            </div>
+          </Button>
+        </a>
+        <a
+          style={{
+            marginTop: "2em",
+            display: "flex",
+            justifyContent: "center",
+            textDecoration: "none",
+          }}
+          href="https://www.facebook.com/randygodwinmusic"
+          target="_blank"
+        >
+          <Button>
+            <div style={styles.instagram}>
+              <span>Facebook</span>
+              <FontAwesomeIcon style={styles.instagramIcon} icon={faFacebook} />
+            </div>
+          </Button>
+        </a>
+      </div>
     </div>
   )
 }
@@ -48,6 +70,12 @@ const styles = {
   image: {
     width: "100%",
     height: "auto",
+  },
+  socialButtons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   instagram: {
     fontSize: "20px",

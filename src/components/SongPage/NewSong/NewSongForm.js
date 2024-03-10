@@ -64,13 +64,13 @@ export const NewSongForm = ({ toggleIsEditing }) => {
       artist: result.artists[0].name,
       artistId: result.artists[0].id,
       album: result.album.name,
-      title: result.name,
+      title: titleQuery || result.name,
       albumArtwork: result.album.images[0].url,
       releaseDate: result.album.release_date,
       votes: 0,
       visible: true,
     })
-  }, [results, resultIndex])
+  }, [results, resultIndex, titleQuery])
 
   return (
     <div style={styles.backdrop}>
@@ -116,18 +116,18 @@ export const NewSongForm = ({ toggleIsEditing }) => {
             width="200px"
             src={newSong.albumArtwork}
             alt=""
-            class={results.length === 0 ? "hide" : ""}
+            className={results.length === 0 ? "hide" : ""}
           />
           <span
             style={styles.releaseDate}
-            class={results.length === 0 ? "hide" : ""}
+            className={results.length === 0 ? "hide" : ""}
           >
             {moment(newSong.releaseDate).format("MMMM Do, YYYY")}
           </span>
         </div>
         <div
           style={styles.buttonContainer}
-          class={results.length === 0 ? "hide" : ""}
+          className={results.length === 0 ? "hide" : ""}
         >
           <Button type="button" onClick={previousResult}>
             ←
@@ -138,7 +138,7 @@ export const NewSongForm = ({ toggleIsEditing }) => {
           </Button>
         </div>
 
-        <div class={!searching && "hide"} style={styles.searching}>
+        <div className={!searching && "hide"} style={styles.searching}>
           Searching...
         </div>
       </div>
