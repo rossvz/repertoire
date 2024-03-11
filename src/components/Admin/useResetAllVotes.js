@@ -8,17 +8,17 @@ export const useResetAllVotes = () => {
   const database = useDatabase()
   const songsRef = ref(database, "songs")
   return React.useCallback(
-    songs => {
+    (songs) => {
       const updates = {}
       songs
-        .filter(s => s.votes > 0)
-        .forEach(song => {
+        .filter((s) => s.votes !== 0)
+        .forEach((song) => {
           removeVoteFromStorage(song.id)
           updates[`/${song.id}`] = { ...song, votes: 0 }
         })
 
       update(songsRef, updates)
     },
-    [songsRef]
+    [songsRef],
   )
 }
