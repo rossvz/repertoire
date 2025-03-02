@@ -5,25 +5,25 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@fontsource/roboto": "^5.0.8",
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@googlemaps/js-api-loader": "^1.16.6",
-    "axios": "^1.6.7",
+    "@fontsource/roboto": "^5.2.5",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@googlemaps/js-api-loader": "^1.16.8",
+    "axios": "^1.8.1",
     "firebase": "^9.23.0",
     "moment": "^2.30.1",
     "ramda": "^0.29.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-places-autocomplete": "^7.3.0",
-    "react-router": "^6.22.1",
-    "react-router-dom": "^6.22.1",
+    "react-router": "^6.30.0",
+    "react-router-dom": "^6.30.0",
     "reactfire": "^4.2.3",
-    "styled-components": "^6.1.8",
-    "stylis": "^4.3.1",
+    "styled-components": "^6.1.15",
+    "stylis": "^4.3.6",
     "unsplash-js": "^7.0.19"
   },
   "scripts": {
@@ -34,11 +34,11 @@
     "deploy": "vite build && firebase deploy"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
     "@vitejs/plugin-react": "^4.2.1",
-    "prettier": "^3.2.5",
-    "vite": "^5.0.12",
-    "vitest": "^1.2.1"
+    "prettier": "^3.5.2",
+    "vite": "^5.4.14",
+    "vitest": "^1.6.1"
   },
   "prettier": {
     "semi": false
