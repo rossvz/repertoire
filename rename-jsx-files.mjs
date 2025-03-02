@@ -1,13 +1,13 @@
 /**
  * Script to rename React component files from .js to .jsx and update imports
  *
- * Usage: node rename-jsx-files.js
+ * Usage: node rename-jsx-files.mjs
  */
 
-const fs = require("fs")
-const path = require("path")
-const { promisify } = require("util")
-const { exec } = require("child_process")
+import fs from "fs"
+import path from "path"
+import { promisify } from "util"
+import { exec } from "child_process"
 
 const execAsync = promisify(exec)
 const readFileAsync = promisify(fs.readFile)

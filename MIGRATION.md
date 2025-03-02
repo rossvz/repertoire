@@ -15,11 +15,12 @@ This document outlines the steps to migrate this project from Create React App (
 
 - ✅ Added Vite and React plugin: `vite`, `@vitejs/plugin-react`
 - ✅ Added Vitest for testing: `vitest`
-- ✅ Created `vite.config.js` in the project root
+- ✅ Created `vite.config.mjs` in the project root
 - ✅ Created root-level `index.html` file
 - ✅ Updated scripts in `package.json`
 - ✅ Created environment variable compatibility layer
 - ✅ Renamed .js files to .jsx
+- ✅ Configured project to use ES modules
 
 ### 2. File Extensions (Completed)
 
@@ -63,7 +64,17 @@ const apiKey = ENV.GOOGLE_API_KEY
 
 This approach works with both build systems and makes future migration easier.
 
-### 4. Testing Both Builds
+### 4. ES Modules Configuration
+
+Vite uses ES modules (ESM) by default, which is different from CRA's CommonJS (CJS) approach. We've updated the project to use ES modules:
+
+- Added `"type": "module"` to package.json
+- Used `.mjs` extension for the Vite config file
+- Updated import/export syntax to use ES modules
+
+This prevents the "CJS build of Vite's Node API is deprecated" warning.
+
+### 5. Testing Both Builds
 
 During the migration period, you can use both build systems:
 
@@ -74,7 +85,7 @@ During the migration period, you can use both build systems:
 | Run tests            | `npm run test:legacy`   | `npm test`       |
 | Deploy               | `npm run deploy:legacy` | `npm run deploy` |
 
-### 5. Common Issues and Solutions
+### 6. Common Issues and Solutions
 
 #### File Extensions
 - **Problem**: Vite expects JSX in `.jsx` files, not `.js` files
@@ -96,6 +107,13 @@ During the migration period, you can use both build systems:
   ```html
   <script type="module" src="./src/index.jsx"></script>
   ```
+
+#### Module Format
+- **Problem**: Vite uses ES modules while CRA uses CommonJS
+- **Solution**: 
+  - Added `"type": "module"` to package.json
+  - Used `.mjs` extension for configuration files
+  - Updated import/export syntax
 
 ## Final Cleanup (After Migration)
 

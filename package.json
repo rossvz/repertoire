@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "node": "20",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@fontsource/roboto": "^5.0.8",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
