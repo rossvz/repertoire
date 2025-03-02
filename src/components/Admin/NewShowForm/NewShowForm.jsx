@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -36,146 +36,132 @@ export const NewShowWrapper = () => {
   )
 }
 
-export class NewShowForm extends Component {
-  state = INITIAL_STATE
+export const NewShowForm = ({ saveShow, toggleEditingNewShow }) => {
+  const [formState, setFormState] = useState(INITIAL_STATE)
+  const { date, venue, time } = formState
 
-  onAutocompleteChange(venue) {
-    this.setState({ ...this.state, venue })
+  const onAutocompleteChange = (venue) => {
+    setFormState({ ...formState, venue })
   }
 
-  saveShow(e) {
+  const handleSaveShow = (e) => {
     e.preventDefault()
-    const { date, venue, time } = this.state
-    geocodeByAddress(this.state.venue)
+    geocodeByAddress(venue)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
-        this.props.saveShow({ date, venue, time, latLng })
+        saveShow({ date, venue, time, latLng })
       })
       .catch((error) => console.error("Error", error))
-    this.setState(INITIAL_STATE)
+    setFormState(INITIAL_STATE)
   }
 
-  onDateChange(e) {
-    this.setState({ ...this.state, date: e.target.value })
+  const onDateChange = (e) => {
+    setFormState({ ...formState, date: e.target.value })
   }
 
-  onTimeChange(e) {
-    this.setState({ ...this.state, time: e.target.value })
+  const onTimeChange = (e) => {
+    setFormState({ ...formState, time: e.target.value })
   }
 
-  cancelShow(e) {
+  const cancelShow = (e) => {
     e.preventDefault()
-    this.props.toggleEditingNewShow()
-    this.setState(INITIAL_STATE)
+    toggleEditingNewShow()
+    setFormState(INITIAL_STATE)
   }
 
-  render() {
-    const AutocompleteItem = ({ formattedSuggestion }) => (
-      <div
-        style={{
-          paddingTop: "8px",
-          borderBottom: "2px solid black",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <strong>{formattedSuggestion.mainText}</strong>
-        <small style={{ fontSize: "12px", textAlign: "right" }}>
-          {formattedSuggestion.secondaryText}
-        </small>
-      </div>
-    )
+  const AutocompleteItem = ({ formattedSuggestion }) => (
+    <div
+      style={{
+        paddingTop: "8px",
+        borderBottom: "2px solid black",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <strong>{formattedSuggestion.mainText}</strong>
+      <small style={{ fontSize: "12px", textAlign: "right" }}>
+        {formattedSuggestion.secondaryText}
+      </small>
+    </div>
+  )
 
-    const options = {
-      types: ["establishment"],
-    }
+  const options = {
+    types: ["establishment"],
+  }
 
-    return (
-      <div style={styles.backdrop}>
-        <div style={styles.container}>
-          <form onSubmit={this.saveShow.bind(this)} style={styles.formStyles}>
-            <input
-              style={styles.inputStyles}
-              type="date"
-              placeholder={"Date"}
-              onChange={this.onDateChange.bind(this)}
-              value={this.state.date}
-            />
-            <PlacesAutocomplete
-              value={this.state.venue}
-              onChange={this.onAutocompleteChange.bind(this)}
-              searchOptions={options}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <div>
-                  <input
-                    {...getInputProps({
-                      placeholder: "Search Places ...",
-                      style: styles.inputStyles,
-                    })}
-                  />
-                  <div
-                    style={{
-                      backgroundColor: "#3a3a3a",
-                      color: "#f8f8f8",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {loading && <div>Loading...</div>}
-                    {suggestions.map((suggestion) => {
-                      const style = suggestion.active
-                        ? { backgroundColor: "#f8f8f8", color: "#3a3a3a" }
-                        : {}
-                      return (
-                        <div
-                          key={suggestion.description}
-                          {...getSuggestionItemProps(suggestion, { style })}
-                        >
-                          <AutocompleteItem
-                            formattedSuggestion={suggestion.formattedSuggestion}
-                          />
-                        </div>
-                      )
-                    })}
-                  </div>
+  return (
+    <div style={styles.backdrop}>
+      <div style={styles.container}>
+        <form onSubmit={handleSaveShow} style={styles.formStyles}>
+          <input
+            style={styles.inputStyles}
+            type="date"
+            placeholder={"Date"}
+            onChange={onDateChange}
+            value={date}
+          />
+          <PlacesAutocomplete
+            value={venue}
+            onChange={onAutocompleteChange}
+            searchOptions={options}
+          >
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <div>
+                <input
+                  {...getInputProps({
+                    placeholder: "Search Places ...",
+                    style: styles.inputStyles,
+                  })}
+                />
+                <div
+                  style={{
+                    backgroundColor: "#3a3a3a",
+                    color: "#f8f8f8",
+                    cursor: "pointer",
+                  }}
+                >
+                  {loading && <div>Loading...</div>}
+                  {suggestions.map((suggestion) => {
+                    const style = suggestion.active
+                      ? { backgroundColor: "#f8f8f8", color: "#3a3a3a" }
+                      : {}
+                    return (
+                      <div
+                        key={suggestion.description}
+                        {...getSuggestionItemProps(suggestion, { style })}
+                      >
+                        <AutocompleteItem
+                          formattedSuggestion={suggestion.formattedSuggestion}
+                        />
+                      </div>
+                    )
+                  })}
                 </div>
-              )}
-            </PlacesAutocomplete>
-            <input
-              style={styles.inputStyles}
-              type="datetime"
-              placeholder={"Time"}
-              onChange={this.onTimeChange.bind(this)}
-              value={this.state.time}
-            />
-            <div style={styles.buttonContainer}>
-              {/* <button */}
-              {/*   style={styles.cancelButton} */}
-              {/*   onClick={this.cancelShow.bind(this)} */}
-              {/* > */}
-              {/*   CANCEL */}
-              {/* </button> */}
-              <Button onClick={this.cancelShow.bind(this)}>Cancel</Button>
-              {/* <button */}
-              {/*   style={styles.saveShowButton} */}
-              {/*   onClick={this.saveShow.bind(this)} */}
-              {/* > */}
-              {/*   SAVE */}
-              {/* </button> */}
-              <Button onClick={this.saveShow.bind(this)}>Save</Button>
-            </div>
-          </form>
-        </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
+          <input
+            style={styles.inputStyles}
+            type="datetime"
+            placeholder={"Time"}
+            onChange={onTimeChange}
+            value={time}
+          />
+          <div style={styles.buttonContainer}>
+            <Button onClick={cancelShow}>Cancel</Button>
+            <Button onClick={handleSaveShow}>Save</Button>
+          </div>
+        </form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 const styles = {
