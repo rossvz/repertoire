@@ -21,7 +21,6 @@
     "react-places-autocomplete": "^7.3.0",
     "react-router": "^6.22.1",
     "react-router-dom": "^6.22.1",
-    "react-scripts": "^5.0.1",
     "reactfire": "^4.2.3",
     "styled-components": "^6.1.8",
     "stylis": "^4.3.1",
@@ -29,18 +28,12 @@
   },
   "scripts": {
     "start": "vite",
-    "start:legacy": "react-scripts start",
     "build": "vite build",
-    "build:legacy": "react-scripts build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:legacy": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "vite build && firebase deploy",
-    "deploy:legacy": "npm run build:legacy && firebase deploy"
+    "deploy": "vite build && firebase deploy"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-transform-react-jsx": "^7.22.5",
     "@vitejs/plugin-react": "^4.2.1",
     "prettier": "^3.2.5",

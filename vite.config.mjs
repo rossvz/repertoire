@@ -3,22 +3,9 @@ import react from "@vitejs/plugin-react"
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Load environment variables
+  // Load env file based on `mode` in the current working directory.
+  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), "")
-
-  // Create a process.env-like object with all environment variables
-  const processEnv = {}
-
-  // Add all environment variables to processEnv
-  for (const key in env) {
-    processEnv[key] = env[key]
-  }
-
-  // Ensure REACT_APP_ variables are available
-  processEnv.REACT_APP_GOOGLE_API_KEY = env.REACT_APP_GOOGLE_API_KEY || ""
-  processEnv.REACT_APP_GOOGLE_MAPS_API_KEY =
-    env.REACT_APP_GOOGLE_MAPS_API_KEY || ""
-  processEnv.REACT_APP_SPOTIFY_API_URL = env.REACT_APP_SPOTIFY_API_URL || ""
 
   return {
     plugins: [react()],
@@ -31,10 +18,6 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       extensions: [".js", ".jsx"],
-    },
-    // Pass environment variables to the app
-    define: {
-      "process.env": processEnv,
     },
   }
 })
