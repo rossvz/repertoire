@@ -2,10 +2,11 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import { FirebaseAppProvider } from "reactfire"
 import "./index.css"
+import { ENV } from "./env-compatibility"
 
 import App from "./App"
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+  apiKey: ENV.GOOGLE_API_KEY,
   authDomain: "rg-music.firebaseapp.com",
   databaseURL: "https://rg-music.firebaseio.com",
   projectId: "rg-music",

@@ -27,15 +27,24 @@
     "unsplash-js": "^7.0.19"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "vite",
+    "start:legacy": "react-scripts start",
+    "build": "vite build",
+    "build:legacy": "react-scripts build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:legacy": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "vite build && firebase deploy",
+    "deploy:legacy": "npm run build:legacy && firebase deploy"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "prettier": "^3.2.5"
+    "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "@vitejs/plugin-react": "^4.2.1",
+    "prettier": "^3.2.5",
+    "vite": "^5.0.12",
+    "vitest": "^1.2.1"
   },
   "prettier": {
     "semi": false

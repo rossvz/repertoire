@@ -138,7 +138,7 @@ export const NewSongForm = ({ toggleIsEditing }) => {
           </Button>
         </div>
 
-        <div className={!searching && "hide"} style={styles.searching}>
+        <div className={searching ? "" : "hide"} style={styles.searching}>
           Searching...
         </div>
       </div>

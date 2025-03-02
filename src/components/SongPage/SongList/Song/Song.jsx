@@ -108,7 +108,6 @@ const styles = {
     fontWeight: "bold",
     fontSize: "16px",
     marginBottom: "10px",
-    fontWeight: "bold",
   },
   artist: {
     color: "#B4CBEA",
