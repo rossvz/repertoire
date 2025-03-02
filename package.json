@@ -31,11 +31,19 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix",
     "deploy": "vite build && firebase deploy"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "7.25.9",
     "@vitejs/plugin-react": "4.3.4",
+    "babel-plugin-react-compiler": "beta",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-compiler": "beta",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.0.0",
     "prettier": "3.5.2",
     "vite": "^6.2.0",
     "vitest": "^3.0.7"
