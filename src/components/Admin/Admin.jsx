@@ -17,6 +17,7 @@ export const Admin = ({ user }) => {
   const logout = React.useCallback(() => {
     auth.signOut()
   }, [auth])
+  console.log(user)
   return (
     <div>
       <Header title={"Settings"} right={<LogoutButton logout={logout} />} />
@@ -28,11 +29,9 @@ export const Admin = ({ user }) => {
           justifyContent: "center",
         }}
       >
-        <Heading>Shows</Heading>
-        <NewShowWrapper />
-        <Heading>Songs</Heading>
-
-        <ResetAllVotes />
+        <Heading>Logged In</Heading>
+        <p>{user.user.email}</p>
+        <p>{user.displayName}</p>
       </div>
     </div>
   )
