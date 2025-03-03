@@ -17,7 +17,7 @@ export const Admin = ({ user }) => {
   const logout = React.useCallback(() => {
     auth.signOut()
   }, [auth])
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     console.log(user)
   }
   return (
@@ -32,8 +32,7 @@ export const Admin = ({ user }) => {
         }}
       >
         <Heading>Logged In</Heading>
-        <p>{user.user.email}</p>
-        <p>{user.displayName}</p>
+        <p>email: {user.user.email}</p>
       </div>
     </div>
   )
