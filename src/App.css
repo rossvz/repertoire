@@ -1,5 +1,42 @@
 .App {
   min-height: 105vh;
-  font-family: Roboto, SansSerif;
-  background: linear-gradient(135deg, #1e1d22 0%, #28272d 100%);
+  font-family: Roboto, sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--background-dark) 0%,
+    var(--background-darker) 100%
+  );
+  color: #ffffff;
+}
+
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-rgb: 99, 102, 241;
+  --secondary: #f9fafb;
+  --accent: #10b981;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --background-dark: #18181b;
+  --background-darker: #1f1f23;
+  --background-card: rgba(32, 32, 38, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Modern scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }

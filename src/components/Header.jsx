@@ -24,17 +24,24 @@ const Section = styled.div`
 const HeaderContainer = styled.div`
   width: 100%;
   height: 60px;
-  background: transparent;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #b4cbea;
-  font-weight: bold;
-  padding: 0 0px;
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 `
 
 const Title = styled.div`
   flex: 2;
   font-size: 20px;
   text-align: center;
+  letter-spacing: 0.5px;
 `

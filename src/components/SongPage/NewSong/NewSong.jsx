@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { useSigninCheck } from "reactfire"
+import styled from "styled-components"
 
 import { NewSongForm } from "./NewSongForm"
 import Button from "../../common/Button"
@@ -10,9 +11,11 @@ export const NewSong = () => {
   const [isEditing, setIsEditing] = useState(false)
   const { status, data } = useSigninCheck()
   const toggleIsEditing = () => setIsEditing(!isEditing)
+
   if (status === "loading" || !data.signedIn) return null
+
   return (
-    <div style={styles.container}>
+    <Container>
       {isEditing ? (
         <NewSongForm toggleIsEditing={toggleIsEditing} />
       ) : (
@@ -22,20 +25,16 @@ export const NewSong = () => {
             toggleIsEditing()
           }}
         >
-          <FontAwesomeIcon style={styles.icon} icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faPlusCircle} />
           Song
         </Button>
       )}
-    </div>
+    </Container>
   )
 }
 
-const styles = {
-  container: {
-    textAlign: "center",
-    // fontSize: "14px",
-  },
-  icon: {
-    marginRight: "10px",
-  },
-}
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

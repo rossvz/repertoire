@@ -15,8 +15,11 @@ const Heading = styled.h2`
 export const Admin = ({ user }) => {
   const auth = useAuth()
   const logout = React.useCallback(() => {
-    auth.signOut().then(() => console.log("signed out"))
+    auth.signOut()
   }, [auth])
+  if (process.env.NODE_ENV === 'development') {
+    console.log(user)
+  }
   return (
     <div>
       <Header title={"Settings"} right={<LogoutButton logout={logout} />} />
@@ -28,11 +31,9 @@ export const Admin = ({ user }) => {
           justifyContent: "center",
         }}
       >
-        <Heading>Shows</Heading>
-        <NewShowWrapper />
-        <Heading>Songs</Heading>
-
-        <ResetAllVotes />
+        <Heading>Logged In</Heading>
+        <p>{user.user.email}</p>
+        <p>{user.displayName}</p>
       </div>
     </div>
   )

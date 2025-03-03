@@ -5,7 +5,7 @@ import "./index.css"
 
 import App from "./App"
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
   authDomain: "rg-music.firebaseapp.com",
   databaseURL: "https://rg-music.firebaseio.com",
   projectId: "rg-music",

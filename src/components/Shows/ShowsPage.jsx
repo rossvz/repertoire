@@ -7,7 +7,7 @@ import { Loader } from "@googlemaps/js-api-loader"
 import { Shows } from "./Shows"
 
 const loader = new Loader({
-  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   version: "weekly",
   libraries: ["places"],
 })

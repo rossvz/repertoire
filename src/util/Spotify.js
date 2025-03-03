@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const SPOTIFY_API_URL = process.env.REACT_APP_SPOTIFY_API_URL
+const SPOTIFY_API_URL = import.meta.env.VITE_SPOTIFY_API_URL
 
 export const search = ({ title, artist }) => {
   let query = ""
