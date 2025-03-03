@@ -17,7 +17,7 @@ const styles = {
     justifyContent: "center",
     padding: "5%",
     fontSize: "1em",
-    color: "#FC1F49",
+    color: "var(--primary)",
     textDecoration: "none",
   },
 }

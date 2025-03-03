@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import styled from "styled-components"
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -22,7 +23,9 @@ export const NewShowWrapper = () => {
     const newShowRef = push(showsRef)
     set(newShowRef, newShow)
   }
+
   if (status === "loading" || !data.signedIn) return null
+
   return editingNewShow ? (
     <NewShowForm
       saveShow={saveShow}
@@ -30,7 +33,7 @@ export const NewShowWrapper = () => {
     />
   ) : (
     <Button onClick={() => setEditingNewShow(true)}>
-      <FontAwesomeIcon style={styles.icon} icon={faPlusCircle} />
+      <FontAwesomeIcon icon={faPlusCircle} />
       Show
     </Button>
   )

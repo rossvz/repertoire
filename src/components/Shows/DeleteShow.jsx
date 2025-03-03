@@ -1,27 +1,34 @@
-import Button from "../common/Button"
 import React from "react"
+import styled from "styled-components"
 import { useDeleteShow } from "./useDeleteShow"
-
 import { useSigninCheck } from "reactfire"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
+
 export const DeleteShow = ({ show }) => {
   const deleteShow = useDeleteShow(show)
-
   const { data: user } = useSigninCheck()
 
   if (!user || !user.signedIn) return null
+
   return (
-    <div style={styles.deleteShow}>
-      <Button onClick={deleteShow}>
-        <FontAwesomeIcon icon={faTrash} />
-      </Button>
-    </div>
+    <DeleteButton
+      onClick={deleteShow}
+      aria-label="Delete show"
+      title="Delete show"
+    >
+      <FontAwesomeIcon icon={faTrash} size="lg" />
+    </DeleteButton>
   )
 }
 
-const styles = {
-  deleteShow: {
-    maxWidth: "20%",
-  },
-}
+const DeleteButton = styled.button`
+  background: transparent;
+  color: rgba(255, 59, 48, 0.8);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+`

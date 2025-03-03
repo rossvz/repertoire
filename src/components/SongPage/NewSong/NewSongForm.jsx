@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useDatabase } from "reactfire"
 import moment from "moment"
 import { ref, set, push } from "firebase/database"
-
+import styled from "styled-components"
 import { search } from "../../../util/Spotify"
 import Button from "../../common/Button"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faSearch,
+  faTimes,
+  faPlus,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons"
 
 const INITIAL_SONG_STATE = {
   title: "",
@@ -19,9 +26,7 @@ export const NewSongForm = ({ toggleIsEditing }) => {
   const [searching, setSearching] = useState(false)
   const [titleQuery, setTitleQuery] = useState("")
   const [artistQuery, setArtistQuery] = useState("")
-  const [results, setResults] = useState([])
-  const [resultIndex, setResultIndex] = useState(0)
-  const [newSong, setNewSong] = useState(INITIAL_SONG_STATE)
+  const [results, setResults] = useState(null)
 
   const database = useDatabase()
   const songsRef = ref(database, "songs")
@@ -30,23 +35,24 @@ export const NewSongForm = ({ toggleIsEditing }) => {
     setSearching(true)
     e.preventDefault()
     search({ title: titleQuery, artist: artistQuery }).then((results) => {
+      console.log("Search results:", results.data.items)
       setResults(results.data.items)
-      setTitleQuery("")
-      setArtistQuery("")
-      setResultIndex(0)
       setSearching(false)
     })
   }
-  const nextResult = () => {
-    const newIndex = resultIndex + 1 > results.length - 1 ? 0 : resultIndex + 1
-    setResultIndex(newIndex)
-  }
-  const previousResult = () => {
-    const newIndex = resultIndex - 1 < 0 ? results.length - 1 : resultIndex - 1
-    setResultIndex(newIndex)
-  }
 
-  const saveSong = () => {
+  const saveSong = (result) => {
+    const newSong = {
+      artist: result.artists[0].name,
+      artistId: result.artists[0].id,
+      album: result.album.name,
+      title: result.name,
+      albumArtwork: result.album.images[0]?.url,
+      releaseDate: result.album.release_date,
+      votes: 0,
+      visible: true,
+    }
+
     const newSongRef = push(songsRef)
     set(newSongRef, newSong)
     toggleIsEditing()
@@ -54,175 +60,338 @@ export const NewSongForm = ({ toggleIsEditing }) => {
 
   const resetSearch = () => {
     setResults([])
-    setNewSong(INITIAL_SONG_STATE)
+    setTitleQuery("")
+    setArtistQuery("")
   }
 
-  useEffect(() => {
-    const result = results[resultIndex]
-    if (!result) return
-    setNewSong({
-      artist: result.artists[0].name,
-      artistId: result.artists[0].id,
-      album: result.album.name,
-      title: titleQuery || result.name,
-      albumArtwork: result.album.images[0].url,
-      releaseDate: result.album.release_date,
-      votes: 0,
-      visible: true,
-    })
-  }, [results, resultIndex, titleQuery])
-
   return (
-    <div style={styles.backdrop}>
-      <div style={styles.newSongContainer}>
-        <div style={styles.closeButton}>
-          <Button onClick={toggleIsEditing}>X</Button>
-        </div>
-        <form onSubmit={searchSong} style={styles.formStyles}>
-          <input
-            style={styles.inputStyles}
-            type="text"
-            placeholder={"Title"}
-            onChange={(e) => {
-              if (e.target.value === "") resetSearch()
-              setTitleQuery(e.target.value)
-            }}
-            value={titleQuery || newSong.title}
-          />
-          <input
-            style={styles.inputStyles}
-            type="text"
-            placeholder={"Artist (optional)"}
-            onChange={(e) => setArtistQuery(e.target.value)}
-            value={artistQuery || newSong.artist}
-          />
-          <input
-            style={styles.inputStyles}
-            value={newSong.album}
-            onChange={(e) => {
-              setNewSong({ ...newSong, album: e.target.value })
-            }}
-          />
-          <div style={styles.findButtonContainer}>
-            <Button type="button" onClick={resetSearch}>
-              Clear
-            </Button>
-            <Button type="submit">Search</Button>
-          </div>
-        </form>
-        <div style={styles.results}>
-          <img
-            height="200px"
-            width="200px"
-            src={newSong.albumArtwork}
-            alt=""
-            className={results.length === 0 ? "hide" : ""}
-          />
-          <span
-            style={styles.releaseDate}
-            className={results.length === 0 ? "hide" : ""}
-          >
-            {moment(newSong.releaseDate).format("MMMM Do, YYYY")}
-          </span>
-        </div>
-        <div
-          style={styles.buttonContainer}
-          className={results.length === 0 ? "hide" : ""}
-        >
-          <Button type="button" onClick={previousResult}>
-            ←
-          </Button>
-          <Button onClick={saveSong}>Save</Button>
-          <Button type="button" onClick={nextResult}>
-            →
-          </Button>
-        </div>
+    <ModalBackdrop>
+      <ModalContainer>
+        <CloseButton onClick={toggleIsEditing}>
+          <FontAwesomeIcon icon={faTimes} />
+        </CloseButton>
 
-        <div className={searching ? "" : "hide"} style={styles.searching}>
-          Searching...
-        </div>
-      </div>
-    </div>
+        <SearchForm onSubmit={searchSong}>
+          <SearchInput
+            type="text"
+            placeholder="Title"
+            onChange={(e) => setTitleQuery(e.target.value)}
+            value={titleQuery}
+            required
+          />
+          <SearchInput
+            type="text"
+            placeholder="Artist (optional)"
+            onChange={(e) => setArtistQuery(e.target.value)}
+            value={artistQuery}
+          />
+
+          <ButtonContainer>
+            <Button type="button" onClick={resetSearch} variant="secondary">
+              <FontAwesomeIcon icon={faTimes} /> Clear
+            </Button>
+            <Button type="submit" disabled={searching}>
+              <FontAwesomeIcon icon={faSearch} />{" "}
+              {searching ? "Searching..." : "Search"}
+            </Button>
+          </ButtonContainer>
+        </SearchForm>
+
+        {results?.length > 0 && (
+          <>
+            <ResultsHeader>
+              <ResultsCount>{results.length} results found</ResultsCount>
+              <ResultsInstructions>Select a song to add</ResultsInstructions>
+            </ResultsHeader>
+            <ResultsDivider />
+            <ResultsContainer>
+              {results.map((result, index) => (
+                <SongResult key={`${result.id}-${index}`}>
+                  <SongContent>
+                    <AlbumArtworkWrapper>
+                      {result.album.images && result.album.images[0] && (
+                        <AlbumArtwork
+                          src={result.album.images[0].url}
+                          alt={result.album.name}
+                        />
+                      )}
+                    </AlbumArtworkWrapper>
+
+                    <SongInfo>
+                      <SongTitle>{result.name}</SongTitle>
+                      <ArtistName>{result.artists[0]?.name}</ArtistName>
+                      <AlbumName>{result.album.name}</AlbumName>
+                      {result.album.release_date && (
+                        <ReleaseDate>
+                          {moment(result.album.release_date).format(
+                            "MMMM Do, YYYY",
+                          )}
+                        </ReleaseDate>
+                      )}
+                    </SongInfo>
+
+                    <SelectButton onClick={() => saveSong(result)}>
+                      <FontAwesomeIcon icon={faPlus} /> Select
+                    </SelectButton>
+                  </SongContent>
+                </SongResult>
+              ))}
+            </ResultsContainer>
+          </>
+        )}
+
+        {searching && (
+          <SearchingIndicator>
+            <FontAwesomeIcon icon={faSpinner} spin /> Searching...
+          </SearchingIndicator>
+        )}
+
+        {results?.length === 0 && !searching && titleQuery.length > 3 && (
+          <NoResults>No results found. Try a different search.</NoResults>
+        )}
+      </ModalContainer>
+    </ModalBackdrop>
   )
 }
 
-const styles = {
-  backdrop: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    background: "rgba(0, 0, 0, 0.8)",
-    zIndex: 1,
-  },
-  newSongContainer: {
-    opacity: 1,
-    border: "2px solid white",
-    borderRadius: "5px",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    background: "black",
-    zIndex: "2",
-    boxShadow: "rgba(0, 0, 0, 0.75) -1px 4px 20px 8px",
-    width: "95%",
-  },
-  formStyles: {
-    display: "flex",
-    flexFlow: "column",
-    alignItems: "center",
-  },
-  inputStyles: {
-    lineHeight: "1.4em",
-    fontSize: "1.2em",
-    textAlign: "center",
-    border: "none",
-    backgroundColor: "#3a3a3a",
-    color: "#b3b3b3",
-    margin: "1%",
-    width: "70vw",
-  },
-  addSongStyles: {
-    fontSize: "1em",
-    borderRadius: "100em",
-    padding: "2%",
-    background: "#f8f8f8",
-    color: "#333",
-  },
-  results: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  releaseDate: {
-    color: "#b3b3b3",
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  buttonContainer: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  findButtonContainer: {
-    display: "flex",
-    flexFlow: "row nowrap",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    width: "85vw",
-    margin: "2%",
-  },
-  closeButton: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  searching: {
-    color: "white",
-    textAlign: "center",
-    fontSize: "2em",
-  },
-}
+const ModalBackdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const ModalContainer = styled.div`
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  background: rgba(32, 32, 38, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  padding: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 2;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+`
+
+const SearchForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+`
+
+const SearchInput = styled.input`
+  padding: 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: 1rem;
+
+  &::placeholder {
+    color: var(--text-secondary);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  }
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+`
+
+const ResultsHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 4px;
+`
+
+const ResultsCount = styled.div`
+  font-size: 14px;
+  color: var(--text-secondary);
+`
+
+const ResultsInstructions = styled.div`
+  font-size: 14px;
+  color: var(--primary-light);
+  font-weight: 500;
+`
+
+const ResultsDivider = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+  width: 100%;
+`
+
+const ResultsContainer = styled.div`
+  overflow-y: auto;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 8px;
+  margin: 0 -4px 0 0;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+  }
+`
+
+const SongResult = styled.div`
+  background: var(--background-card);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: rgba(var(--primary-rgb), 0.3);
+  }
+`
+
+const SongContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+  min-height: 80px;
+`
+
+const AlbumArtworkWrapper = styled.div`
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const AlbumArtwork = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+`
+
+const SongInfo = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+`
+
+const SongTitle = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const ArtistName = styled.div`
+  color: var(--primary-light);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const AlbumName = styled.div`
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const ReleaseDate = styled.div`
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+`
+
+const SelectButton = styled(Button)`
+  flex-shrink: 0;
+  background: var(--primary);
+
+  &:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px) scale(1.05);
+  }
+`
+
+const SearchingIndicator = styled.div`
+  text-align: center;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  margin: 20px 0;
+`
+
+const NoResults = styled.div`
+  text-align: center;
+  color: var(--text-secondary);
+  margin: 20px 0;
+`
+
+export default NewSongForm

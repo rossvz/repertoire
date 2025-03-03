@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
+import styled from "styled-components"
 import Upvote from "./Upvote"
 import AlbumArtwork from "./AlbumArtwork"
 import { AdminFunctions } from "./AdminFunctions"
@@ -6,132 +7,148 @@ import { isUpvoted } from "../../../../util/votes"
 import { toggleVoteInStorage } from "../../../../util/votes"
 import { ref, remove, update } from "firebase/database"
 import { useDatabase } from "reactfire"
-const Song = ({ song, signedIn, editting, setEdittingSong }) => {
+
+const Song = ({ song, signedIn, editing, setEditingSong }) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
 
   const changeVote = (value) => {
-    const votes = song.votes < 0 || value === "reset" ? 0 : song.votes + value
-    update(songRef, { votes })
+    if (value === "reset") {
+      update(songRef, { votes: 0 })
+      return
+    }
+
+    const alreadyUpvoted = isUpvoted(song.id)
+
+    let newVotes
+
+    if (alreadyUpvoted) {
+      newVotes = Math.max(0, song.votes - 1)
+    } else {
+      newVotes = Math.max(0, song.votes + 1)
+    }
+
+    update(songRef, { votes: newVotes })
+
     toggleVoteInStorage(song.id)
   }
 
   const toggleVisible = () => {
     update(songRef, { visible: !song.visible })
   }
+
   const deleteSong = () => {
     remove(songRef)
   }
 
-  if (!signedIn && !song.visible) return <div />
+  if (!signedIn && !song.visible) return null
+
   return (
-    <div style={setStyles(song)}>
-      <div style={styles.columnStyles}>
-        <AlbumArtwork albumArtwork={song.albumArtwork} />
-        <div
-          style={styles.songInfoStyles}
+    <SongCard $visible={song.visible}>
+      <SongContent>
+        <AlbumArtworkWrapper>
+          <AlbumArtwork albumArtwork={song.albumArtwork} />
+        </AlbumArtworkWrapper>
+
+        <SongInfo
           onClick={() => {
-            if (editting) setEdittingSong(null)
-            else setEdittingSong(song.id)
+            if (editing) setEditingSong(null)
+            else setEditingSong(song.id)
           }}
         >
-          <div style={styles.title}>{song.title}</div>
+          <SongTitle>{song.title}</SongTitle>
+          <ArtistName>{song.artist}</ArtistName>
+          <AlbumName>{song.album}</AlbumName>
+        </SongInfo>
 
-          <div style={styles.artist}>{song.artist}</div>
-          <div style={styles.album}>{song.album}</div>
-        </div>
-        <div style={styles.actionStyles}>
+        <VoteSection>
           <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
-          {song.votes > 0 && <p style={styles.voteCount}>{song.votes}</p>}
-        </div>
-      </div>
-      {signedIn && editting ? (
+          <VoteCount>{song.votes > 0 ? song.votes : ""}</VoteCount>
+        </VoteSection>
+      </SongContent>
+
+      {signedIn ? (
         <AdminFunctions
           song={song}
           changeVote={changeVote}
           toggleVisible={toggleVisible}
           deleteSong={deleteSong}
+          editing={editing}
         />
       ) : null}
-    </div>
+    </SongCard>
   )
 }
 
-const setStyles = (song) =>
-  song.visible
-    ? styles.songStyles
-    : { ...styles.songStyles, ...styles.invisibleSongStyles }
+const SongCard = styled.div`
+  width: 100%;
+  margin: 8px 0;
+  background: var(--background-card);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
+  opacity: ${(props) => (props.$visible ? 1 : 0.5)};
+`
 
-const styles = {
-  songStyles: {
-    width: "100%",
-    margin: "10px 20px",
-    backgroundSize: "cover",
-    paddingTop: "10px",
-    borderTop: "2px solid rgb(84 78 88 / 47%)",
-    color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-  },
-  invisibleSongStyles: {
-    opacity: 0.4,
-  },
-  columnStyles: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flex: 1,
-  },
-  actionStyles: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 0.5,
-    opacity: 0.5,
-    color: "#fff",
-    height: "80px",
-  },
-  songInfoStyles: {
-    padding: "0 20px",
-    flex: 3,
-    color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "space-around",
-    minHeight: "80px",
-  },
+const SongContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+`
 
-  title: {
-    fontWeight: "bold",
-    fontSize: "16px",
-    marginBottom: "10px",
-  },
-  artist: {
-    color: "#B4CBEA",
-    fontSize: "14px",
-    textTransform: "uppercase",
-    letterSpacing: "0.1em",
-  },
-  album: {
-    fontStyle: "italic",
-    opacity: 0.7,
-  },
-  genres: {
-    fontSize: "smaller",
-    opacity: 0.5,
-    marginTop: "2em ",
-  },
-  row: {
-    marginBottom: 10,
-  },
-  voteCount: {
-    fontSize: "0.7em",
-    color: "#B4CBEA",
-    fontWeight: "bold",
-  },
-}
+const AlbumArtworkWrapper = styled.div`
+  flex-shrink: 0;
+`
+
+const SongInfo = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+`
+
+const SongTitle = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-primary);
+`
+
+const ArtistName = styled.div`
+  color: var(--primary-light);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`
+
+const AlbumName = styled.div`
+  color: var(--text-secondary);
+  font-size: 14px;
+`
+
+const VoteSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+`
+
+const VoteCount = styled.div`
+  font-size: 0.8em;
+  color: var(--primary-light);
+  font-weight: 600;
+  margin-top: 4px;
+  height: 1em;
+  line-height: 1em;
+`
 
 export default Song

@@ -1,29 +1,49 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import styled from "styled-components"
 
 const FooterButton = ({ route, icon, title }) => {
+  const location = useLocation()
+  const isActive =
+    location.pathname === route || (route === "/" && location.pathname === "")
+
   return (
-    <Link to={route} style={styles.buttonContainer}>
-      <FontAwesomeIcon icon={icon} />
-      <span>{title}</span>
-    </Link>
+    <ButtonLink to={route} $isActive={isActive}>
+      <IconWrapper>
+        <FontAwesomeIcon icon={icon} />
+      </IconWrapper>
+      <ButtonText>{title}</ButtonText>
+    </ButtonLink>
   )
 }
 
-const styles = {
-  buttonContainer: {
-    textDecoration: "none",
-    flex: 1,
-    display: "flex",
-    flexFlow: "column",
-    alignItems: "center",
-    justifyContent: "space-around",
-    padding: "0 5%",
-    fontSize: "1em",
-    color: "#FC1F49",
-    height: "90%",
-  },
-}
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+  height: 90%;
+  color: ${(props) =>
+    props.$isActive ? "var(--primary-light)" : "var(--text-secondary)"};
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--primary-light);
+  }
+`
+
+const IconWrapper = styled.div`
+  font-size: 1.2em;
+  margin-bottom: 4px;
+`
+
+const ButtonText = styled.span`
+  font-size: 0.8em;
+  font-weight: 500;
+`
 
 export default FooterButton

@@ -5,16 +5,16 @@ import { useSigninCheck } from "reactfire"
 import Song from "./Song/Song"
 import { useSongs } from "./useSongs"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimesCircle } from "@fortawesome/free-solid-svg-icons"
+import { faTimesCircle, faSearch } from "@fortawesome/free-solid-svg-icons"
 
 export const SongList = () => {
   const { status: authStatus, data: user } = useSigninCheck()
   const [searchFilter, setSearchFilter] = useState("")
   const { status: songStatus, songs } = useSongs(searchFilter)
-  const [edittingSong, setEdittingSong] = useState(null)
+  const [editingSong, setEditingSong] = useState(null)
 
   if (authStatus === "loading" || songStatus === "loading") {
-    return <div>Loading...</div>
+    return <LoadingContainer>Loading songs...</LoadingContainer>
   }
 
   const resetSearch = () => {
@@ -24,67 +24,116 @@ export const SongList = () => {
   return (
     <>
       <SearchContainer>
-        <SearchInput
-          onChange={(e) => setSearchFilter(e.target.value)}
-          placeholder="Search title, artist, album"
-          value={searchFilter}
-        />
-        <div onClick={resetSearch}>
-          <FontAwesomeIcon
-            icon={faTimesCircle}
-            style={{
-              color: "white",
-              fontSize: "1.8em",
-              fontWeight: "bold",
-              cursor: "pointer",
-              margin: "0 10px",
-            }}
+        <SearchInputWrapper>
+          <SearchIcon>
+            <FontAwesomeIcon icon={faSearch} />
+          </SearchIcon>
+          <SearchInput
+            onChange={(e) => setSearchFilter(e.target.value)}
+            placeholder="Search title, artist, album"
+            value={searchFilter}
           />
-        </div>
+          {searchFilter && (
+            <ClearButton onClick={resetSearch}>
+              <FontAwesomeIcon icon={faTimesCircle} />
+            </ClearButton>
+          )}
+        </SearchInputWrapper>
       </SearchContainer>
-      <div style={styles.songListStyles}>
+      <SongListContainer>
         {songs.map((song) => (
           <Song
-            editting={edittingSong === song.id}
-            setEdittingSong={setEdittingSong}
+            editing={editingSong === song.id}
+            setEditingSong={setEditingSong}
             key={song.id}
             song={song}
             signedIn={user.signedIn}
           />
         ))}
-      </div>
+      </SongListContainer>
     </>
   )
 }
 
-const styles = {
-  songListStyles: {
-    margin: "0 auto !important",
-    display: "flex",
-    flexFlow: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "10px",
-    paddingBottom: "15%",
-  },
-}
-
-const SearchContainer = styled.div`
-  margin: 1% 0;
+const LoadingContainer = styled.div`
   display: flex;
-  flex-flow: column;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  height: 200px;
+  color: var(--text-secondary);
+  font-size: 1.1em;
+`
+
+const SearchContainer = styled.div`
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+`
+
+const SearchInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    box-shadow: 0 0 0 2px var(--primary-light);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+`
+
+const SearchIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  color: var(--text-secondary);
 `
 
 const SearchInput = styled.input`
-  text-align: left;
-  font-size: 1.3em;
-  background-color: #161519;
-  color: white;
+  flex: 1;
+  font-size: 1rem;
+  background-color: transparent;
+  color: var(--text-primary);
   border: none;
-  border-bottom: 2px solid #b4cbea;
-  padding: 5px;
-  width: 75%;
+  padding: 12px 0;
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+  }
+`
+
+const ClearButton = styled.button`
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+`
+
+const SongListContainer = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px 15vh;
+  max-width: 800px;
 `
