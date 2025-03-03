@@ -2,6 +2,21 @@ import React from "react"
 import styled from "styled-components"
 import moment from "moment/moment"
 
+// Custom Day component to handle props correctly
+const Day = ({ isEmpty, hasShow, isToday, children }) => {
+  return (
+    <StyledDay
+      className={`
+        ${isEmpty ? "empty" : ""}
+        ${hasShow ? "has-show" : ""}
+        ${isToday ? "today" : ""}
+      `}
+    >
+      {children}
+    </StyledDay>
+  )
+}
+
 export const MonthCalendar = ({ shows }) => {
   const currentMonth = moment().startOf("month")
 
@@ -49,7 +64,7 @@ export const MonthCalendar = ({ shows }) => {
       </WeekdayLabels>
       <CalendarGrid>
         {calendarDays.map((day, index) => (
-          <CalendarDay
+          <Day
             key={index}
             isEmpty={day.isEmpty}
             hasShow={day.hasShow}
@@ -57,7 +72,7 @@ export const MonthCalendar = ({ shows }) => {
           >
             {!day.isEmpty && day.date}
             {!day.isEmpty && day.hasShow && <ShowIndicator />}
-          </CalendarDay>
+          </Day>
         ))}
       </CalendarGrid>
     </CalendarContainer>
@@ -102,7 +117,7 @@ const CalendarGrid = styled.div`
   gap: 4px;
 `
 
-const CalendarDay = styled.div`
+const StyledDay = styled.div`
   position: relative;
   aspect-ratio: 1;
   display: flex;
@@ -111,15 +126,20 @@ const CalendarDay = styled.div`
   font-size: 0.9rem;
   border-radius: 4px;
   background-color: ${(props) =>
-    props.isEmpty ? "transparent" : "rgba(255, 255, 255, 0.03)"};
+    props.className.includes("empty")
+      ? "transparent"
+      : "rgba(255, 255, 255, 0.03)"};
   color: ${(props) => {
-    if (props.isEmpty) return "transparent"
-    if (props.isToday) return "var(--primary-light)"
+    if (props.className.includes("empty")) return "transparent"
+    if (props.className.includes("today")) return "var(--primary-light)"
     return "var(--text-primary)"
   }};
-  font-weight: ${(props) => (props.isToday ? "600" : "400")};
+  font-weight: ${(props) =>
+    props.className.includes("today") ? "600" : "400"};
   border: ${(props) =>
-    props.isToday ? "1px solid var(--primary-light)" : "none"};
+    props.className.includes("today")
+      ? "1px solid var(--primary-light)"
+      : "none"};
 `
 
 const ShowIndicator = styled.div`
