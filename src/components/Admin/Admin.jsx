@@ -15,7 +15,7 @@ const Heading = styled.h2`
 export const Admin = ({ user }) => {
   const auth = useAuth()
   const logout = React.useCallback(() => {
-    auth.signOut().then(() => console.log("signed out"))
+    auth.signOut()
   }, [auth])
   return (
     <div>

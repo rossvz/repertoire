@@ -35,7 +35,6 @@ export const NewSongForm = ({ toggleIsEditing }) => {
     setSearching(true)
     e.preventDefault()
     search({ title: titleQuery, artist: artistQuery }).then((results) => {
-      console.log("Search results:", results.data.items)
       setResults(results.data.items)
       setSearching(false)
     })
