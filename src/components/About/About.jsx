@@ -11,13 +11,10 @@ import {
 import Button from "../common/Button"
 import styled, { keyframes } from "styled-components"
 import TipJar from "./TipJar"
-
 const About = () => {
   return (
     <AboutContainer>
       <Header title={"About Me"} />
-
-      <TipJar />
 
       <ContentWrapper>
         <ProfileSection>
@@ -38,16 +35,17 @@ const About = () => {
               <FontAwesomeIcon icon={faMicrophone} />
             </MusicIcon>
           </MusicIconsContainer>
-        </ProfileSection>
-
-        <BioSection>
           <BioText>
             I am a singer & guitar player in the Atlanta, Georgia area where I
             perform acoustic covers at local restaurants and private events.
             Thank you for using this app! I hope it will be a fun way for us to
             interact during our time together.
           </BioText>
+        </ProfileSection>
 
+        <TipJar />
+
+        <BioSection>
           <Highlight>
             Grab some food, pull up a chair, and let's sing some songs.
           </Highlight>
@@ -125,7 +123,6 @@ const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
 `
 
 const ProfileImageContainer = styled.div`
@@ -179,13 +176,11 @@ const MusicIcon = styled.div`
 
 const BioSection = styled.div`
   text-align: center;
-  margin-bottom: 2.5rem;
 `
 
 const BioText = styled.p`
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
   color: var(--text-secondary);
 `
 
@@ -193,7 +188,6 @@ const Highlight = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 1rem;
   padding: 0.5rem 1rem;
   border-left: 3px solid var(--primary);
   border-right: 3px solid var(--primary);
@@ -211,8 +205,6 @@ const SocialSection = styled.div`
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: auto;
-  padding-bottom: 2rem;
 `
 
 const SocialLink = styled.a`

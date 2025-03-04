@@ -42,5 +42,4 @@ const ShowsContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 15vh;
-  padding: 0 16px;
 `
