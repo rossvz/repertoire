@@ -24,7 +24,7 @@ export const DeleteShow = ({ show }) => {
 
 const DeleteButton = styled.button`
   background: transparent;
-  color: rgba(255, 59, 48, 0.8);
+  color: var(--text-secondary);
   border: none;
   display: flex;
   align-items: center;

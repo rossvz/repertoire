@@ -29,7 +29,6 @@ const TipJar = () => {
   )
 }
 
-// Animations
 const pulse = keyframes`
   0% { transform: scale(1); }
   50% { transform: scale(1.3); }
@@ -42,24 +41,22 @@ const float = keyframes`
   100% { transform: translateY(0); }
 `
 
-// Styled Components
 const TipJarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
 `
 
 const TipJarTitle = styled.h3`
   font-size: 1.4rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -76,7 +73,7 @@ const TipJarDescription = styled.p`
   line-height: 1.5;
   text-align: center;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   max-width: 90%;
 `
 
