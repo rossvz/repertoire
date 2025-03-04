@@ -54,7 +54,10 @@ export const Login = () => {
             required
           />
         </InputGroup>
-        <Button type="submit" style={{ width: "75%", marginTop: "16px" }}>
+        <Button
+          type="submit"
+          style={{ width: "100%", maxWidth: "360px", marginTop: "16px" }}
+        >
           Sign In
         </Button>
       </Form>
@@ -101,12 +104,9 @@ const InputGroup = styled.div`
 `
 
 const InputIcon = styled.div`
-  position: absolute;
-  left: 30px;
-  top: 50%;
-  transform: translateY(-50%);
   color: var(--text-secondary);
   opacity: 0.7;
+  transform: translateX(30px);
 `
 
 const Input = styled.input`
