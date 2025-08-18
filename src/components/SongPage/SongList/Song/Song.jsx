@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Upvote from "./Upvote"
 import AlbumArtwork from "./AlbumArtwork"
@@ -11,10 +11,15 @@ import { useDatabase } from "reactfire"
 const Song = ({ song, signedIn, editing, setEditingSong }) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
+  const [upvoted, setUpvoted] = useState(isUpvoted(song.id))
 
-  const changeVote = (value) => {
+  useEffect(() => {
+    setUpvoted(isUpvoted(song.id))
+  }, [song.id])
+
+  const changeVote = async (value) => {
     if (value === "reset") {
-      update(songRef, { votes: 0 })
+      await update(songRef, { votes: 0 })
       return
     }
 
@@ -28,9 +33,14 @@ const Song = ({ song, signedIn, editing, setEditingSong }) => {
       newVotes = Math.max(0, song.votes + 1)
     }
 
-    update(songRef, { votes: newVotes })
-
-    toggleVoteInStorage(song.id)
+    try {
+      await update(songRef, { votes: newVotes })
+      toggleVoteInStorage(song.id)
+      setUpvoted(!alreadyUpvoted)
+    } catch (error) {
+      console.error('Failed to update vote:', error)
+      // Don't update localStorage if Firebase update failed
+    }
   }
 
   const toggleVisible = () => {
@@ -62,7 +72,7 @@ const Song = ({ song, signedIn, editing, setEditingSong }) => {
         </SongInfo>
 
         <VoteSection>
-          <Upvote changeVote={changeVote} upvoted={isUpvoted(song.id)} />
+          <Upvote changeVote={changeVote} upvoted={upvoted} />
           <VoteCount>{song.votes > 0 ? song.votes : ""}</VoteCount>
         </VoteSection>
       </SongContent>
