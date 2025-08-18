@@ -1,16 +1,28 @@
 {
   "rules": {
     "songs": {
-      ".indexOn": [
-        "votes"
-      ]
+      ".indexOn": ["votes"],
+      ".read": true,
+      "$songId": {
+        ".validate": "newData.hasChildren(['id', 'title', 'artist']) && newData.child('votes').isNumber()",
+        ".write": "auth != null",
+        "votes": {
+          ".write": "auth != null || (newData.isNumber() && (newData.val() >= (data.exists() ? data.val() : 0) || newData.val() == (data.exists() ? data.val() - 1 : -1)))"
+        }
+      }
     },
     "shows": {
-      ".indexOn": [
-        "date"
-      ]
+      ".indexOn": ["date"],
+      ".read": true,
+      ".write": "auth != null"
     },
-    ".read": true,
-    ".write": true
+    "votes": {
+      "$ip": {
+        "$songId": {
+          ".read": false,
+          ".write": "!data.exists() || (newData.exists() && newData.val() > data.val())"
+        }
+      }
+    }
   }
 }
