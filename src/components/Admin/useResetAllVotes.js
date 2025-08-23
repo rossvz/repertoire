@@ -14,8 +14,9 @@ export const useResetAllVotes = () => {
         .filter((s) => s.votes !== 0)
         .forEach((song) => {
           removeVoteFromStorage(song.id)
-          updates[`/${song.id}`] = { ...song, votes: 0 }
+          updates[`/${song.id}/votes`] = 0
         })
+      console.log(updates)
 
       update(songsRef, updates)
     },

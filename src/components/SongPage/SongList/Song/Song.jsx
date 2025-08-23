@@ -6,7 +6,7 @@ import AlbumArtwork from "./AlbumArtwork"
 import { AdminFunctions } from "./AdminFunctions"
 import { isUpvoted } from "../../../../util/votes"
 import { toggleVoteInStorage } from "../../../../util/votes"
-import { ref, remove, update } from "firebase/database"
+import { ref, remove, update, increment } from "firebase/database"
 import { useDatabase } from "reactfire"
 
 const Song = ({ song, signedIn, editing, setEditingSong, ...motionProps }) => {
@@ -25,13 +25,10 @@ const Song = ({ song, signedIn, editing, setEditingSong, ...motionProps }) => {
     }
 
     const alreadyUpvoted = isUpvoted(song.id)
-
-    const newVotes = alreadyUpvoted
-      ? Math.max(0, song.votes - 1)
-      : Math.max(0, song.votes + 1)
+    const incrementValue = alreadyUpvoted ? -1 : 1
 
     try {
-      await update(songRef, { votes: newVotes })
+      await update(songRef, { votes: increment(incrementValue) })
       toggleVoteInStorage(song.id)
       setUpvoted(!alreadyUpvoted)
     } catch (error) {

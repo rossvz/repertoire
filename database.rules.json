@@ -4,10 +4,26 @@
       ".indexOn": ["votes"],
       ".read": true,
       "$songId": {
-        ".validate": "newData.hasChildren(['id', 'title', 'artist']) && newData.child('votes').isNumber()",
-        ".write": "auth != null",
+        "id": {
+          ".write": "auth != null"
+        },
+        "title": {
+          ".write": "auth != null"
+        },
+        "artist": {
+          ".write": "auth != null"
+        },
+        "album": {
+          ".write": "auth != null"
+        },
+        "albumArtwork": {
+          ".write": "auth != null"
+        },
+        "visible": {
+          ".write": "auth != null"
+        },
         "votes": {
-          ".write": "auth != null || (newData.isNumber() && (newData.val() >= (data.exists() ? data.val() : 0) || newData.val() == (data.exists() ? data.val() - 1 : -1)))"
+          ".write": "auth != null || newData.isNumber()"
         }
       }
     },
