@@ -16,25 +16,19 @@ const Song = ({ song, signedIn, editing, setEditingSong, ...motionProps }) => {
 
   useEffect(() => {
     setUpvoted(isUpvoted(song.id))
-  }, [song.id])
+  }, [song.id, song.votes])
 
   const changeVote = async (value) => {
+    const alreadyUpvoted = isUpvoted(song.id)
     if (value === "reset") {
       await update(songRef, { votes: 0 })
-      return
-    }
-
-    const alreadyUpvoted = isUpvoted(song.id)
-    const incrementValue = alreadyUpvoted ? -1 : 1
-
-    try {
+    } else {
+      const incrementValue = alreadyUpvoted ? -1 : 1
       await update(songRef, { votes: increment(incrementValue) })
-      toggleVoteInStorage(song.id)
-      setUpvoted(!alreadyUpvoted)
-    } catch (error) {
-      console.error("Failed to update vote:", error)
-      // Don't update localStorage if Firebase update failed
     }
+    setUpvoted(!alreadyUpvoted)
+
+    toggleVoteInStorage(song.id)
   }
 
   const toggleVisible = () => {

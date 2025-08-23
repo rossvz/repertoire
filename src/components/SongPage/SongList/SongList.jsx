@@ -53,7 +53,7 @@ export const SongList = () => {
               layout
               layoutId={song.id}
               transition={{
-                layout: { duration: 0.4, ease: "easeInOut" }
+                layout: { duration: 0.4, ease: "easeInOut" },
               }}
             />
           ))}
