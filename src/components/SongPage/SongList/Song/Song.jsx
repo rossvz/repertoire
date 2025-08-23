@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import { motion } from "framer-motion"
 import Upvote from "./Upvote"
 import AlbumArtwork from "./AlbumArtwork"
 import { AdminFunctions } from "./AdminFunctions"
@@ -8,7 +9,7 @@ import { toggleVoteInStorage } from "../../../../util/votes"
 import { ref, remove, update } from "firebase/database"
 import { useDatabase } from "reactfire"
 
-const Song = ({ song, signedIn, editing, setEditingSong }) => {
+const Song = ({ song, signedIn, editing, setEditingSong, ...motionProps }) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
   const [upvoted, setUpvoted] = useState(isUpvoted(song.id))
@@ -25,20 +26,16 @@ const Song = ({ song, signedIn, editing, setEditingSong }) => {
 
     const alreadyUpvoted = isUpvoted(song.id)
 
-    let newVotes
-
-    if (alreadyUpvoted) {
-      newVotes = Math.max(0, song.votes - 1)
-    } else {
-      newVotes = Math.max(0, song.votes + 1)
-    }
+    const newVotes = alreadyUpvoted
+      ? Math.max(0, song.votes - 1)
+      : Math.max(0, song.votes + 1)
 
     try {
       await update(songRef, { votes: newVotes })
       toggleVoteInStorage(song.id)
       setUpvoted(!alreadyUpvoted)
     } catch (error) {
-      console.error('Failed to update vote:', error)
+      console.error("Failed to update vote:", error)
       // Don't update localStorage if Firebase update failed
     }
   }
@@ -54,7 +51,7 @@ const Song = ({ song, signedIn, editing, setEditingSong }) => {
   if (!signedIn && !song.visible) return null
 
   return (
-    <SongCard $visible={song.visible}>
+    <SongCard $visible={song.visible} {...motionProps}>
       <SongContent>
         <AlbumArtworkWrapper>
           <AlbumArtwork albumArtwork={song.albumArtwork} />
@@ -90,7 +87,7 @@ const Song = ({ song, signedIn, editing, setEditingSong }) => {
   )
 }
 
-const SongCard = styled.div`
+const SongCard = styled(motion.div)`
   width: 100%;
   margin: 8px 0;
   background: var(--background-card);
@@ -99,9 +96,6 @@ const SongCard = styled.div`
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
   border: 1px solid var(--border-color);
   opacity: ${(props) => (props.$visible ? 1 : 0.5)};
 `

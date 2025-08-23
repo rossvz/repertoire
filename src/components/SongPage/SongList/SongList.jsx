@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { useSigninCheck } from "reactfire"
+import { LayoutGroup } from "framer-motion"
 
 import Song from "./Song/Song"
 import { useSongs } from "./useSongs"
@@ -41,15 +42,22 @@ export const SongList = () => {
         </SearchInputWrapper>
       </SearchContainer>
       <SongListContainer>
-        {songs.map((song) => (
-          <Song
-            editing={editingSong === song.id}
-            setEditingSong={setEditingSong}
-            key={song.id}
-            song={song}
-            signedIn={user.signedIn}
-          />
-        ))}
+        <LayoutGroup>
+          {songs.map((song) => (
+            <Song
+              key={song.id}
+              editing={editingSong === song.id}
+              setEditingSong={setEditingSong}
+              song={song}
+              signedIn={user.signedIn}
+              layout
+              layoutId={song.id}
+              transition={{
+                layout: { duration: 0.4, ease: "easeInOut" }
+              }}
+            />
+          ))}
+        </LayoutGroup>
       </SongListContainer>
     </>
   )
