@@ -28,5 +28,14 @@ export default defineConfig(({ mode }) => {
     resolve: {
       extensions: [".js", ".jsx"],
     },
+    test: {
+      globals: true,
+      environment: "happy-dom",
+      setupFiles: ["./src/test-setup.js"],
+      coverage: {
+        provider: "v8",
+        reporter: ["text", "json", "html"],
+      },
+    },
   }
 })
