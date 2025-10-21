@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import FooterButton from "./FooterButton"
 import styled from "styled-components"
 
@@ -26,10 +26,10 @@ const Footer = () => {
       }
     >
       <FooterContent>
-        <FooterButton title={"Songs"} icon={faMusic} route={"/"} />
-        <FooterButton title={"Shows"} icon={faCalendarAlt} route={"/shows"} />
-        <FooterButton title={"About"} icon={faUserCircle} route={"/about"} />
-        <FooterButton title={"Settings"} icon={faCogs} route="/admin" />
+        <FooterButton title="Songs" icon={faMusic} route="/" />
+        <FooterButton title="Shows" icon={faCalendarAlt} route="/shows" />
+        <FooterButton title="About" icon={faUserCircle} route="/about" />
+        <FooterButton title="Settings" icon={faCogs} route="/admin" />
       </FooterContent>
     </FooterContainer>
   )

@@ -1,7 +1,6 @@
 import { Login } from "./Login"
 import { useFirebaseApp, DatabaseProvider } from "reactfire"
 import { getDatabase } from "firebase/database"
-import React from "react"
 import { useSigninCheck } from "reactfire"
 import { Admin } from "./Admin"
 

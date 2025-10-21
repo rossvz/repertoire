@@ -1,10 +1,9 @@
-import React from "react"
 import styled from "styled-components"
 
 export const Header = (props) => {
   const title = props.title || "Randy Godwin Music"
   const left = props.left || null
-  const right = props.right || <div></div>
+  const right = props.right || <div />
   return (
     <HeaderContainer>
       <Section>{left}</Section>

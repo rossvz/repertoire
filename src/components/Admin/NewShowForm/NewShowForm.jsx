@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -16,7 +16,7 @@ const INITIAL_STATE = { date: "", venue: "", time: "" }
 export const NewShowWrapper = () => {
   const database = useDatabase()
   const showsRef = ref(database, "shows")
-  const [editingNewShow, setEditingNewShow] = React.useState(false)
+  const [editingNewShow, setEditingNewShow] = useState(false)
   const { status, data } = useSigninCheck()
 
   const saveShow = (newShow) => {
@@ -54,7 +54,9 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }) => {
       .then((latLng) => {
         saveShow({ date, venue, time, latLng })
       })
-      .catch((error) => console.error("Error", error))
+      .catch((error) => {
+        // console.error("Error", error)
+      })
     setFormState(INITIAL_STATE)
   }
 
@@ -101,7 +103,7 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }) => {
           <input
             style={styles.inputStyles}
             type="date"
-            placeholder={"Date"}
+            placeholder="Date"
             onChange={onDateChange}
             value={date}
           />
@@ -153,7 +155,7 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }) => {
           <input
             style={styles.inputStyles}
             type="datetime"
-            placeholder={"Time"}
+            placeholder="Time"
             onChange={onTimeChange}
             value={time}
           />

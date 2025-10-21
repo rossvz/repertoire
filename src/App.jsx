@@ -1,5 +1,4 @@
 import { getAuth } from "firebase/auth"
-import React from "react"
 import { AuthProvider, useFirebaseApp } from "reactfire"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
@@ -10,7 +9,6 @@ import About from "./components/About/About"
 import { AdminPage } from "./components/Admin/AdminPage"
 import Footer from "./components/Footer/Footer"
 import { ShowsPage } from "./components/Shows/ShowsPage"
-import Song from "./components/SongPage/SongList/Song/Song"
 import { SongListPage } from "./components/SongPage/SongPage"
 
 const App = () => {

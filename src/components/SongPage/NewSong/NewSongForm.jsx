@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useDatabase } from "reactfire"
 import moment from "moment"
 import { ref, set, push } from "firebase/database"

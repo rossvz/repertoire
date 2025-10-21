@@ -1,7 +1,6 @@
 import { useMemo } from "react"
 import { ref, query, orderByChild } from "firebase/database"
 import { useDatabase, useDatabaseListData } from "reactfire"
-import { reverse } from "ramda"
 import { songContainsSearchTerm } from "../../../util/songs"
 
 export const useSongs = (searchFilter = "") => {

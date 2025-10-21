@@ -70,4 +70,21 @@ export default [
       "react-hooks/exhaustive-deps": "warn",
     },
   },
+  // Test files configuration
+  {
+    files: ["**/*.test.js", "**/*.test.jsx", "**/*.spec.js", "**/*.spec.jsx"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        it: "readonly",
+        describe: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        vi: "readonly",
+      },
+    },
+  },
 ]

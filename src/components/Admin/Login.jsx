@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { useAuth } from "reactfire"
 import { signInWithEmailAndPassword } from "firebase/auth"
@@ -20,7 +20,7 @@ export const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => localStorage.setItem("uid", res.user.uid))
       .catch((err) => {
-        console.error(err)
+        // console.error(err)
         setError("Invalid email or password")
       })
   }
@@ -29,7 +29,7 @@ export const Login = () => {
     <Container>
       <LoginHeader>Admin Login</LoginHeader>
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      <Form onSubmit={(e) => onSubmit(e)} autoComplete={"off"}>
+      <Form onSubmit={(e) => onSubmit(e)} autoComplete="off">
         <InputGroup>
           <InputIcon>
             <FontAwesomeIcon icon={faEnvelope} />

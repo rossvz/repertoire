@@ -1,4 +1,3 @@
-import React from "react"
 import { useSigninCheck } from "reactfire"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUndo } from "@fortawesome/free-solid-svg-icons"

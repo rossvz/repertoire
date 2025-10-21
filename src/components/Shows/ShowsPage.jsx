@@ -1,5 +1,3 @@
-import React from "react"
-
 import { useFirebaseApp, DatabaseProvider } from "reactfire"
 import { getDatabase } from "firebase/database"
 import { Loader } from "@googlemaps/js-api-loader"
@@ -13,9 +11,9 @@ const loader = new Loader({
 })
 
 export const ShowsPage = () => {
-  loader.load().then(async () => {
-    const { Map } = await google.maps.importLibrary("maps")
-  })
+  // loader.load().then(async () => {
+  //   const { Map } = await google.maps.importLibrary("maps")
+  // })
   const firebaseApp = useFirebaseApp()
   const database = getDatabase(firebaseApp)
 
