@@ -3,6 +3,7 @@
     "songs": {
       ".indexOn": ["votes"],
       ".read": true,
+      ".write": "auth != null",
       "$songId": {
         "id": {
           ".write": "auth != null"
@@ -42,3 +43,4 @@
     }
   }
 }
+
