@@ -17,9 +17,6 @@ export const Admin = ({ user }) => {
   const logout = useCallback(() => {
     auth.signOut()
   }, [auth])
-  if (process.env.NODE_ENV === "development") {
-    // console.log(user)
-  }
   return (
     <div>
       <Header title="Settings" right={<LogoutButton logout={logout} />} />

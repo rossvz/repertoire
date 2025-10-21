@@ -53,9 +53,6 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }) => {
       .then((latLng) => {
         saveShow({ date, venue, time, latLng })
       })
-      .catch((_error) => {
-        // console.error("Error", _error)
-      })
     setFormState(INITIAL_STATE)
   }
 
