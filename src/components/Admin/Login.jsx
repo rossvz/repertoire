@@ -19,8 +19,8 @@ export const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => localStorage.setItem("uid", res.user.uid))
-      .catch((err) => {
-        // console.error(err)
+      .catch((_err) => {
+        // console.error(_err)
         setError("Invalid email or password")
       })
   }

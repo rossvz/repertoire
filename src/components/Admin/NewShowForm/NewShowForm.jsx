@@ -1,5 +1,4 @@
 import { useState } from "react"
-import styled from "styled-components"
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -54,8 +53,8 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }) => {
       .then((latLng) => {
         saveShow({ date, venue, time, latLng })
       })
-      .catch((error) => {
-        // console.error("Error", error)
+      .catch((_error) => {
+        // console.error("Error", _error)
       })
     setFormState(INITIAL_STATE)
   }

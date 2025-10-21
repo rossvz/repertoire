@@ -39,7 +39,15 @@ export default [
     rules: {
       // JavaScript best practices
       "no-console": "warn",
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_|^[A-Z]", // Ignore vars starting with _ or uppercase (React components)
+          caughtErrors: "all",
+          ignoreRestSiblings: true,
+        },
+      ],
       "prefer-const": "warn",
       "no-var": "error",
       "eqeqeq": ["error", "always", { null: "ignore" }],

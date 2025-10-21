@@ -4,11 +4,12 @@ import { Loader } from "@googlemaps/js-api-loader"
 
 import { Shows } from "./Shows"
 
-const loader = new Loader({
-  apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-  version: "weekly",
-  libraries: ["places"],
-})
+// Commented out - Google Maps loader not currently used
+// const loader = new Loader({
+//   apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+//   version: "weekly",
+//   libraries: ["places"],
+// })
 
 export const ShowsPage = () => {
   // loader.load().then(async () => {
