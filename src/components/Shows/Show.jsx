@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { DeleteShow } from "./DeleteShow"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

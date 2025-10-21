@@ -1,4 +1,3 @@
-import React from "react"
 import { getDatabase } from "firebase/database"
 import { useFirebaseApp, DatabaseProvider } from "reactfire"
 
@@ -14,17 +13,9 @@ export const SongListPage = () => {
 
   return (
     <DatabaseProvider sdk={database}>
-      <Header title={"Songs"} left={<NewSong />} right={<ResetAllVotes />} />
+      <Header title="Songs" left={<NewSong />} right={<ResetAllVotes />} />
       <HelperText />
       <SongList />
     </DatabaseProvider>
   )
-}
-
-const styles = {
-  adminTopButtons: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
 }

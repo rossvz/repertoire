@@ -12,13 +12,7 @@ const setMomentDate = (show) => {
 const setGooglePlaces = (show) => {
   show._location = `https://www.google.com/maps/search/?api=1&query=${show.venue}`
   if (show.latLng)
-    show._location = `https://www.google.com/maps/dir/?api=1&destination=${show.latLng.lat},${show.latLng.lng}`
-  return show
-}
-
-const formatVenueName = (show) => {
-  const parts = show.venue.split(",")
-  show.venue = `${parts[0]}, ${parts[2]}`
+    {show._location = `https://www.google.com/maps/dir/?api=1&destination=${show.latLng.lat},${show.latLng.lng}`}
   return show
 }
 

@@ -1,4 +1,3 @@
-import React from "react"
 import { Header } from "../Header"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
@@ -6,7 +5,6 @@ import {
   faMusic,
   faGuitar,
   faMicrophone,
-  faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons"
 import Button from "../common/Button"
 import styled, { keyframes } from "styled-components"
@@ -14,7 +12,7 @@ import TipJar from "./TipJar"
 const About = () => {
   return (
     <AboutContainer>
-      <Header title={"About Me"} />
+      <Header title="About Me" />
 
       <ContentWrapper>
         <ProfileSection>
@@ -47,7 +45,7 @@ const About = () => {
 
         <BioSection>
           <Highlight>
-            Grab some food, pull up a chair, and let's sing some songs.
+            Grab some food, pull up a chair, and let&apos;s sing some songs.
           </Highlight>
 
           <Signature>— Randy Godwin</Signature>

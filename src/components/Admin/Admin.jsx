@@ -1,4 +1,4 @@
-import React from "react"
+import { useCallback } from "react"
 import styled from "styled-components"
 import { useAuth } from "reactfire"
 
@@ -14,15 +14,12 @@ const Heading = styled.h2`
 
 export const Admin = ({ user }) => {
   const auth = useAuth()
-  const logout = React.useCallback(() => {
+  const logout = useCallback(() => {
     auth.signOut()
   }, [auth])
-  if (process.env.NODE_ENV === "development") {
-    console.log(user)
-  }
   return (
     <div>
-      <Header title={"Settings"} right={<LogoutButton logout={logout} />} />
+      <Header title="Settings" right={<LogoutButton logout={logout} />} />
       <div
         style={{
           display: "flex",

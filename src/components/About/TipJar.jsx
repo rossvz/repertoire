@@ -1,4 +1,3 @@
-import React from "react"
 import styled, { keyframes } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faDollarSign, faHeart } from "@fortawesome/free-solid-svg-icons"
@@ -13,7 +12,7 @@ const TipJar = () => {
       </TipJarTitle>
 
       <TipJarDescription>
-        If you're enjoying the music and would like to show your support, tips
+        If you&apos;re enjoying the music and would like to show your support, tips
         are always appreciated but never expected!
       </TipJarDescription>
 

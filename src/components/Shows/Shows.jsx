@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 
 import { Header } from "../Header"
@@ -16,7 +15,7 @@ export const Shows = () => {
 
   return (
     <div>
-      <Header title={"Upcoming Shows"} left={<NewShowWrapper />} />
+      <Header title="Upcoming Shows" left={<NewShowWrapper />} />
       <MonthCalendar shows={shows} />
       <ShowsContainer>
         {shows.map((show) => (

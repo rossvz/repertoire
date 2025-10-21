@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import moment from "moment/moment"
 
@@ -44,7 +43,7 @@ export const MonthCalendar = ({ shows }) => {
   })
 
   // Add empty slots for days before the first day of the month
-  const emptyDaysBefore = Array.from({ length: firstDayOfMonth }, (_, i) => ({
+  const emptyDaysBefore = Array.from({ length: firstDayOfMonth }, () => ({
     isEmpty: true,
   }))
 

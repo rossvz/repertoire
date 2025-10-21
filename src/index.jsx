@@ -1,4 +1,3 @@
-import React from "react"
 import { createRoot } from "react-dom/client"
 import { FirebaseAppProvider } from "reactfire"
 import "./index.css"

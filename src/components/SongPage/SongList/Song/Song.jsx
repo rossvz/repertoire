@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import Upvote from "./Upvote"

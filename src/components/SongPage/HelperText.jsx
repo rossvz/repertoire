@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
@@ -10,9 +9,9 @@ export const HelperText = () => {
         <FontAwesomeIcon icon={faInfoCircle} />
       </IconWrapper>
       <InfoText>
-        Hit the "like" button on any song to vote for it. Songs with higher
-        votes are more likely to get played! Use the search feature to find a
-        song by title, artist, or album.
+        Hit the &ldquo;like&rdquo; button on any song to vote for it. Songs
+        with higher votes are more likely to get played! Use the search feature
+        to find a song by title, artist, or album.
       </InfoText>
     </InfoContainer>
   )

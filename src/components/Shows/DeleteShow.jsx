@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { useDeleteShow } from "./useDeleteShow"
 import { useSigninCheck } from "reactfire"
