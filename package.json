@@ -28,15 +28,24 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint": "eslint src --ext .js,.jsx",
-    "lint:fix": "eslint src --ext .js,.jsx --fix",
-    "deploy": "vite build && firebase deploy"
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "deploy": "npm run build && firebase deploy"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "7.25.9",
+    "@types/history": "^4.7.11",
+    "@types/node": "^24.9.1",
+    "@types/ramda": "^0.31.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@types/react-places-autocomplete": "^7.2.14",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
     "@vitejs/plugin-react": "4.3.4",
     "babel-plugin-react-compiler": "beta",
     "eslint": "^9.21.0",
@@ -46,6 +55,7 @@
     "globals": "^16.0.0",
     "happy-dom": "^20.0.7",
     "prettier": "3.5.2",
+    "typescript": "^5.9.3",
     "vite": "^6.2.0",
     "vitest": "^3.0.7"
   },
