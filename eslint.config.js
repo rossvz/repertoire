@@ -97,6 +97,7 @@ export default [
       "@typescript-eslint": tseslint,
     },
     rules: {
+      "no-undef": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {

@@ -8,6 +8,7 @@ import AlbumArtwork from "./AlbumArtwork"
 import { AdminFunctions } from "./AdminFunctions"
 import { isUpvoted } from "../../../../util/votes"
 import { toggleVoteInStorage } from "../../../../util/votes"
+import { removeVoteFromStorage } from "../../../../util/votes"
 import { ref, remove, update, increment } from "firebase/database"
 import { useDatabase } from "reactfire"
 
@@ -18,7 +19,13 @@ interface SongProps extends MotionProps {
   setEditingSong: (songId: string | null) => void
 }
 
-const Song = ({ song, signedIn, editing, setEditingSong, ...motionProps }: SongProps) => {
+const Song = ({
+  song,
+  signedIn,
+  editing,
+  setEditingSong,
+  ...motionProps
+}: SongProps) => {
   const database = useDatabase()
   const songRef = ref(database, `songs/${song.id}`)
   const [upvoted, setUpvoted] = useState(isUpvoted(song.id))
@@ -31,12 +38,14 @@ const Song = ({ song, signedIn, editing, setEditingSong, ...motionProps }: SongP
     const alreadyUpvoted = isUpvoted(song.id)
     if (value === "reset") {
       await update(songRef, { votes: 0 })
-    } else {
-      const incrementValue = alreadyUpvoted ? -1 : 1
-      await update(songRef, { votes: increment(incrementValue) })
+      if (alreadyUpvoted) removeVoteFromStorage(song.id)
+      setUpvoted(false)
+      return
     }
-    setUpvoted(!alreadyUpvoted)
 
+    const incrementValue = alreadyUpvoted ? -1 : 1
+    await update(songRef, { votes: increment(incrementValue) })
+    setUpvoted(!alreadyUpvoted)
     toggleVoteInStorage(song.id)
   }
 

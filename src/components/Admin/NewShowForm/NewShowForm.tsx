@@ -70,7 +70,10 @@ interface AutocompleteItemProps {
   }
 }
 
-export const NewShowForm = ({ saveShow, toggleEditingNewShow }: NewShowFormProps) => {
+export const NewShowForm = ({
+  saveShow,
+  toggleEditingNewShow,
+}: NewShowFormProps) => {
   const [formState, setFormState] = useState<FormState>(INITIAL_STATE)
   const { date, venue, time } = formState
 
@@ -121,7 +124,9 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }: NewShowFormProps
   )
 
   const options = {
-    types: ["establishment"] as google.maps.places.AutocompletionRequest["types"],
+    types: [
+      "establishment",
+    ] as google.maps.places.AutocompletionRequest["types"],
   }
 
   return (
@@ -166,7 +171,10 @@ export const NewShowForm = ({ saveShow, toggleEditingNewShow }: NewShowFormProps
                       ? { backgroundColor: "#f8f8f8", color: "#3a3a3a" }
                       : {}
                     return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
+                      <div
+                        {...getSuggestionItemProps(suggestion, { style })}
+                        key={suggestion.placeId}
+                      >
                         <AutocompleteItem
                           formattedSuggestion={suggestion.formattedSuggestion}
                         />
