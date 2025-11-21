@@ -1,10 +1,11 @@
-import { createRoot } from "react-dom/client"
+import { describe, it, expect } from 'vitest'
+import { render } from '@testing-library/react'
+import App from './App'
 
-import App from "./App"
-
-it("renders without crashing", () => {
-  const div = document.createElement("div")
-  const root = createRoot(div)
-  root.render(<App />)
-  root.unmount()
+describe('App', () => {
+  it('renders without crashing', () => {
+    const { container } = render(<App />)
+    expect(container).toBeDefined()
+    expect(container.querySelector('.App')).toBeTruthy()
+  })
 })
