@@ -12,6 +12,8 @@ vi.mock('firebase/database', () => ({
   query: vi.fn(),
   orderByChild: vi.fn(),
   update: vi.fn(),
+  limitToLast: vi.fn(),
+  startAfter: vi.fn(),
 }))
 
 vi.mock('firebase/auth', () => ({
